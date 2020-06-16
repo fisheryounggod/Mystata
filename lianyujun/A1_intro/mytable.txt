@@ -1,0 +1,18 @@
+
+            occupation |      Freq.     Percent        Cum.
+-----------------------+-----------------------------------
+Professional/technical |        317       14.17       14.17
+        Managers/admin |        264       11.80       25.97
+                 Sales |        726       32.45       58.43
+    Clerical/unskilled |        102        4.56       62.99
+             Craftsmen |         53        2.37       65.36
+            Operatives |        246       11.00       76.35
+             Transport |         28        1.25       77.60
+              Laborers |        286       12.78       90.39
+               Farmers |          1        0.04       90.43
+         Farm laborers |          9        0.40       90.84
+               Service |         16        0.72       91.55
+     Household workers |          2        0.09       91.64
+                 Other |        187        8.36      100.00
+-----------------------+-----------------------------------
+                 Total |      2,237      100.00

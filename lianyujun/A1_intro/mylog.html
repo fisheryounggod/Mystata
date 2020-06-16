@@ -1,0 +1,106 @@
+
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css">
+BODY{background-color: cccccc;
+    font-family: monaco, "courier new", monospace;
+     color: #000000}
+.input {color: #ff3300}
+.result{color: #003333}
+.error{color: #dd0000}
+</style>
+</head>
+<body>
+<pre>
+-----------------------------------------------------------------------------------------
+      name:  <span class=result>&lt;unnamed&gt;</span>
+<span class=result>       </span>log:  <span class=result>D:\stata11\ado\personal\Net_course_A\A1_intro\mylog.smcl</span>
+<span class=result>  </span>log type:  <span class=result>smcl</span>
+<span class=result> </span>opened on:  <span class=result>16 Mar 2010, 17:51:15</span>
+<br><br>
+<span class=input>.         sysuse nlsw88, clear</span>
+(NLSW, 1988 extract)
+<br><br>
+<span class=input>.         desc</span>
+<br><br>
+Contains data from <span class=result>D:\stata11\ado\base/n/nlsw88.dta</span>
+  obs:<span class=result>         2,246                          NLSW, 1988 extract</span>
+ vars:<span class=result>            17                          1 May 2009 22:52</span>
+ size:<span class=result>        69,626</span> (99.9% of memory free)   (_dta has notes)
+-----------------------------------------------------------------------------------------
+              storage  display     value
+variable name   type   format      label      variable label
+-----------------------------------------------------------------------------------------
+<span class=result>idcode         </span> int    %8.0g                  <span class=result>NLS id</span>
+<span class=result>age            </span> byte   %8.0g                  <span class=result>age in current year</span>
+<span class=result>race           </span> byte   %8.0g       racelbl    <span class=result>race</span>
+<span class=result>married        </span> byte   %8.0g       marlbl     <span class=result>married</span>
+<span class=result>never_married  </span> byte   %8.0g                  <span class=result>never married</span>
+<span class=result>grade          </span> byte   %8.0g                  <span class=result>current grade completed</span>
+<span class=result>collgrad       </span> byte   %16.0g      gradlbl    <span class=result>college graduate</span>
+<span class=result>south          </span> byte   %8.0g                  <span class=result>lives in south</span>
+<span class=result>smsa           </span> byte   %9.0g       smsalbl    <span class=result>lives in SMSA</span>
+<span class=result>c_city         </span> byte   %8.0g                  <span class=result>lives in central city</span>
+<span class=result>industry       </span> byte   %23.0g      indlbl     <span class=result>industry</span>
+<span class=result>occupation     </span> byte   %22.0g      occlbl     <span class=result>occupation</span>
+<span class=result>union          </span> byte   %8.0g       unionlbl   <span class=result>union worker</span>
+<span class=result>wage           </span> float  %9.0g                  <span class=result>hourly wage</span>
+<span class=result>hours          </span> byte   %8.0g                  <span class=result>usual hours worked</span>
+<span class=result>ttl_exp        </span> float  %9.0g                  <span class=result>total work experience</span>
+<span class=result>tenure         </span> float  %9.0g                  <span class=result>job tenure (years)</span>
+-----------------------------------------------------------------------------------------
+Sorted by:  <span class=result>idcode</span>
+<br><br>
+<span class=input>.         summ</span>
+<br><br>
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+      idcode |<span class=result>      2246    2612.654    1480.864          1       5159</span>
+         age |<span class=result>      2246    39.15316    3.060002         34         46</span>
+        race |<span class=result>      2246    1.282725    .4754413          1          3</span>
+     married |<span class=result>      2246    .6420303    .4795099          0          1</span>
+never_marr~d |<span class=result>      2246    .1041852    .3055687          0          1</span>
+-------------+--------------------------------------------------------
+       grade |<span class=result>      2244    13.09893    2.521246          0         18</span>
+    collgrad |<span class=result>      2246    .2368655    .4252538          0          1</span>
+       south |<span class=result>      2246    .4194123    .4935728          0          1</span>
+        smsa |<span class=result>      2246    .7039181    .4566292          0          1</span>
+      c_city |<span class=result>      2246    .2916296    .4546139          0          1</span>
+-------------+--------------------------------------------------------
+    industry |<span class=result>      2232    8.189516    3.010875          1         12</span>
+  occupation |<span class=result>      2237    4.642825    3.408897          1         13</span>
+       union |<span class=result>      1878    .2454739    .4304825          0          1</span>
+        wage |<span class=result>      2246    7.766949    5.755523   1.004952   40.74659</span>
+       hours |<span class=result>      2242    37.21811    10.50914          1         80</span>
+-------------+--------------------------------------------------------
+     ttl_exp |<span class=result>      2246    12.53498    4.610208   .1153846   28.88461</span>
+      tenure |<span class=result>      2231     5.97785    5.510331          0   25.91667</span>
+<br><br>
+<span class=input>.         regress wage hours ttl_exp</span>
+<br><br>
+<span class=result>      </span>Source |       SS       df       MS              Number of obs =<span class=result>    2242</span>
+-------------+------------------------------           F(  2,  2239) =<span class=result>   97.98</span>
+<span class=result>    </span>   Model | <span class=result> 5978.66381     2  2989.33191           </span>Prob &gt; F      = <span class=result> 0.0000</span>
+<span class=result>    </span>Residual | <span class=result> 68309.1577  2239  30.5087797           </span>R-squared     = <span class=result> 0.0805</span>
+-------------+------------------------------           Adj R-squared = <span class=result> 0.0797</span>
+<span class=result>    </span>   Total | <span class=result> 74287.8215  2241  33.1494072           </span>Root MSE      = <span class=result> 5.5235</span>
+<br><br>
+------------------------------------------------------------------------------
+        wage |      Coef.   Std. Err.      t    P&gt;|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       hours |<span class=result>   .0568453   .0114072     4.98   0.000     .0344755     .079215</span>
+     ttl_exp |<span class=result>   .3013915   .0260076    11.59   0.000     .2503899    .3523931</span>
+       _cons |<span class=result>   1.879377   .4864704     3.86   0.000      .925397    2.833357</span>
+------------------------------------------------------------------------------
+<br><br>
+<span class=input>.       log close</span>
+<span class=result>      </span>name:  <span class=result>&lt;unnamed&gt;</span>
+<span class=result>       </span>log:  <span class=result>D:\stata11\ado\personal\Net_course_A\A1_intro\mylog.smcl</span>
+<span class=result>  </span>log type:  <span class=result>smcl</span>
+<span class=result> </span>closed on:  <span class=result>16 Mar 2010, 17:51:17</span>
+-----------------------------------------------------------------------------------------
+</pre>
+</body>
+</html>

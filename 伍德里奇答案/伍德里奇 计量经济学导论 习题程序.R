@@ -1,0 +1,3492 @@
+#####第一章 习题#####
+#读取Stata文件：后缀为.dta的文件，直接用foreign包中的
+#read.dta()函数；后缀诶.DTA的，在read.dta()中设置参数
+#convert.factors = FALSE
+#----------------------------------------------------------
+#1.1
+WAGE1<-read.table("clipboard")
+names(WAGE1)<-c("wage","educ","exper","tenure","nonwhite",
+               "female", "married","numdep", "smsa",
+               "northcen","south","west","construc",
+               "ndurman","trcommpu","trade","services",
+               "profserv","profocc","clerocc","servocc",
+               "lwage","expersq","tenursq")
+attach(WAGE1)
+mean(educ)
+nrow(WAGE1[which(educ==min(educ)),])
+nrow(WAGE1[which(educ==max(educ)),])
+#----------------------------------------------------------
+#1.2
+mean(WAGE$wage)
+#----------------------------------------------------------
+#1.5
+w=nrow(WAGE[female==0,]);w
+m=nrow(WAGE[female==1,]);m
+detach(WAGE)
+#----------------------------------------------------------
+#2.1
+BWGHT=read.table('clipboard',na.strings='.')
+names(BWGHT)<-c("faminc","cigtax","cigprice","bwght",
+                "fatheduc","motheduc","parity","male",
+                "white","cigs","lbwght","bwghtlbs",
+                "packs","lfaminc")
+BWGHTNA<-na.omit(BWGHT)
+female=BWGHT[BWGHT$male==0,]
+nfemale=nrow(female);nfemale
+fecig=female[female$cigs>0,]
+ncigs=nrow(fecig);ncigs
+#----------------------------------------------------------
+#2.2
+mean(BWGHT$cigs)
+#----------------------------------------------------------
+#2.3
+mean(fecig$cigs)
+#----------------------------------------------------------
+#2.4
+mean(BWGHTNA$fatheduc)
+mean(BWGHT$fatheduc,na.rm=T)
+#用哪一个呢？
+#----------------------------------------------------------
+#2.5
+mean(BWGHT$faminc)*1000
+sd(BWGHT$faminc)*1000
+#----------------------------------------------------------
+#3.1
+library(foreign)
+MEAP01=read.dta('meap01.dta')
+min(MEAP01$math4);max(MEAP01$math4)
+#----------------------------------------------------------
+#3.5
+cor(MEAP01$math4,MEAP01$read4)
+#----------------------------------------------------------
+#3.6
+mean(MEAP01$exppp);sd(MEAP01$exppp)
+#----------------------------------------------------------
+100*(6000-5500)/5500
+100*log(6000/5500)
+#----------------------------------------------------------
+#4.1
+jtrain2=read.dta('JTRAIN2.DTA',convert.factors = FALSE)
+maletrain=jtrain2[jtrain2$train==1,]
+nrow(maletrain)/nrow(jtrain2)
+#----------------------------------------------------------
+#4.2
+malenotrain=jtrain2[jtrain2$train==0,]
+mean(maletrain$re78)*1000
+mean(malenotrain$re78)*1000
+#----------------------------------------------------------
+#4.3
+tunem=maletrain[maletrain$unem78==1,]
+nrow(tunem)/nrow(maletrain)
+ntunem=maletrain[malenotrain$unem78==1,]
+nrow(ntunem)/nrow(malenotrain)
+#----------------------------------------------------------
+#####第二章 习题#####
+library(foreign)
+#1.1
+data401K=read.dta('401K.DTA',convert.factors=F)
+head(data401K)
+mean(data401K$prate);mean(data401K$mrate)
+#----------------------------------------------------------
+#1.2
+fit401K=lm(prate~mrate,data401K)
+summary(fit401K)
+#----------------------------------------------------------
+#1.4
+predict(fit401K,data.frame(mrate=3.5))
+#----------------------------------------------------------
+#2.1
+CEOSAL2=read.dta('CEOSAL2.DTA',convert.factors=F)
+head(CEOSAL2)
+mean(CEOSAL2$salary)
+mean(CEOSAL2$ceoten)
+#----------------------------------------------------------
+#2.2
+length(CEOSAL2[CEOSAL2$ceoten==0,][,1])
+max(CEOSAL2$ceoten)
+#----------------------------------------------------------
+#2.3
+fitCEO2=lm(log(salary)~ceoten,CEOSAL2)
+summary(fitCEO2)
+#----------------------------------------------------------
+#3.1
+SLEEP75=read.dta('SLEEP75.DTA',convert.factors=F)
+head(SLEEP75)
+fitSLEEP75=lm(sleep~totwrk,SLEEP75)
+summary(fitSLEEP75)
+2*coefficients(fitSLEEP75)[2]
+#----------------------------------------------------------
+#4.1
+WAGE2=read.dta('WAGE2.DTA',convert.factors=F)
+head(WAGE2)
+mean(WAGE2$wage);mean(WAGE2$IQ)
+sd(WAGE2$IQ)
+#----------------------------------------------------------
+#4.2
+fitWAGE2=lm(wage~IQ,WAGE2)
+summary(fitWAGE2)
+15*coefficients(fitWAGE2)[2]
+#----------------------------------------------------------
+#4.3
+fitlogWAGE2=lm(log(wage)~IQ,WAGE2)
+summary(fitlogWAGE2)
+15*coefficients(fitlogWAGE2)[2]
+#----------------------------------------------------------
+#5
+RDCHEM=read.dta('RDCHEM.DTA',convert.factors=F)
+head(RDCHEM)
+fitRDCHEM=lm(log(rd)~log(sales),RDCHEM)
+summary(fitRDCHEM)
+#----------------------------------------------------------
+#6
+MEAP93=read.dta('MEAP93.DTA',convert.factors=F)
+head(MEAP93)
+fitMEAP93=lm(math10~log(expend),data=MEAP93)
+summary(fitMEAP93)
+#----------------------------------------------------------
+#7.1
+charity=read.dta('charity.dta')
+head(charity)
+mean(charity$gift)
+nogift=charity[charity$gift==0,]
+length(nogift[,1])/length(charity[,1])
+#----------------------------------------------------------
+#7.2
+mean(charity$mailsyear)
+min(charity$mailsyear)
+max(charity$mailsyear)
+#----------------------------------------------------------
+#7.3
+fitcharity=lm(gift~mailsyear,charity)
+summary(fitcharity)
+#----------------------------------------------------------
+#####第三章 习题#####
+library(foreign)
+#1.3
+BWGHT=read.dta('BWGHT.DTA',convert.factors=F)
+head(BWGHT)
+fitBWGHT=lm(bwght~cigs+faminc,BWGHT)
+summary(fitBWGHT)
+
+fBWGHT=lm(bwght~cigs,BWGHT)
+summary(fBWGHT)
+
+cor(BWGHT$cigs,BWGHT$faminc)
+#可能因为两者相关系数较小，所以两个模型差别不大
+#----------------------------------------------------------
+#2.1
+hprice1=read.dta('hprice1.dta')
+head(hprice1)
+fithprice1=lm(price~sqrft+bdrms,hprice1)
+summary(fithprice1)
+#----------------------------------------------------------
+#2.2 2.3 
+1*coefficients(fithprice1)[3]*1000
+140*coefficients(fithprice1)[2]*1000
+#----------------------------------------------------------
+#2.5 2.6
+predict(fithprice1,data.frame(sqrft=2438,bdrms=4))*1000
+300-predict(fithprice1,data.frame(sqrft=2438,bdrms=4))
+#----------------------------------------------------------
+#3.1
+CEOSAL2=read.dta('CEOSAL2.DTA',convert.factors=F)
+head(CEOSAL2)
+fitCEOSAL2=lm(log(salary)~log(sales)+log(mktval),CEOSAL2)
+summary(fitCEOSAL2)
+#----------------------------------------------------------
+fCEOSAL2=lm(log(salary)~log(sales)+
+              log(mktval)+profits,CEOSAL2)
+summary(fCEOSAL2)
+#----------------------------------------------------------
+#3.3
+ffCEOSAL2=lm(log(salary)~log(sales)+
+               log(mktval)+profits+ceoten,CEOSAL2)
+summary(ffCEOSAL2)
+#----------------------------------------------------------
+#3.4
+cor(log(CEOSAL2$mktval),CEOSAL2$profits)
+#----------------------------------------------------------
+#4.1
+attend=read.dta('attend.dta')
+head(attend)
+apA=cbind(attend$atndrte,attend$priGPA,attend$ACT)
+apply(apA,2,min)
+apply(apA,2,max)
+apply(apA,2,mean)
+#----------------------------------------------------------
+#4.2
+fitattend=lm(atndrte~priGPA+ACT,attend)
+summary(fitattend)
+#----------------------------------------------------------
+#4.4 4.5
+predict(fitattend,data.frame(priGPA=3.65,ACT=20))
+A=predict(fitattend,data.frame(priGPA=3.1,ACT=21))
+B=predict(fitattend,data.frame(priGPA=2.1,ACT=26))
+A-B
+#----------------------------------------------------------
+#5
+WAGE1=read.dta('WAGE1.DTA',convert.factors=F)
+head(WAGE1)
+fitWAGE1=lm(educ~exper+tenure,data=WAGE1)
+r=residuals(fitWAGE1)
+cbind(
+  coefficients(lm(log(wage)~educ+exper+tenure,WAGE1))[2],
+  coefficients(lm(log(WAGE1$wage)~r))[2])
+#----------------------------------------------------------
+#6.1
+WAGE2=read.dta('WAGE2.DTA',convert.factors=F)
+head(WAGE2)
+fit1WAGE2=lm(IQ~educ,WAGE2)
+deta=coefficients(fit1WAGE2)[2];deta
+#----------------------------------------------------------
+#6.2
+fit2WAGE2=lm(log(wage)~educ,WAGE2)
+beta=coefficients(fit2WAGE2)[2];beta
+#----------------------------------------------------------
+#6.3 6.4
+fit3WAGE2=lm(log(wage)~educ+IQ,WAGE2)
+betahat=coefficients(fit3WAGE2)[2:3];betahat
+
+cbind(beta,betahat[1]+betahat[2]*deta)
+#----------------------------------------------------------
+#7.1
+MEAP93=read.dta('MEAP93.DTA',convert.factors=F)
+head(MEAP93)
+fitMEAP93=lm(math10~log(expend)+lnchprg,data=MEAP93)
+summary(fitMEAP93)
+#----------------------------------------------------------
+#7.3 7.4
+fMEAP93=lm(math10~log(expend),data=MEAP93)
+cbind(coefficients(fitMEAP93)[2],
+      coefficients(fMEAP93)[2])
+cor(log(MEAP93$expend),MEAP93$lnchprg)
+#----------------------------------------------------------
+#8.1
+discrim=read.dta('discrim.dta')
+head(discrim)
+mean(discrim$prpblck,na.rm=T)
+sd(discrim$prpblck,na.rm=T)
+#----------------------------------------------------------
+#8.2 8.3
+fitdiscrim=lm(psoda~prpblck+income,discrim)
+summary(fitdiscrim)
+fdiscrim=lm(psoda~prpblck,discrim)
+summary(fdiscrim)
+#----------------------------------------------------------
+#8.4
+ffdiscrim=lm(log(psoda)~prpblck+log(income),discrim)
+summary(ffdiscrim)
+0.2*coefficients(ffdiscrim)[2]*100
+#----------------------------------------------------------
+#8.5 8.6
+fffdiscrim=lm(log(psoda)~prpblck+
+                log(income)+prppov,discrim)
+summary(fffdiscrim)
+coefficients(fffdiscrim)[2]
+discrim=na.omit(discrim)
+cor(log(discrim$income),discrim$prppov)
+#----------------------------------------------------------
+#9.1
+charity=read.dta('charity.dta')
+head(charity)
+fit1charity=lm(gift~mailsyear+giftlast+propresp,charity)
+summary(fit1charity)
+fit2charity=lm(gift~mailsyear,charity)
+summary(fit2charity)
+#----------------------------------------------------------
+#9.4
+fit3charity=lm(gift~mailsyear+giftlast+
+                 propresp+avggift,charity)
+summary(fit3charity)
+#----------------------------------------------------------
+#####第四章 习题#####
+#1.3 1.4
+VOTE1=read.dta('VOTE1.DTA',convert.factors=F)
+head(VOTE1)
+fitVOTE1=lm(voteA~lexpendA+lexpendB+prtystrA,data=VOTE1)
+summary(fitVOTE1)
+
+VOTE1$exAB=VOTE1$expendA/VOTE1$expendB
+fit=lm(voteA~lexpendB+log(exAB)+prtystrA,VOTE1)
+summary(fit)
+#结果显示不拒绝beta1+beta2=0的原假设
+#----------------------------------------------------------
+#3.1
+HPRICE1=read.dta('HPRICE1.DTA',convert.factors=F)
+head(HPRICE1)
+fitHPRICE1=lm(lprice~sqrft+bdrms,HPRICE1)
+summary(fitHPRICE1)
+
+theta=150*coefficients(fitHPRICE1)[2]+
+  coefficients(fitHPRICE1)[3];theta
+#----------------------------------------------------------
+#3.2 3.3
+HPRICE1$sb=HPRICE1$sqrft-150*HPRICE1$bdrms
+fit=lm(lprice~bdrms+sb,HPRICE1)
+summary(fit)
+0.00004321*qt(0.95,85)
+#----------------------------------------------------------
+#5.1
+MLB1=read.dta('MLB1.DTA',convert.factors=F)
+head(MLB1)
+fit1MLB1=lm(lsalary~years+gamesyr+bavg+
+             hrunsyr+rbisyr,MLB1)
+summary(fit1MLB1)
+fit2MLB1=lm(lsalary~years+gamesyr+bavg+hrunsyr,MLB1)
+summary(fit2MLB1)
+#----------------------------------------------------------
+#5.2
+fit3MLB1=lm(lsalary~years+gamesyr+bavg+hrunsyr+
+              rbisyr+runsyr+fldperc+sbasesyr,MLB1)
+summary(fit3MLB1)
+#----------------------------------------------------------
+fit4MLB1=lm(lsalary~years+gamesyr+hrunsyr+
+              rbisyr+runsyr,MLB1)
+summary(fit4MLB1)
+
+f=(0.6392-0.6378)/(1-0.6392)*344/3;f
+#----------------------------------------------------------
+#6
+WAGE2=read.dta('WAGE2.DTA',convert.factors=F)
+head(WAGE2)
+fit1WAGE2=lm(log(wage)~educ+exper+tenure,data=WAGE2)
+summary(fit1WAGE2)
+WAGE2$et=WAGE2$exper+WAGE2$tenure
+fit2WAGE2=lm(log(wage)~educ+exper+et,data=WAGE2)
+summary(fit2WAGE2)
+#结果显示不拒绝beta2-beta3=0的原假设
+#----------------------------------------------------------
+#7.1
+twoyear=read.dta('twoyear.dta')
+head(twoyear)
+mean(twoyear$phsrank)
+min(twoyear$phsrank)
+max(twoyear$phsrank)
+#----------------------------------------------------------
+#7.2
+fit1twoyear=lm(lwage~jc+totcoll+exper,twoyear)
+summary(fit1twoyear)
+
+fit2twoyear=lm(lwage~jc+totcoll+exper+phsrank,twoyear)
+summary(fit2twoyear)
+10*coefficients(fit2twoyear)[5]
+#----------------------------------------------------------
+#8.1
+data401ksubs=read.dta('401ksubs.dta')
+head(data401ksubs)
+length(data401ksubs[data401ksubs$fsize==1,][,1])
+#----------------------------------------------------------
+#8.2
+fitdata401ksubs=lm(nettfa~inc+age,data401ksubs)
+summary(fitdata401ksubs)
+#----------------------------------------------------------
+#8.4
+t=(1.03078-1)/0.05912
+p=pt(t,9272)
+p
+#----------------------------------------------------------
+#8.5
+fit=lm(nettfa~inc,data401ksubs)
+summary(fit)
+#----------------------------------------------------------
+#9.1 9.2
+discrim=read.dta('discrim.dta')
+head(discrim)
+fitdiscrim=lm(lpsoda~prpblck+lincome+prppov,discrim)
+summary(fitdiscrim)
+discrim=na.omit(discrim)
+cor(discrim$lincome,discrim$prppov)
+#----------------------------------------------------------
+#9.3
+fdiscrim=lm(lpsoda~prpblck+
+              lincome+prppov+lhseval,discrim)
+summary(fdiscrim)
+#----------------------------------------------------------
+#10.1
+elem94_95=read.dta('elem94_95.dta')
+head(elem94_95)
+fit1elem94_95=lm(lavgsal~bs,elem94_95)
+summary(fit1elem94_95)
+t=(-0.79512+1)/0.14965
+pt(t,1846)
+#----------------------------------------------------------
+#10.2
+fit2elem94_95=lm(lavgsal~bs+lenrol+lstaff,elem94_95)
+summary(fit2elem94_95)
+#----------------------------------------------------------
+#10.3
+fit3elem94_95=lm(lavgsal~bs+lenrol+
+                   lstaff+lunch,elem94_95)
+summary(fit3elem94_95)
+#----------------------------------------------------------
+#####第五章 习题#####
+library(foreign)
+#1.1
+WAGE1=read.dta('WAGE1.DTA',convert.factors=F)
+head(WAGE1)
+fit1WAGE1=lm(wage~educ+exper+tenure,data=WAGE1)
+summary(fit1WAGE1)
+hist(residuals(fit1WAGE1),freq=F)
+x=seq(-3,2,length.out=300)
+lines(density(residuals(fit2WAGE1)),col='blue')
+lines(x,dnorm(x,mean(residuals(fit2WAGE1)),
+              sd(residuals(fit2WAGE1))),col='red')
+#----------------------------------------------------------
+#1.2 1.3
+fit2WAGE1=lm(log(wage)~educ+exper+tenure,data=WAGE1)
+summary(fit2WAGE1)
+hist(residuals(fit2WAGE1),freq=F)
+x=seq(-8,20,length.out=300)
+lines(density(residuals(fit2WAGE1)),col='blue')
+lines(x,dnorm(x,mean(residuals(fit1WAGE1)),
+              sd(residuals(fit1WAGE1))),col='red')
+#结果显示model2较好
+#----------------------------------------------------------
+#2.1
+gpa2=read.dta('gpa2.dta')
+head(gpa2)
+fitgpa2=lm(colgpa~hsperc+sat,gpa2)
+summary(fitgpa2)
+#----------------------------------------------------------
+#2.2
+gpa=gpa2[1:2070,]
+fitgpa=lm(colgpa~hsperc+sat,gpa)
+summary(fitgpa)
+#----------------------------------------------------------
+#2.3
+cbind(5.495e-4/7.185e-4,6.531e-5/8.858e-5,sqrt(2070/4137))
+#----------------------------------------------------------
+#4.1
+data401ksubs=read.dta('401ksubs.dta')
+head(data401ksubs)
+fksubs=data401ksubs[data401ksubs$fsize==1,]
+z1=scale(fksubs$inc)
+mean(z1^3)#偏度系数
+z2=scale(log(fksubs$inc))
+mean(z2^3)
+#结果显示z2接近正态分布
+#----------------------------------------------------------
+#4.2
+bwght2=read.dta('bwght2.dta')
+head(bwght2)
+z1=scale(bwght2$bwght)
+mean(z1^3)
+z2=scale(log(bwght2$bwght))
+mean(z2^3)
+#----------------------------------------------------------
+#####第六章 习题#####
+library(foreign)
+#1.1
+KIELMC=read.dta('KIELMC.DTA',convert.factors=F)
+head(KIELMC)
+fit1KIELMC=lm(lprice~ldist,KIELMC)
+summary(fit1KIELMC)
+#----------------------------------------------------------
+#1.2
+fit2KIELMC=lm(lprice~ldist+lintst+larea+lland+
+                rooms+baths+age,KIELMC)
+summary(fit2KIELMC)
+#----------------------------------------------------------
+#1.3
+fit3KIELMC=lm(lprice~ldist+lintst+larea+lland+
+                I(lintst^2)+rooms+baths+age,KIELMC)
+summary(fit3KIELMC)
+#----------------------------------------------------------
+#2.1 
+WAGE1=read.dta('WAGE1.DTA',convert.factors=F)
+head(WAGE1)
+fitWAGE1=lm(log(wage)~educ+exper+I(exper^2),data=WAGE1)
+summary(fitWAGE1)
+#----------------------------------------------------------
+#2.3
+100*(coefficients(fitWAGE1)[3]*c(5,20)+
+       2*coefficients(fitWAGE1)[4]*c(5,20))
+#----------------------------------------------------------
+#2.4
+abs(coefficients(fitWAGE1)[3]/coefficients(fitWAGE1)[4]/2)
+#----------------------------------------------------------
+#3.1
+WAGE2=read.dta('WAGE2.DTA',convert.factors=F)
+head(WAGE2)
+fitWAGE2=lm(log(wage)~educ*exper,data=WAGE2)
+summary(fitWAGE2)
+#----------------------------------------------------------
+#3.4
+WAGE2$ee=WAGE2$educ*WAGE2$exper-10*WAGE2$educ
+fit2WAGE2=lm(log(wage)~educ+exper+ee,data=WAGE2)
+summary(fit2WAGE2)
+#educ 95%的置信区间
+confint(fit2WAGE2)[2,]
+#----------------------------------------------------------
+#4.1 4.2
+gpa2=read.dta('gpa2.dta')
+head(gpa2)
+fit1gpa2=lm(sat~hsize+I(hsize^2),gpa2)
+summary(fit1gpa2)
+abs(coefficients(fit1gpa2)[2]/coefficients(fit1gpa2)[3])/2
+#----------------------------------------------------------
+#4.4
+fit2gpa2=lm(log(sat)~hsize+I(hsize^2),gpa2)
+summary(fit2gpa2)
+abs(coefficients(fit2gpa2)[2]/coefficients(fit2gpa2)[3])/2
+#----------------------------------------------------------
+#5.1
+hprice1=read.dta('hprice1.dta')
+head(hprice1)
+fithprice1=lm(lprice~llotsize+lsqrft+bdrms,hprice1)
+summary(fithprice1)
+#----------------------------------------------------------
+#5.2
+logyhat=predict(fithprice1,data.frame(llotsize=log(20000),
+        lsqrft=log(2500),bdrms=4))
+u=residuals(fithprice1)
+alph0=mean(exp(u))
+cbind(exp(logyhat),alph0*exp(logyhat))
+#----------------------------------------------------------
+#6.1
+VOTE1=read.dta('VOTE1.DTA',convert.factors=F)
+head(VOTE1)
+fitVOTE1=lm(voteA~prtystrA+expendA*expendB,VOTE1)
+summary(fitVOTE1)
+#----------------------------------------------------------
+#6.3 6.4
+mean(VOTE1$expendA)
+cof=coefficients(fitVOTE1)
+300*cof[3]+100*cof[4]+300*100*cof[5]
+
+100*cof[3]+100*cof[4]+100*100*cof[5]
+#----------------------------------------------------------
+#7.1
+attend=read.dta('attend.dta')
+head(attend)
+fitattend=lm(stndfnl~atndrte+priGPA+ACT+I(priGPA^2)+
+               I(ACT^2)+priGPA:atndrte,attend)
+summary(fitattend)
+coef=coefficients(fitattend)
+coef[3]+2*coef[5]*2.59+coef[7]*82
+#----------------------------------------------------------
+#7.2
+attend$p=attend$priGPA-2.59
+attend$a=attend$atndrte-82
+fit2attend=lm(stndfnl~atndrte+priGPA+ACT+
+                p+I(ACT^2)+priGPA:a,attend)
+summary(fit2attend)
+#se=0.078119
+#----------------------------------------------------------
+#8.1 
+hprice1=read.dta('hprice1.dta')
+head(hprice1)
+fithprice1=lm(price~lotsize+sqrft+bdrms,hprice1)
+summary(fithprice1)
+pre=predict(fithprice1,
+    data.frame(lotsize=10000,sqrft=2300,bdrms=4))
+pre
+#----------------------------------------------------------
+#8.2
+hprice1$l=hprice1$lotsize-10000
+hprice1$s=hprice1$sqrft-2300
+hprice1$b=hprice1$bdrms-4
+fit2hprice1=lm(price~l+s+b,hprice1)
+summary(fit2hprice1)
+se=7.374
+pre+c(-1,1)*1.96*se
+#也可以如下计算
+predict(fithprice1,
+        data.frame(lotsize=10000,sqrft=2300,bdrms=4),
+        interval='confidence')
+#----------------------------------------------------------
+#8.3
+pre+c(-1,1)*1.96*sqrt(se^2+59.83^2)
+#也可以如下计算
+predict(fithprice1,
+        data.frame(lotsize=10000,sqrft=2300,bdrms=4),
+        interval='prediction')
+#----------------------------------------------------------
+#9.1 9.2
+nbasal=read.dta('nbasal.dta')
+head(nbasal)
+fitnbasal=lm(points~exper+age+coll+I(exper^2),nbasal)
+summary(fitnbasal)
+
+cof=coefficients(fitnbasal)
+abs(cof[2]/cof[5]/2)
+#----------------------------------------------------------
+#9.5
+fit2nbasal=lm(lwage~points+exper+
+                I(exper^2)+age+coll,nbasal)
+summary(fit2nbasal)
+Ru=0.4878
+fit3nbasal=lm(lwage~points+exper+I(exper^2),nbasal)
+summary(fit3nbasal)
+Rs=0.4832
+f=(Ru-Rs)/(1-Ru)*263/2;f
+pf(f,263,2)
+#----------------------------------------------------------
+#10.1
+bwght2=read.dta('bwght2.dta')
+head(bwght2)
+fitbwght2=lm(lbwght~npvis+I(npvis^2),bwght2)
+summary(fitbwght2)
+#----------------------------------------------------------
+#10.2
+cof=coefficients(fitbwght2)
+abs(cof[2]/cof[3]/2)
+#----------------------------------------------------------
+#10.4
+fit2bwght2=lm(lbwght~npvis+I(npvis^2)+
+                mage+I(mage^2),bwght2)
+summary(fit2bwght2)
+cof2=coefficients(fit2bwght2)
+ma=abs(cof2[4]/cof2[5]/2);ma
+length(bwght2[bwght2$mage>ma,][,1])
+#----------------------------------------------------------
+#11.1 11.3
+APPLE=read.dta('APPLE.DTA',convert.factors=F)
+head(APPLE)
+fitAPPLE=lm(ecolbs~ecoprc+regprc,APPLE)
+summary(fitAPPLE)
+
+range(predict(fitAPPLE))
+#----------------------------------------------------------
+#11.5
+fit2APPLE=lm(ecolbs~ecoprc+regprc+
+               faminc+hhsize+educ+age,APPLE)
+summary(fit2APPLE)
+Rs=0.03641
+Ru=0.04022
+f=(Ru-Rs)/(1-Ru)*653/4;f
+pf(f,653,4)
+#----------------------------------------------------------
+#12.1
+d401ksubs=read.dta('401ksubs.dta')
+d401ksubs=d401ksubs[d401ksubs$fsize==1,]
+head(d401ksubs)
+minage=min(d401ksubs$age);minage
+length(d401ksubs[d401ksubs$age==minage,][,1])
+#----------------------------------------------------------
+#12.2
+fitd401ksubs=lm(nettfa~inc+age+I(age^2),d401ksubs)
+summary(fitd401ksubs)
+#----------------------------------------------------------
+#12.4
+d401ksubs$a=(d401ksubs$age)^2-d401ksubs$age*50
+fit2d401ksubs=lm(nettfa~inc+age+a,d401ksubs)
+summary(fit2d401ksubs)
+p=0.89315
+#结果显示不显著
+#----------------------------------------------------------
+#12.5
+d401ksubs$aa=(d401ksubs$age-25)^2
+fit3d401ksubs=lm(nettfa~inc+aa,d401ksubs)
+summary(fit3d401ksubs)
+#比之要好
+#----------------------------------------------------------
+#12.6
+pre=predict(fit3d401ksubs,
+    data.frame(inc=30,aa=(d401ksubs$age-25)^2))
+plot(d401ksubs$age,pre)
+#----------------------------------------------------------
+#13.1
+meap00_01=read.dta('meap00_01.dta')
+head(meap00_01)
+fitmeap00_01=lm(math4~lexppp+lenroll+lunch,meap00_01)
+summary(fitmeap00_01)
+#----------------------------------------------------------
+#13.2
+pre=predict(fitmeap00_01)
+range(pre)
+range(meap00_01$math4)
+#----------------------------------------------------------
+#13.3
+meap00_01$res=residuals(fitmeap00_01)
+maxr=max(meap00_01$res);maxr
+meap00_01[meap00_01$res==maxr,1]
+#----------------------------------------------------------
+#13.4
+fit2meap00_01=lm(math4~lexppp+lenroll+lunch+
+   I(lexppp^2)+I(lenroll^2)+I(lunch^2),meap00_01)
+summary(fit2meap00_01)
+Ru=summary(fit2meap00_01)$r.squared
+Rs=summary(fitmeap00_01)$r.squared
+f=(Ru-Rs)/(1-Ru)*1685/3;f
+pf(f,1685,3)
+#----------------------------------------------------------
+#13.5
+meap00_01$math4=meap00_01$math4/sd(meap00_01$math4)
+meap00_01$lexppp=meap00_01$lexppp/sd(meap00_01$lexppp)
+meap00_01$lenroll=meap00_01$lenroll/sd(meap00_01$lenroll)
+meap00_01$lunch=meap00_01$lunch/sd(meap00_01$lunch)
+fit3meap00_01=lm(math4~lexppp+lenroll+lunch,meap00_01)
+summary(fit3meap00_01)
+#----------------------------------------------------------
+#####第七章 习题#####
+library(foreign)
+#1.1
+GPA1=read.dta('GPA1.DTA',convert.factors=F)
+head(GPA1)
+fitGPA1=lm(colGPA~PC+hsGPA+ACT,GPA1)
+summary(fitGPA1)
+
+fit2GPA1=lm(colGPA~PC+hsGPA+ACT+mothcoll+fathcoll,GPA1)
+summary(fit2GPA1)
+#----------------------------------------------------------
+#1.2
+Ru=summary(fit2GPA1)$r.squared
+Rs=summary(fitGPA1)$r.squared
+f=(Ru-Rs)/(1-Ru)*135/2;f
+pf(f,135,2)
+#----------------------------------------------------------
+#1.3
+fit3GPA1=lm(colGPA~PC+hsGPA+ACT+mothcoll+fathcoll+
+              I(hsGPA^2),GPA1)
+summary(fit3GPA1)
+#----------------------------------------------------------
+#2.1
+WAGE2=read.dta('WAGE2.DTA',convert.factors=F)
+head(WAGE2)
+fitWAGE2=lm(lwage~educ+exper+tenure+married+black+
+              south+urban,WAGE2)
+summary(fitWAGE2)
+#----------------------------------------------------------
+#2.2
+fit2WAGE2=lm(lwage~educ+exper+tenure+married+black+
+              south+urban+I(exper^2)+I(tenure^2),WAGE2)
+summary(fit2WAGE2)
+
+Ru=summary(fit2WAGE2)$r.squared
+Rs=summary(fitWAGE2)$r.squared
+f=(Ru-Rs)/(1-Ru)*925/2;f
+pf(f,925,2)
+#----------------------------------------------------------
+#2.3
+fit3WAGE2=lm(lwage~educ+exper+tenure+married+
+              south+urban,WAGE2)
+summary(fit3WAGE2)
+
+Ru=summary(fitWAGE2)$r.squared
+Rs=summary(fit3WAGE2)$r.squared
+f=(Ru-Rs)/(1-Ru)*927;f
+pf(f,927,1)
+#----------------------------------------------------------
+#2.4
+#以单身非黑人为基准组
+WAGE2$marrbl=rep(0,nrow(WAGE2))
+WAGE2$marrnbl=rep(0,nrow(WAGE2))
+WAGE2$nmarrbl=rep(0,nrow(WAGE2))
+nr1=WAGE2[which(WAGE2$married==1 & WAGE2$black==1),]
+nr2=WAGE2[which(WAGE2$married==1 & WAGE2$black==0),]
+nr3=WAGE2[which(WAGE2$married==0 & WAGE2$black==1),]
+WAGE2$marrbl[as.numeric(rownames(nr1))]=1
+WAGE2$marrnbl[as.numeric(rownames(nr2))]=1
+WAGE2$nmarrbl[as.numeric(rownames(nr3))]=1
+fit4WAGE2=lm(lwage~educ+exper+tenure+south+urban+
+               marrbl+marrnbl+nmarrbl,WAGE2)
+summary(fit4WAGE2)
+cof=coefficients(fit4WAGE2)
+(exp(cof[7])-exp(cof[8]))*100
+#----------------------------------------------------------
+#3.1
+MLB1=read.dta('MLB1.DTA',convert.factors=F)
+head(MLB1)
+#catcher是接球手,outfield是外场手,以外场手为基准组
+fitMLB1=lm(lsalary~years+gamesyr+bavg+hrunsyr+rbisyr+
+             runsyr+fldperc+allstar+frstbase+scndbase+
+             thrdbase+shrtstop+catcher,MLB1)
+summary(fitMLB1)
+cof=coefficients(fitMLB1)
+(exp(cof[14])-1)*100
+#----------------------------------------------------------
+#3.2
+fit2MLB1=lm(lsalary~years+gamesyr+bavg+hrunsyr+rbisyr+
+             runsyr+fldperc+allstar,MLB1)
+summary(fit2MLB1)
+
+Ru=summary(fitMLB1)$r.squared
+Rs=summary(fit2MLB1)$r.squared
+f=(Ru-Rs)/(1-Ru)*339/5;f
+pf(f,339,5)
+#----------------------------------------------------------
+#4.2
+gpa2=read.dta('gpa2.dta')
+head(gpa2)
+fitgpa2=lm(colgpa~hsize+I(hsize^2)+hsperc+sat+
+             female+athlete,gpa2)
+summary(fitgpa2)
+cof=coefficients(fitgpa2)
+cof[7]
+#----------------------------------------------------------
+#4.3
+fit2gpa2=lm(colgpa~hsize+I(hsize^2)+hsperc+
+              female+athlete,gpa2)
+summary(fit2gpa2)
+cof2=coefficients(fit2gpa2)
+cof2[6]
+#----------------------------------------------------------
+#4.4
+fit3gpa2=lm(colgpa~hsize+I(hsize^2)+hsperc+
+              sat+female*athlete,gpa2)
+summary(fit3gpa2)
+fit4gpa2=lm(colgpa~hsize+I(hsize^2)+hsperc+
+              sat+athlete,gpa2)
+summary(fit4gpa2)
+
+Ru=summary(fit3gpa2)$r.squared
+Rs=summary(fit4gpa2)$r.squared
+f=(Ru-Rs)/(1-Ru)*4129/2;f
+pf(f,4129,2)
+#----------------------------------------------------------
+#4.5
+fit5gpa2=lm(colgpa~hsize+I(hsize^2)+hsperc+
+              female*sat+athlete,gpa2)
+summary(fit5gpa2)
+fit6gpa2=lm(colgpa~hsize+I(hsize^2)+hsperc+
+              sat+athlete,gpa2)
+summary(fit6gpa2)
+
+Ru=summary(fit5gpa2)$r.squared
+Rs=summary(fit6gpa2)$r.squared
+f=(Ru-Rs)/(1-Ru)*4129/2;f
+pf(f,4129,2)
+#----------------------------------------------------------
+#5
+CEOSAL1=read.dta('CEOSAL1.DTA',convert.factors=F)
+head(CEOSAL1)
+CEOSAL1$rosneg=rep(0,nrow(CEOSAL1))
+nr=CEOSAL1[CEOSAL1$ros<0,]
+CEOSAL1$rosneg[as.numeric(rownames(nr))]=1
+fitCEOSAL1=lm(lsalary~lsales+roe+rosneg,CEOSAL1)
+summary(fitCEOSAL1)
+#----------------------------------------------------------
+#6.1
+SLEEP75=read.dta('SLEEP75.DTA',convert.factors=F)
+head(SLEEP75)
+mSLEEP75=SLEEP75[SLEEP75$male==1,]
+fmSLEEP75=SLEEP75[SLEEP75$male==0,]
+fitmSLEEP75=lm(sleep~totwrk+educ+age+I(age^2)+
+                yngkid,mSLEEP75)
+summary(fitmSLEEP75)
+fitfmSLEEP75=lm(sleep~totwrk+educ+age+I(age^2)+
+                yngkid,fmSLEEP75)
+summary(fitfmSLEEP75)
+#----------------------------------------------------------
+#6.2
+SSR1=deviance(fitmSLEEP75);SSR2=deviance(fitfmSLEEP75)
+fitSLEEP75=lm(sleep~totwrk*male+educ*male+age*male+
+                I(age^2)*male+yngkid*male,SLEEP75)
+summary(fitSLEEP75)
+SSR=deviance(fitSLEEP75)
+f=(SSR-SSR1-SSR2)/(SSR1+SSR2)*(706-2*6)/6;f
+1-pf(f,6,706-2*6)
+#----------------------------------------------------------
+#6.3
+fit2SLEEP75=lm(sleep~totwrk+educ+age+I(age^2)+
+                 yngkid+male,SLEEP75)
+summary(fit2SLEEP75)
+SSRs=deviance(fit2SLEEP75)
+f=(SSRs-SSR)/SSR*694/5;f
+1-pf(f,5,694)
+#----------------------------------------------------------
+#7.1
+WAGE1=read.dta('WAGE1.DTA',convert.factors=F)
+head(WAGE1)
+fitWAGE1=lm(lwage~female*educ+exper+
+               I(exper^2)+tenure+I(tenure^2),data=WAGE1)
+summary(fitWAGE1)
+cof=coefficients(fitWAGE1)
+#educ=12.5,female=1,其余解释变量=0时
+fe=exp(cof[2]+cof[3]*12.5+cof[7]*12.5)-1
+#educ=12.5,female=0,其余解释变量=0时
+m=exp(cof[3]*12.5)
+fe-m#差异
+#educ=0,female=1,其余解释变量=0时
+fe=exp(cof[2])-1;fe#差异
+#----------------------------------------------------------
+#7.2
+WAGE1$ce=WAGE1$educ-12.5
+fit2WAGE1=lm(lwage~female+educ+female:ce+exper+
+              I(exper^2)+tenure+I(tenure^2),data=WAGE1)
+summary(fit2WAGE1)
+#female系数变了，其余未变
+#female与female:educ存在多重共线性
+#----------------------------------------------------------
+#8.2
+loanapp=read.dta('loanapp.dta')
+head(loanapp)
+fitloanapp=lm(approve~white,loanapp)
+summary(fitloanapp)
+#----------------------------------------------------------
+#8.3
+fit2loanapp=lm(approve~white+hrat+obrat+loanprc+unem+
+                 male+married+dep+sch+cosign+chist+
+                 pubrec+mortlat1+mortlat2+vr,loanapp)
+summary(fit2loanapp)
+#----------------------------------------------------------
+#8.4
+fit3loanapp=lm(approve~white*obrat+hrat+loanprc+unem+
+                 male+married+dep+sch+cosign+chist+
+                 pubrec+mortlat1+mortlat2+vr,loanapp)
+summary(fit3loanapp)
+#----------------------------------------------------------
+#8.5
+cof=coefficients(fit3loanapp)
+cof[2]+c(-1,1)*qt(0.975,1954)*0.080263
+#----------------------------------------------------------
+#9.1
+data401ksubs=read.dta('401ksubs.dta')
+head(data401ksubs)
+a=length(data401ksubs[data401ksubs$e401k==1,][,1])
+a/nrow(data401ksubs)
+#----------------------------------------------------------
+#9.2 9.3 9.4
+fitdata401ksubs=lm(e401k~inc+age+male+
+                     I(inc^2)+I(age^2),data401ksubs)
+summary(fitdata401ksubs)
+#male不显著,收入和年龄显著
+fit=fitted(fitdata401ksubs);fit[1:10]
+#----------------------------------------------------------
+#9.5
+data401ksubs$ffit=ifelse(fit<0.5,0,1)
+sum(data401ksubs$ffit)
+sum(data401ksubs$ffit)/nrow(data401ksubs)
+#----------------------------------------------------------
+#9.6
+a1=length(data401ksubs[which(data401ksubs$e401k==0 &
+                      data401ksubs$ffit==0),][,1])
+a2=length(data401ksubs[which(data401ksubs$e401k==1 &
+                      data401ksubs$ffit==1),][,1])
+a1/5638;a2/3637
+#----------------------------------------------------------
+#9.8
+fit2data401ksubs=lm(e401k~inc+age+male+I(inc^2)+
+                      I(age^2)+pira,data401ksubs)
+summary(fit2data401ksubs)
+#----------------------------------------------------------
+#10.1 10.3
+nbasal=read.dta('nbasal.dta')
+head(nbasal)
+fitnbasal=lm(points~exper+I(exper^2)+guard+forward,nbasal)
+summary(fitnbasal)
+#guard在5%水平上显著
+#----------------------------------------------------------
+#10.4
+fit2nbasal=lm(points~exper+I(exper^2)+guard+forward+
+               marr,nbasal)
+summary(fit2nbasal)
+#----------------------------------------------------------
+#10.5
+fit3nbasal=lm(points~marr*exper+marr*I(exper^2)+
+                guard+forward,nbasal)
+summary(fit3nbasal)
+#----------------------------------------------------------
+#10.6
+fit4nbasal=lm(assists~marr*exper+marr*I(exper^2)+
+                guard+forward,nbasal)
+summary(fit4nbasal)
+#----------------------------------------------------------
+#11.1
+data401ksubs=read.dta('401ksubs.dta')
+head(data401ksubs)
+attach(data401ksubs)
+mean(nettfa);sd(nettfa);min(nettfa);max(nettfa)
+#----------------------------------------------------------
+#11.2
+fit1=lm(nettfa~e401k)
+summary(fit1)
+#----------------------------------------------------------
+#11.3
+fit2=lm(nettfa~inc+age+I(inc^2)+I(age^2)+e401k)
+summary(fit2)
+#----------------------------------------------------------
+#11.4
+ag1=age-41;ag2=(age-41)^2
+fit3=lm(nettfa~inc+age+e401k+I(inc^2)+I(age^2)+
+        e401k:ag1+e401k:ag2)
+summary(fit3)
+#----------------------------------------------------------
+#11.5
+summary(fit2)$coef[6,1]*41-summary(fit3)$coef[4,1]*41
+#----------------------------------------------------------
+#11.6
+data401ksubs$fsize1=rep(0,nrow(data401ksubs))
+data401ksubs$fsize2=rep(0,nrow(data401ksubs))
+data401ksubs$fsize3=rep(0,nrow(data401ksubs))
+data401ksubs$fsize4=rep(0,nrow(data401ksubs))
+data401ksubs$fsize5=rep(0,nrow(data401ksubs))
+nr1=data401ksubs[data401ksubs$fsize==1,]
+nr2=data401ksubs[data401ksubs$fsize==2,]
+nr3=data401ksubs[data401ksubs$fsize==3,]
+nr4=data401ksubs[data401ksubs$fsize==4,]
+nr5=data401ksubs[data401ksubs$fsize>=5,]
+data401ksubs$fsize1[as.numeric(rownames(nr1))]=1
+data401ksubs$fsize2[as.numeric(rownames(nr2))]=1
+data401ksubs$fsize3[as.numeric(rownames(nr3))]=1
+data401ksubs$fsize4[as.numeric(rownames(nr4))]=1
+data401ksubs$fsize5[as.numeric(rownames(nr5))]=1
+fit4=lm(nettfa~inc+age+e401k+I(inc^2)+I(age^2)+
+          fsize1+fsize2+fsize3+fsize4,data401ksubs)
+summary(fit4)
+
+Ru=summary(fit4)$r.squared
+Rs=summary(fit2)$r.squared
+f=(Ru-Rs)/(1-Ru)*9265/4;f
+1-pf(f,4,9265)
+#----------------------------------------------------------
+#11.7
+#邹至庄检验
+SSRr=deviance(fit4)
+fit5=lm(nettfa~inc+age+e401k+I(inc^2)+I(age^2),
+        data401ksubs[data401ksubs$fsize1==1,])
+fit6=lm(nettfa~inc+age+e401k+I(inc^2)+I(age^2),
+        data401ksubs[data401ksubs$fsize2==1,])
+fit7=lm(nettfa~inc+age+e401k+I(inc^2)+I(age^2),
+        data401ksubs[data401ksubs$fsize3==1,])
+fit8=lm(nettfa~inc+age+e401k+I(inc^2)+I(age^2),
+        data401ksubs[data401ksubs$fsize4==1,])
+fit9=lm(nettfa~inc+age+e401k+I(inc^2)+I(age^2),
+        data401ksubs[data401ksubs$fsize5==1,])
+SSR1=deviance(fit5)
+SSR2=deviance(fit6)
+SSR3=deviance(fit7)
+SSR4=deviance(fit8)
+SSR5=deviance(fit9)
+f=(SSRr-SSR1-SSR2-SSR3-SSR4-SSR5)/(SSR1+SSR2+SSR3+SSR4+SSR5)*
+  (9275-5*6)/20;f
+1-pf(f,20,9275-5*6)
+#----------------------------------------------------------
+#12.1
+beauty=read.dta('beauty.dta')
+head(beauty)
+fivenum(beauty$looks)
+#相貌一般水平looks=3
+a1=beauty[which(beauty$looks==3 & beauty$female==0),]
+a2=beauty[which(beauty$looks==3 & beauty$female==1),]
+nrow(a1)/nrow(beauty[beauty$looks==3,])
+nrow(a2)/nrow(beauty[beauty$looks==3,])
+nrow(beauty[beauty$looks<3,]);nrow(beauty[beauty$looks>3,])
+#----------------------------------------------------------
+#12.2
+fitbeauty=lm(female~looks,beauty[beauty$looks>3,])
+summary(fitbeauty)
+#接收原假设
+#----------------------------------------------------------
+#12.3 12.4
+beautym=beauty[beauty$female==0,]
+beautyfm=beauty[beauty$female==1,]
+fit2beauty=lm(lwage~belavg+abvavg,beautym)
+summary(fit2beauty)
+
+fit3beauty=lm(lwage~belavg+abvavg,beautyfm)
+summary(fit3beauty)
+p1=summary(fit2beauty)$coef[2,4]/2;p1
+p2=summary(fit3beauty)$coef[2,4]/2;p2
+#女性的abvavg不显著,男性的显著
+#----------------------------------------------------------
+#12.5
+fit4beauty=lm(lwage~belavg+abvavg+educ+exper+
+                I(exper^2)+union+goodhlth+black+married+
+                south+bigcity+smllcity+service,beautym)
+summary(fit4beauty)
+fit5beauty=lm(lwage~belavg+abvavg+educ+exper+
+                I(exper^2)+union+goodhlth+black+married+
+                south+bigcity+smllcity+service,beautyfm)
+summary(fit5beauty)
+#----------------------------------------------------------
+#13.1
+APPLE=read.dta('APPLE.DTA',convert.factors=F)
+head(APPLE)
+APPLE$ecobuy=rep(0,nrow(APPLE))
+nr=APPLE[APPLE$ecolbs>0,]
+APPLE$ecobuy[as.numeric(rownames(nr))]=1
+sum(APPLE$ecobuy)/length(APPLE$ecobuy)
+#----------------------------------------------------------
+#13.2
+fitAPPLE=lm(ecobuy~ecoprc+regprc+faminc+hhsize+
+              educ+age,APPLE)
+summary(fitAPPLE)
+#----------------------------------------------------------
+#13.3
+fit2APPLE=lm(ecobuy~ecoprc+regprc,APPLE)
+summary(fit2APPLE)
+
+Ru=summary(fitAPPLE)$r.squared
+Rs=summary(fit2APPLE)$r.squared
+f=(Ru-Rs)/(1-Ru)*653/4;f
+1-pf(f,4,653)
+#联合显著，且educ显著
+#----------------------------------------------------------
+#13.4
+fit3APPLE=lm(ecobuy~ecoprc+regprc+log(faminc)+hhsize+
+              educ+age,APPLE)
+summary(fit3APPLE)
+#----------------------------------------------------------
+#13.5
+fit=fitted(fit3APPLE)
+length(fit[fit<0])
+length(fit[fit>1])
+#----------------------------------------------------------
+#13.6
+APPLE$fitt=ifelse(fit<0.5,0,1)
+a1=APPLE[which(APPLE$ecobuy==0 & APPLE$fitt==0),]
+a2=APPLE[which(APPLE$ecobuy==1 & APPLE$fitt==1),]
+nrow(a1)/nrow(APPLE[APPLE$ecobuy==0,])
+nrow(a2)/nrow(APPLE[APPLE$ecobuy==1,])
+#----------------------------------------------------------
+#14.1 14.2
+charity=read.dta('charity.dta')
+head(charity)
+fitcharity=lm(respond~resplast+avggift,charity)
+summary(fitcharity)
+#avggift不怎么显著
+#----------------------------------------------------------
+#14.3
+fit2charity=lm(respond~resplast+avggift+propresp,charity)
+summary(fit2charity)
+#----------------------------------------------------------
+#14.4
+fit3charity=lm(respond~resplast+avggift+
+                 propresp+mailsyear,charity)
+summary(fit3charity)
+#----------------------------------------------------------
+#####第八章 习题#####
+library(foreign)
+#White异方差-稳健标准误程序
+summaryw <- function(model) {
+  s <- summary( model)
+  X <- model.matrix(model)
+  u2 <- residuals(model)^2
+  XDX <- 0
+  for(i in 1:nrow(X)) {
+    XDX <- XDX + u2[i]*X[i,]%*%t(X[i,])
+  }
+  XX1 <- solve(t(X)%*%X)
+  varcovar <- XX1 %*% XDX %*% XX1
+  stdh <- sqrt(diag(varcovar))
+  t <- model$coefficients/stdh
+  p <- 2*pnorm(-abs(t))
+  results <- cbind(model$coefficients, stdh, t, p)
+  dimnames(results) <- dimnames(summary(model)$coefficients)
+  results
+}
+#----------------------------------------------------------
+#1.2 1.3
+SLEEP75=read.dta('SLEEP75.DTA',convert.factors=F)
+head(SLEEP75)
+fitSLEEP75=lm(sleep~totwrk+educ+age+I(age^2)+yngkid+
+                male,SLEEP75)
+summary(fitSLEEP75)
+SLEEP75$u2=residuals(fitSLEEP75)^2
+fit=lm(u2~male,SLEEP75)
+summary(fit)
+#由于male的系数是负数,所以男人u的估计方差比女人高
+#male不显著
+#----------------------------------------------------------
+#2.1
+hprice1=read.dta('hprice1.dta')
+head(hprice1)
+fithprice1=lm(price~lotsize+sqrft+bdrms,hprice1)
+summary(fithprice1)
+summaryw(fithprice1)
+#----------------------------------------------------------
+#2.2
+fit2hprice1=lm(lprice~llotsize+lsqrft+bdrms,hprice1)
+summary(fit2hprice1)
+summaryw(fit2hprice1)
+#----------------------------------------------------------
+#3
+fit2hprice1=lm(lprice~llotsize+lsqrft+bdrms,hprice1)
+summary(fit2hprice1)
+hprice1$u2=residuals(fit2hprice1)^2
+fit=lm(u2~llotsize*lsqrft+llotsize*bdrms+
+                 lsqrft*bdrms+I(llotsize^2)+
+                 I(lsqrft^2)+I(bdrms^2),hprice1)
+Ru=summary(fit)$r.squared
+n=88;q=9
+LM=n*Ru;LM
+1-pchisq(LM,q)
+#----------------------------------------------------------
+#4.1
+VOTE1=read.dta('VOTE1.DTA',convert.factors=F)
+head(VOTE1)
+fitVOTE1=lm(voteA~prtystrA+democA+lexpendA+lexpendB,VOTE1)
+summary(fitVOTE1)
+VOTE1$u=residuals(fitVOTE1)
+fit=lm(u~prtystrA+democA+lexpendA+lexpendB,VOTE1)
+summary(fit)
+#----------------------------------------------------------
+#4.2
+VOTE1$u2=residuals(fitVOTE1)^2
+fit2=lm(u2~prtystrA+democA+lexpendA+lexpendB,VOTE1)
+summary(fit2)
+Ru=summary(fit2)$r.squared
+n=173;k=4
+f=Ru/(1-Ru)*(n-k-1)/k;f
+1-pf(f,k,n-k-1)
+
+#bptest(fitVOTE1)  得到LM统计量
+#----------------------------------------------------------
+#4.3
+VOTE1$yhat=fitted(fitVOTE1)
+VOTE1$yhat2=fitted(fitVOTE1)^2
+fit3=lm(u2~yhat+yhat2,VOTE1)
+summary(fit3)
+Ru=summary(fit3)$r.squared
+n=173;k=2
+f=Ru/(1-Ru)*(n-k-1)/k;f
+1-pf(f,k,n-k-1)
+#----------------------------------------------------------
+#5.1 5.2
+PNTSPRD=read.dta('PNTSPRD.DTA',convert.factors=F)
+head(PNTSPRD)
+fitPNTSPRD=lm(sprdcvr~1,PNTSPRD)
+summary(fitPNTSPRD)
+cof=summary(fitPNTSPRD)$coef
+t=(cof[1,1]-0.5)/cof[1,2];t
+1-pt(t,552)
+#结果显示不显著
+length(PNTSPRD[PNTSPRD$neutral==1,][,1])
+#----------------------------------------------------------
+#5.3
+fit2PNTSPRD=lm(sprdcvr~favhome+neutral+fav25+und25,PNTSPRD)
+summary(fit2PNTSPRD)
+summaryw(fit2PNTSPRD)
+#----------------------------------------------------------
+#5.5
+Ru=summary(fit2PNTSPRD)$r.squared
+Rs=summary(fitPNTSPRD)$r.squared
+n=553;k=4
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/k;f
+1-pf(f,k,n-k-1)
+#----------------------------------------------------------
+#6.1
+CRIME1=read.dta('CRIME1.DTA',convert.factors=F)
+head(CRIME1)
+CRIME1$arr86=rep(1,nrow(CRIME1))
+nr=CRIME1[CRIME1$narr86==0,]
+CRIME1$arr86[as.numeric(rownames(nr))]=0
+fitCRIME1=lm(arr86~pcnv+avgsen+tottime+
+               ptime86+qemp86,CRIME1)
+summary(fitCRIME1)
+yhat=fitted(fitCRIME1)
+range(yhat)
+#----------------------------------------------------------
+#6.2
+#因为拟合值都介于0到1之间
+h=yhat*(1-yhat)
+fit2CRIME1=lm(arr86~pcnv+avgsen+tottime+
+               ptime86+qemp86,weights=1/h,CRIME1)
+summary(fit2CRIME1)
+#----------------------------------------------------------
+#6.3
+fit3CRIME1=lm(arr86~pcnv+ptime86+qemp86,weights=1/h,CRIME1)
+summary(fit3CRIME1)
+Ru=summary(fit2CRIME1)$r.squared
+Rs=summary(fit3CRIME1)$r.squared
+n=2725;k=2
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/k;f
+1-pf(f,k,n-k-1)
+#不拒绝联合显著
+#----------------------------------------------------------
+#7.1
+loanapp=read.dta('loanapp.dta')
+head(loanapp)
+fitloanapp=lm(approve~white+hrat+obrat+loanprc+unem+
+                 male+married+dep+sch+cosign+chist+
+                 pubrec+mortlat1+mortlat2+vr,loanapp)
+summary(fitloanapp)
+a=summaryw(fitloanapp);a
+#普通置信区间和稳健置信区间
+confint(fitloanapp)[2,]
+a[2,1]+c(-1,1)*1.96*a[2,2]
+#----------------------------------------------------------
+#7.2
+yhat=fitted(fitloanapp)
+range(yhat)
+length(yhat[yhat>1])/length(yhat)
+#没有小于0的拟合值,大概11%的拟合值大于1,需调整
+#----------------------------------------------------------
+#8
+GPA1=read.dta('GPA1.DTA',convert.factors=F)
+head(GPA1)
+fitGPA1=lm(colGPA~hsGPA+ACT+skipped+PC,GPA1)
+summary(fitGPA1)
+GPA1$u2=residuals(fitGPA1)^2
+GPA1$yhat=fitted(fitGPA1)
+GPA1$yhat2=fitted(fitGPA1)^2
+fit=lm(u2~yhat+yhat2,GPA1)
+hhat=fitted(fit)
+range(hhat)
+fit2GPA1=lm(colGPA~hsGPA+ACT+skipped+PC,
+            weights=1/hhat,GPA1)
+summary(fit2GPA1)
+summaryw(fitGPA1)
+#----------------------------------------------------------
+#9.1
+SMOKE=read.dta('SMOKE.DTA',convert.factors=F)
+head(SMOKE)
+fitSMOKE=lm(cigs~lincome+lcigpric+educ+
+              age+I(age^2)+restaurn,SMOKE)
+summary(fitSMOKE)
+#----------------------------------------------------------
+#9.2
+SMOKE$u2=residuals(fitSMOKE)^2
+fit=lm(log(u2)~lincome+lcigpric+educ+
+         age+I(age^2)+restaurn,SMOKE)
+ghat=fitted(fit)
+h=exp(ghat)
+fit2SMOKE=lm(cigs~lincome+lcigpric+educ+
+               age+I(age^2)+restaurn,weights=1/h,SMOKE)
+summary(fit2SMOKE)
+SMOKE$u2hat=residuals(fitSMOKE)^2/h
+SMOKE$y2hat=ghat^2/h
+#----------------------------------------------------------
+#9.3 9.5
+fit2=lm(u2hat~sqrt(y2hat)+y2hat,SMOKE)
+n=807;q=2
+Ru=summary(fit2)$r.squared
+LM=n*Ru;LM
+1-pchisq(LM,q)
+
+summaryw(fit2SMOKE)
+#----------------------------------------------------------
+#10.1
+data401=read.dta('401ksubs.dta')
+head(data401)
+fitdata401=lm(e401k~inc+age+male+I(inc^2)+I(age^2),data401)
+summary(fitdata401)
+summaryw(fitdata401)
+#----------------------------------------------------------
+#10.2
+data401$u2=residuals(fitdata401)^2
+data401$yhat=fitted(fitdata401)
+fit=lm(u2~yhat+I(yhat^2),data401)
+summary(fit)
+yhat=fitted(fit)
+range(yhat)
+#----------------------------------------------------------
+#10.3
+Ru=summary(fit)$r.squared
+n=9275;q=2
+LM=n*Ru;LM
+1-pchisq(LM,q)
+#----------------------------------------------------------
+#10.4
+h=yhat*(1-yhat)
+fit2data401=lm(e401k~inc+age+male+I(inc^2)+I(age^2),
+              weights=1/h,data401)
+summary(fit2data401)
+#----------------------------------------------------------
+#11.1
+data401=read.dta('401ksubs.dta')
+head(data401)
+data401=data401[which(data401$marr==1 & data401$fsize==2),]
+data401$ic=(data401$inc-10)^2
+data401$ae=(data401$age-25)^2
+fitdata401=lm(nettfa~inc+ic+age+ae+e401k,data401)
+summary(fitdata401)
+summaryw(fitdata401)
+#----------------------------------------------------------
+#11.2 稳健的LM检验
+fitdata401=lm(nettfa~ic+ae+e401k,data401)
+data401$u=residuals(fitdata401)
+fit1=lm(inc~ic+age+ae+e401k,data401)
+fit2=lm(age~inc+ic+ae+e401k,data401)
+data401$ur1=data401$u*residuals(fit1)
+data401$ur2=data401$u*residuals(fit2)
+data401$c=rep(1,nrow(data401))
+fit3=lm(c~ur1+ur2-1,data401)
+n=1494;q=2
+LM=n-deviance(fit3);LM
+1-pchisq(LM,q)
+#不拒绝h0
+#----------------------------------------------------------
+#11.3
+fit4=lm(log(u^2)~inc+ic+age+ae+e401k,data401)
+ghat=fitted(fit4)
+hhat=exp(ghat)
+fit2data401=lm(nettfa~inc+ic+age+ae+e401k,
+               weights=1/hhat,data401)
+summary(fit2data401)
+summaryw(fit2data401)
+#----------------------------------------------------------
+#12.1
+meap00_01=read.dta('meap00_01.dta')
+head(meap00_01)
+fitmeap00_01=lm(math4~lunch+lenroll+lexppp,meap00_01)
+summary(fitmeap00_01)
+summaryw(fitmeap00_01)
+#----------------------------------------------------------
+#12.2
+meap00_01$u2=residuals(fitmeap00_01)^2
+meap00_01$yhat=fitted(fitmeap00_01)
+fit=lm(u2~yhat+I(yhat^2),meap00_01)
+Ru=summary(fit)$r.squared
+n=1692;k=3
+f=Ru/(1-Ru)*(n-k-1)/k;f
+1-pf(f,k,n-k-1)
+#----------------------------------------------------------
+#12.3 12.4
+fit2=lm(log(u2)~yhat+I(yhat^2),meap00_01)
+ghat=fitted(fit2)
+hhat=exp(ghat)
+fit2meap00_01=lm(math4~lunch+lenroll+lexppp,
+                 weights=1/hhat,meap00_01)
+summary(fit2meap00_01)
+summaryw(fit2meap00_01)
+#----------------------------------------------------------
+#####第九章 习题#####
+library(foreign)
+#1.1
+CEOSAL1=read.dta('CEOSAL1.DTA',convert.factors=F)
+head(CEOSAL1)
+CEOSAL1$rosneg=rep(0,nrow(CEOSAL1))
+nr=CEOSAL1[CEOSAL1$ros<0,]
+CEOSAL1$rosneg[as.numeric(rownames(nr))]=1
+fitCEOSAL1=lm(lsalary~lsales+roe+rosneg,CEOSAL1)
+summary(fitCEOSAL1)
+
+CEOSAL1$yhat=fitted(fitCEOSAL1)
+fit2CEOSAL1=lm(lsalary~lsales+roe+rosneg+
+                 I(yhat^2)+I(yhat^3),CEOSAL1)
+summary(fit2CEOSAL1)
+
+Ru=summary(fit2CEOSAL1)$r.squared
+Rs=summary(fitCEOSAL1)$r.squared
+n=209;k=3;q=2
+f=(Ru-Rs)/(1-Ru)*(n-k-q-1)/q;f
+1-pf(f,q,n-k-q-1)
+#不拒绝 没有误设的原假设
+#----------------------------------------------------------
+#1.2 利用稳健的LM统计量
+fit1=lm(yhat^2~lsales+roe+rosneg,CEOSAL1)
+fit2=lm(yhat^3~lsales+roe+rosneg,CEOSAL1)
+CEOSAL1$r1u=residuals(fit1)*residuals(fitCEOSAL1)
+CEOSAL1$r2u=residuals(fit2)*residuals(fitCEOSAL1)
+CEOSAL1$c=rep(1,nrow(CEOSAL1))
+fit3=lm(c~r1u+r2u-1,CEOSAL1)
+n=209;q=2
+LM=n-deviance(fit3);LM
+1-pchisq(LM,q)
+#不拒绝 没有误设的原假设
+#----------------------------------------------------------
+#2.1
+WAGE2=read.dta('WAGE2.DTA',convert.factors=F)
+head(WAGE2)
+fitWAGE2=lm(lwage~educ+exper+tenure+married+south+
+               urban+black+KWW,WAGE2)
+summary(fitWAGE2)
+#----------------------------------------------------------
+#2.2
+fit2WAGE2=lm(lwage~educ+exper+tenure+married+south+
+              urban+black+KWW+IQ,WAGE2)
+summary(fit2WAGE2)
+#----------------------------------------------------------
+#2.3
+fit3WAGE2=lm(lwage~educ+exper+tenure+married+south+
+              urban+black,WAGE2)
+summary(fit3WAGE2)
+
+Ru=summary(fit2WAGE2)$r.squared
+Rs=summary(fit3WAGE2)$r.squared
+n=935;k=9;q=2
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#结果显示联合显著
+#----------------------------------------------------------
+#3.2
+JTRAIN=read.dta('JTRAIN.DTA',convert.factors=F)
+head(JTRAIN)
+JTRAIN1=JTRAIN[JTRAIN$year==1988,]
+fitJTRAIN=lm(lscrap~grant,JTRAIN1)
+summary(fitJTRAIN)
+#----------------------------------------------------------
+#3.3
+JTRAIN2=JTRAIN[JTRAIN$year==1987,]
+JTRAIN3=cbind(JTRAIN1,lsc=JTRAIN2$lscrap)
+fit2JTRAIN=lm(lscrap~grant+lsc,JTRAIN3)
+summary(fit2JTRAIN)
+#结果显示grant单侧显著
+#----------------------------------------------------------
+#3.4
+cof=summary(fit2JTRAIN)$coef;cof
+t=(cof[3,1]-1)/cof[3,2];t
+#拒绝lsc参数为1的原假设
+#----------------------------------------------------------
+#3.5
+summaryw <- function(model) {
+  s <- summary( model)
+  X <- model.matrix(model)
+  u2 <- residuals(model)^2
+  XDX <- 0
+  for(i in 1:nrow(X)) {
+    XDX <- XDX + u2[i]*X[i,]%*%t(X[i,])
+  }
+  XX1 <- solve(t(X)%*%X)
+  varcovar <- XX1 %*% XDX %*% XX1
+  stdh <- sqrt(diag(varcovar))
+  t <- model$coefficients/stdh
+  p <- 2*pnorm(-abs(t))
+  results <- cbind(model$coefficients, stdh, t, p)
+  dimnames(results) <- dimnames(summary(model)$coefficients)
+  results
+}
+a=summaryw(fit2JTRAIN);a
+t=(a[3,1]-1)/a[3,2];t
+#结果显示均显著
+#----------------------------------------------------------
+#4
+infmrt=read.dta('infmrt.dta')
+head(infmrt)
+infmrt=infmrt[infmrt$year==1990,]
+infmrt$DC=rep(0,nrow(infmrt))
+infmrt$DC=replace(infmrt$DC,which.max(infmrt$lphysic),1)
+fitinfmrt=lm(infmort~lpcinc+lphysic+lpopul+DC,infmrt)
+summary(fitinfmrt)
+#结果显示DC参数显著
+#----------------------------------------------------------
+#5.1
+RDCHEM=read.dta('RDCHEM.DTA',convert.factors=F)
+head(RDCHEM)
+fitRDCHEM=lm(rdintens~sales+I(sales^2)+profmarg,RDCHEM)
+summary(fitRDCHEM)
+#10号样本年销售额最大,接近400亿
+fit2RDCHEM=lm(rdintens~sales+I(sales^2)+
+                profmarg,RDCHEM[-10,])
+summary(fit2RDCHEM)
+#----------------------------------------------------------
+#6
+MEAP93=read.dta('MEAP93.DTA',convert.factors=F)
+head(MEAP93)
+MEAP93$bs=MEAP93$benefits/MEAP93$salary
+MEAP931=MEAP93[MEAP93$bs>=0.01,]
+nrow(MEAP93)-nrow(MEAP931)
+
+fit1=lm(lsalary~bs,MEAP931)
+summary(fit1)
+fit2=lm(lsalary~bs+lenroll+lstaff,MEAP931)
+summary(fit2)
+fit3=lm(lsalary~bs+lenroll+lstaff+droprate+gradrate,MEAP931)
+summary(fit3)
+#----------------------------------------------------------
+#7.1
+loanapp=read.dta('loanapp.dta')
+head(loanapp)
+dim(loanapp)
+length(loanapp[loanapp$obrat>40,][,1])
+#----------------------------------------------------------
+#7.2
+fitloanapp=lm(approve~white+hrat+obrat+loanprc+unem+
+                 male+married+dep+sch+cosign+chist+
+                 pubrec+mortlat1+mortlat2+vr,loanapp)
+summary(fitloanapp)
+loanapp1=loanapp[loanapp$obrat<=40,]
+fit2loanapp=lm(approve~white+hrat+obrat+loanprc+unem+
+                 male+married+dep+sch+cosign+chist+
+                 pubrec+mortlat1+mortlat2+vr,loanapp1)
+summary(fit2loanapp)
+#----------------------------------------------------------
+#8.1
+twoyear=read.dta('twoyear.dta')
+head(twoyear)
+mean(twoyear$stotal);sd(twoyear$stotal)
+#----------------------------------------------------------
+#8.2
+fit1=lm(jc~stotal,twoyear)
+summary(fit1)
+fit2=lm(univ~stotal,twoyear)
+summary(fit2)
+#----------------------------------------------------------
+#8.3
+fit3=lm(lwage~jc+univ+exper+stotal,twoyear)
+summary(fit3)
+#下面检验jc和univ的系数是否相等
+twoyear$ju=twoyear$jc+twoyear$univ
+fit4=lm(lwage~jc+ju+exper+stotal,twoyear)
+summary(fit4)
+#结果显示显著,拒绝相等的原假设
+#----------------------------------------------------------
+#8.4
+fit5=lm(lwage~jc+univ+exper+stotal+I(stotal^2),twoyear)
+summary(fit5)
+#----------------------------------------------------------
+#8.5
+fit6=lm(lwage~jc*stotal+univ*stotal+exper,twoyear)
+summary(fit6)
+#----------------------------------------------------------
+#9.1
+d401=read.dta('401ksubs.dta')
+head(d401)
+fitd401=lm(nettfa~inc+age+male+e401k+
+             I(inc^2)+I(age^2),d401)
+summary(fitd401)
+#----------------------------------------------------------
+#9.2
+library(lmtest)
+bptest(fitd401)
+
+d401$u2=residuals(fitd401)^2
+fit2d401=lm(u2~inc+age+male+e401k+
+             I(inc^2)+I(age^2),d401)
+summary(fit2d401)
+Ru=summary(fit2d401)$r.squared
+n=9275;k=6
+f=Ru/(1-Ru)*(n-k-1)/k;f
+1-pf(f,k,n-k-1)
+LM=n*Ru;LM
+1-pchisq(LM,k)
+#上述结果均显示有异方差
+#----------------------------------------------------------
+#9.3
+fitrq=rq(nettfa~inc+age+male+e401k+
+             I(inc^2)+I(age^2),tau=0.5,d401)
+summary(fitrq)
+#----------------------------------------------------------
+#10.1
+jtrain2=read.dta('JTRAIN2.dta',convert.factors=F)
+head(jtrain2)
+jtrain3=read.dta('jtrain3.dta')
+head(jtrain3)
+nrow(jtrain2[jtrain2$train==1,])/nrow(jtrain2)
+nrow(jtrain3[jtrain3$train==1,])/nrow(jtrain3)
+#----------------------------------------------------------
+#10.2
+fitjtrain2=lm(re78~train,jtrain2)
+summary(fitjtrain2)
+#----------------------------------------------------------
+#10.3
+fit2jtrain2=lm(re78~train+re74+re75+educ+age+
+                 black+hisp,jtrain2)
+summary(fit2jtrain2)
+#----------------------------------------------------------
+#10.4
+fitjtrain3=lm(re78~train,jtrain3)
+summary(fitjtrain3)
+fit2jtrain3=lm(re78~train+re74+re75+educ+age+
+                 black+hisp,jtrain3)
+summary(fit2jtrain3)
+#----------------------------------------------------------
+#10.5
+jtrain2$avgre2=(jtrain2$re74+jtrain2$re75)/2
+jtrain3$avgre3=(jtrain3$re74+jtrain3$re75)/2
+fivenum(jtrain2$avgre2);fivenum(jtrain3$avgre3)
+#----------------------------------------------------------
+#10.6
+jtrain21=jtrain2[jtrain2$avgre2<=10,]
+jtrain31=jtrain3[jtrain3$avgre3<=10,]
+fit2jtrain21=lm(re78~train+re74+re75+educ+age+
+                 black+hisp,jtrain21)
+summary(fit2jtrain21)
+fit2jtrain31=lm(re78~train+re74+re75+educ+age+
+                 black+hisp,jtrain31)
+summary(fit2jtrain31)
+#----------------------------------------------------------
+#10.7
+jtrain22=jtrain2[which(jtrain2$unem74==1 & 
+                       jtrain2$unem75==1),]
+jtrain32=jtrain3[which(jtrain3$unem74==1 & 
+                       jtrain3$unem75==1),]
+fitjtrain22=lm(re78~train,jtrain22)
+summary(fitjtrain22)
+fitjtrain32=lm(re78~train,jtrain32)
+summary(fitjtrain32)
+#----------------------------------------------------------
+#11.1
+MURDER=read.dta("MURDER.DTA",convert.factors=F)
+head(MURDER)
+MURDER1=MURDER[MURDER$year==93,]
+fitMURDER1=lm(mrdrte~exec+unem,MURDER1)
+summary(fitMURDER1)
+#----------------------------------------------------------
+#11.2
+MURDER11=MURDER1[MURDER1$state=='TX',]
+sum(MURDER11$exec)
+
+MURDER1$c=rep(0,nrow(MURDER1))
+nr=MURDER1[MURDER1$state=='TX',]
+MURDER1$c=ifelse(rownames(MURDER1)==rownames(nr),1,0)
+
+fit2MURDER1=lm(mrdrte~exec+unem+c,MURDER1)
+summary(fit2MURDER1)
+#----------------------------------------------------------
+#11.3
+MURDER2=MURDER[MURDER$year==90,]
+MURDER1$mur=MURDER2$mrdrte
+fit3MURDER1=lm(mrdrte~exec+unem+mur,MURDER1)
+summary(fit3MURDER1)
+#----------------------------------------------------------
+#11.4
+fit4MURDER1=lm(mrdrte~exec+unem+mur,MURDER1[-44,])
+summary(fit4MURDER1)
+#----------------------------------------------------------
+#12.1
+elem=read.dta('elem94_95.dta')
+head(elem)
+fitelem=lm(lavgsal~bs+lenrol+lstaff+lunch,elem)
+summary(fitelem)
+summaryw(fitelem)
+#----------------------------------------------------------
+#12.2
+elem1=elem[elem$bs<=0.5,]
+fitelem1=lm(lavgsal~bs+lenrol+lstaff+lunch,elem1)
+summary(fitelem1)
+summaryw(fitelem1)
+#----------------------------------------------------------
+#12.3
+elem$d68=rep(0,nrow(elem))
+elem$d1127=rep(0,nrow(elem))
+elem$d1508=rep(0,nrow(elem))
+elem$d1670=rep(0,nrow(elem))
+elem$d68=replace(elem$d68,68,1)
+elem$d1127=replace(elem$d1127,1127,1)
+elem$d1508=replace(elem$d1508,1508,1)
+elem$d1670=replace(elem$d1670,1670,1)
+fit2elem=lm(lavgsal~bs+lenrol+lstaff+lunch+
+              d68+d1127+d1508+d1670,elem)
+summary(fit2elem)
+#其他解释变量与第二问的相同
+#说明在异常值点添加虚拟变量 与 除去异常值 做回归结果相同
+#----------------------------------------------------------
+#12.4 去掉具有最大化学生残差的点1508 座回归
+fit3elem=lm(lavgsal~bs+lenrol+lstaff+lunch,elem[-1508,])
+summary(fit3elem)
+#----------------------------------------------------------
+#####第十章 习题#####
+library(foreign)
+#1
+intdef=read.dta('intdef.dta')
+head(intdef)
+intdef$c=rep(0,nrow(intdef))
+intdef$c=replace(intdef$c,33:56,1)
+fitintdef=lm(i3~inf+def,intdef)
+summary(fitintdef)
+fit2intdef=lm(i3~inf+def+c,intdef)
+summary(fit2intdef)
+#----------------------------------------------------------
+#2.1
+BARIUM=read.dta('BARIUM.DTA',convert.factors=F)
+head(BARIUM)
+fitBARIUM=lm(lchnimp~lchempi+lgas+lrtwex+
+               befile6+affile6+afdec6,BARIUM)
+summary(fitBARIUM)
+fit2BARIUM=lm(lchnimp~lchempi+lgas+lrtwex+
+               befile6+affile6+afdec6+t,BARIUM)
+summary(fit2BARIUM)
+#----------------------------------------------------------
+#2.2
+fit3BARIUM=lm(lchnimp~t,BARIUM)
+Ru=summary(fit2BARIUM)$r.squared
+Rs=summary(fit3BARIUM)$r.squared
+n=131;k=7;q=6
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#结果显示不是联合显著
+#----------------------------------------------------------
+#2.3
+fit4BARIUM=lm(lchnimp~feb+mar+apr+may+jun+jul+aug+sep+oct+
+               nov+dec+lchempi+lgas+lrtwex+befile6+
+               affile6+afdec6,BARIUM)
+summary(fit4BARIUM)
+#----------------------------------------------------------
+#3
+PRMINWGE=read.dta('PRMINWGE.DTA',convert.factors=F)
+head(PRMINWGE)
+fitPRMINWGE=lm(lprepop~lmincov+lusgnp+t+lprgnp,PRMINWGE)
+summary(fitPRMINWGE)
+#----------------------------------------------------------
+#4
+FERTIL3=read.dta('FERTIL3.DTA',convert.factors=F)
+head(FERTIL3)
+FERTIL3$ee1=FERTIL3$pe_1-FERTIL3$pe
+FERTIL3$ee2=FERTIL3$pe_2-FERTIL3$pe
+fitFERTIL3=lm(gfr~pe+ee1+ee2+ww2+pill,FERTIL3)
+summary(fitFERTIL3)
+#----------------------------------------------------------
+#5.1
+EZANDERS=read.dta('EZANDERS.DTA',convert.factors=F)
+head(EZANDERS)
+EZANDERS$t=c(1:nrow(EZANDERS))
+fitEZANDERS=lm(luclms~feb+mar+apr+may+jun+jul+aug+sep+
+                 oct+nov+dec+t,EZANDERS)
+summary(fitEZANDERS)
+#----------------------------------------------------------
+#5.2
+EZANDERS$EX=rep(0,nrow(EZANDERS))
+EZANDERS$EX=replace(EZANDERS$EX,49:60,1)
+fitEZANDERS=lm(luclms~feb+mar+apr+may+jun+jul+aug+sep+
+                 oct+nov+dec+t+EX,EZANDERS)
+summary(fitEZANDERS)
+cof=summary(fitEZANDERS)$coef;cof
+100*(exp(cof[14,1])-1)
+#----------------------------------------------------------
+#6.1
+FERTIL3=read.dta('FERTIL3.DTA',convert.factors=F)
+head(FERTIL3)
+fitFERTIL3=lm(gfr~t+I(t^2),FERTIL3)
+FERTIL3$y=summary(fitFERTIL3)$resi
+#----------------------------------------------------------
+#6.2
+fit2FERTIL3=lm(gfr~pe+ww2+pill+t+I(t^2),FERTIL3)
+summary(fit2FERTIL3)
+fit3FERTIL3=lm(y~pe+ww2+pill+t+I(t^2),FERTIL3)
+summary(fit3FERTIL3)
+#----------------------------------------------------------
+#6.3
+fit4FERTIL3=lm(gfr~pe+ww2+pill+t+I(t^2)+I(t^3),FERTIL3)
+summary(fit4FERTIL3)
+#----------------------------------------------------------
+#7.1
+consump=read.dta('consump.dta')
+head(consump)
+fitconsump=lm(gc~gy,consump)
+summary(fitconsump)
+#----------------------------------------------------------
+#7.2
+fit2consump=lm(gc~gy+gy_1,consump)
+summary(fit2consump)
+#----------------------------------------------------------
+#7.3
+fit3consump=lm(gc~gy+gy_1+r3,consump)
+summary(fit3consump)
+#----------------------------------------------------------
+#8.1
+FERTIL3=read.dta('FERTIL3.DTA',convert.factors=F)
+head(FERTIL3)
+fitFERTIL3=lm(gfr~pe+pe_1+pe_2+pe_3+pe_4+ww2+pill,FERTIL3)
+summary(fitFERTIL3)
+fit2FERTIL3=lm(gfr~pe+pe_1+pe_2+ww2+pill,FERTIL3)
+summary(fit2FERTIL3)
+
+Ru=summary(fitFERTIL3)$r.squared
+Rs=summary(fit2FERTIL3)$r.squared
+n=72;k=7;q=2
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#----------------------------------------------------------
+#8.2
+cof1=coefficients(fitFERTIL3)
+cof2=coefficients(fit2FERTIL3)
+LRP1=sum(cof[2:6]);LRP1
+LRP2=sum(cof[2:4]);LRP2
+#----------------------------------------------------------
+#9
+VOLAT=read.dta('VOLAT.DTA',convert.factors=F)
+head(VOLAT)
+fitVOLAT=lm(rsp500~pcip+i3,VOLAT)
+summary(fitVOLAT)
+#----------------------------------------------------------
+#10.1
+intdef=read.dta('intdef.dta')
+head(intdef)
+fitintdef=lm(i3~inf+def,intdef)
+summary(fitintdef)
+cor(intdef$inf,intdef$def)
+#----------------------------------------------------------
+#10.2
+fit2intdef=lm(i3~inf+def+inf_1+def_1,intdef)
+summary(fit2intdef)
+#----------------------------------------------------------
+#10.3
+summary(fitintdef)$coef[2,1]
+summary(fit2intdef)$coef[2,1]+summary(fit2intdef)$coef[4,1]
+#----------------------------------------------------------
+#10.4
+Ru=summary(fit2intdef)$r.squared
+Rs=summary(fitintdef)$r.squared
+n=56;k=4;q=2
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#----------------------------------------------------------
+#11.1
+TRAFFIC2=read.dta('TRAFFIC2.DTA',convert.factors=F)
+head(TRAFFIC2)
+rownames(TRAFFIC2[TRAFFIC2$beltlaw==1,])[1]
+rownames(TRAFFIC2[TRAFFIC2$spdlaw==1,])[1]
+#----------------------------------------------------------
+#11.2
+fitTRAFFIC2=lm(ltotacc~feb+mar+apr+may+jun+jul+aug+sep+
+                 oct+nov+dec+t,TRAFFIC2)
+summary(fitTRAFFIC2)
+fit2TRAFFIC2=lm(ltotacc~t,TRAFFIC2)
+summary(fit2TRAFFIC2)
+Ru=summary(fitTRAFFIC2)$r.squared
+Rs=summary(fit2TRAFFIC2)$r.squared
+n=108;k=12;q=11
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#----------------------------------------------------------
+#11.3 11.4
+fit3TRAFFIC2=lm(ltotacc~feb+mar+apr+may+jun+jul+aug+sep+
+                 oct+nov+dec+t+wkends+unem+
+                  spdlaw+beltlaw,TRAFFIC2)
+summary(fit3TRAFFIC2)
+#----------------------------------------------------------
+#11.5 11.6
+mean(TRAFFIC2$prcfat)
+fit4TRAFFIC2=lm(prcfat~feb+mar+apr+may+jun+jul+aug+sep+
+                  oct+nov+dec+t+wkends+unem+
+                  spdlaw+beltlaw,TRAFFIC2)
+summary(fit4TRAFFIC2)
+fit5TRAFFIC2=lm(prcfat~feb+mar+apr+may+jun+jul+aug+sep+
+                  oct+nov+dec+t+wkends+unem,TRAFFIC2)
+summary(fit5TRAFFIC2)
+
+Ru=summary(fit4TRAFFIC2)$r.squared
+Rs=summary(fit5TRAFFIC2)$r.squared
+n=108;k=16;q=2
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#----------------------------------------------------------
+#12.1
+phillips=read.dta('phillips.dta')
+head(phillips)
+fitphillips=lm(inf~unem,phillips)
+summary(fitphillips)
+#----------------------------------------------------------
+#12.2
+fit2phillips=lm(inf~unem,phillips[1:49,])
+summary(fit2phillips)
+#----------------------------------------------------------
+#12.3
+fit3phillips=lm(inf~unem,phillips[-c(1:49),])
+summary(fit3phillips)
+#----------------------------------------------------------
+#12.4
+a=summary(fitphillips)$coef[2,1]
+b=summary(fit2phillips)$coef[2,1]*49/56+
+  summary(fit3phillips)$coef[2,1]*7/56
+cbind(a,b)
+#----------------------------------------------------------
+#13.1
+minwage=read.dta('minwage.dta')
+head(minwage)
+fitminwage=lm(gwage232~gmwage+gcpi,minwage)
+summary(fitminwage)
+#----------------------------------------------------------
+#13.2
+fit2minwage=lm(gwage232~gmwage+gcpi+gmwage_1+gmwage_2+
+              gmwage_3+gmwage_4+gmwage_5+gmwage_6+
+              gmwage_7+gmwage_8+gmwage_9+gmwage_10+
+              gmwage_11+gmwage_12,minwage)
+summary(fit2minwage)
+cof=coefficients(fit2minwage)
+sum(cof[-c(1,3)])#比fit1的gmwage系数大
+Ru=summary(fit2minwage)$r.squared
+Rs=summary(fitminwage)$r.squared
+n=599;k=14;q=12
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#----------------------------------------------------------
+#13.3
+fit3minwage=lm(gemp232~gmwage+gcpi,minwage)
+summary(fit3minwage)
+#----------------------------------------------------------
+#13.4
+fit4minwage=lm(gemp232~gmwage+gcpi+gmwage_1+gmwage_2+
+                 gmwage_3+gmwage_4+gmwage_5+gmwage_6+
+                 gmwage_7+gmwage_8+gmwage_9+gmwage_10+
+                 gmwage_11+gmwage_12,minwage)
+summary(fit4minwage)
+cof=coefficients(fit3minwage)
+sum(cof[-c(1,3)])#比fit1的gmwage系数的绝对值小
+Ru=summary(fit3minwage)$r.squared
+Rs=summary(fit4minwage)$r.squared
+n=599;k=14;q=12
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#----------------------------------------------------------
+#####第十一章 习题#####
+library(foreign)
+#1.1
+HSEINV=read.dta('HSEINV.DTA',convert.factors=F)
+head(HSEINV)
+a=data.frame(linvpc=HSEINV$linvpc,linvpc_1=HSEINV$linvpc_1,
+             lprice=HSEINV$lprice,lprice_1=HSEINV$lprice_1)
+a=na.omit(a)
+cor(a$linvpc,a$linvpc_1)
+cor(a$lprice,a$lprice_1)
+#OLS法去除趋势
+fit1=lm(linvpc~t,HSEINV)
+b1=residuals(fit1)#b1就是去除趋势后的linvpc序列
+#再将b滞后一期求cor
+cor(b1[-1],b1[1:(length(b1)-1)])
+acf(b1,plot=F)[1]#样本自相关系数结果与上述结果不一样？
+fit2=lm(lprice~t,HSEINV)
+b2=residuals(fit2)
+cor(b2[-1],b2[1:(length(b2)-1)])
+acf(b2,plot=F)[1]
+#----------------------------------------------------------
+#1.2
+HSEINV$lprr=HSEINV$lprice-HSEINV$lprice_1
+fit3=lm(linvpc~lprr+t,HSEINV)
+summary(fit3)
+#----------------------------------------------------------
+#1.3
+fit1=lm(linvpc~t,HSEINV)
+HSEINV$b1=residuals(fit1)
+fit4=lm(b1~lprr+t,HSEINV)
+summary(fit4)
+#----------------------------------------------------------
+#1.4
+HSEINV$linn=HSEINV$linvpc-HSEINV$linvpc_1
+fit5=lm(linn~lprr+t,HSEINV)
+summary(fit5)
+#----------------------------------------------------------
+#2.1
+EARNS=read.dta('EARNS.DTA',convert.factors=F)
+head(EARNS)
+fitEARNS=lm(ghrwage~goutphr+goutph_1,EARNS)
+summary(fitEARNS)
+#----------------------------------------------------------
+#2.2
+EARNS$gouu=EARNS$goutphr-EARNS$goutph_1
+fit2EARNS=lm(ghrwage~goutphr+gouu,EARNS)
+summary(fit2EARNS)
+t=(1.185999-1)/0.203142;t
+1-pt(t,38)
+#----------------------------------------------------------
+#2.3
+fit3EARNS=lm(ghrwage~goutphr+goutph_1+goutph_2,EARNS)
+summary(fit3EARNS)
+#----------------------------------------------------------
+#3.1 3.2
+NYSE=read.dta('NYSE.DTA',convert.factors=F)
+head(NYSE)
+fitNYSE=lm(return~return_1+I(return_1^2),NYSE)
+summary(fitNYSE)
+#模型的F统计量不显著,证明了3.2
+#----------------------------------------------------------
+#3.3
+NYSE$return_2=c(NA,NYSE$return_1[1:690])
+fit2NYSE=lm(return~return_1+return_1:return_2,NYSE)
+summary(fit2NYSE)
+#模型的F统计量不显著
+#----------------------------------------------------------
+#4
+phillips=read.dta('phillips.dta')
+head(phillips)
+phillips$inff=phillips$inf-phillips$inf_1
+phillips$unee=phillips$unem-phillips$unem_1
+fitphillips=lm(inff~unem,phillips[1:49,])
+summary(fitphillips)
+fit2phillips=lm(inff~unee,phillips[1:49,])
+summary(fit2phillips)
+#----------------------------------------------------------
+#5.1
+FERTIL3=read.dta('FERTIL3.DTA',convert.factors=F)
+head(FERTIL3)
+a=data.frame(gfr=FERTIL3$gfr,gfr_1=FERTIL3$gfr_1,
+             pe=FERTIL3$pe,pe_1=FERTIL3$pe_1,
+             pe_2=FERTIL3$pe_2,pe_3=FERTIL3$pe_3,
+             t=FERTIL3$t,ww2=FERTIL3$ww2,pill=FERTIL3$pill)
+a=na.omit(a)
+a$gfrr=a[,1]-a[,2]
+a$pee=a[,3]-a[,4]
+a$pee1=a[,4]-a[,5]
+a$pee2=a[,5]-a[,6]
+fit=lm(gfrr~pee+pee1+pee2+t,a)
+summary(fit)
+#----------------------------------------------------------
+#5.2
+fit2=lm(gfrr~pee+pee1+pee2+ww2+pill,a)
+summary(fit2)
+#----------------------------------------------------------
+#5.3
+cof=coefficients(fit2)
+LRP=sum(cof[2:4]);LRP
+FERTIL3$ee1=FERTIL3$pe_1-FERTIL3$pe
+FERTIL3$ee2=FERTIL3$pe_2-FERTIL3$pe
+fit3FERTIL3=lm(gfr~pe+ee1+ee2+ww2+pill,FERTIL3)
+summary(fit3FERTIL3)
+#----------------------------------------------------------
+#6.1
+INVEN=read.dta('INVEN.DTA',convert.factors=F)
+head(INVEN)
+INVEN$dinv=c(NA,diff(INVEN$inven))
+INVEN$dgdp=c(NA,diff(INVEN$gdp))
+fitINVEN=lm(dinv~dgdp,INVEN)
+summary(fitINVEN)
+#----------------------------------------------------------
+#6.2
+fit2INVEN=lm(dinv~dgdp+r3,INVEN)
+summary(fit2INVEN)
+#----------------------------------------------------------
+#6.3
+INVEN$dr3=c(NA,diff(INVEN$r3))
+fit3INVEN=lm(dinv~dgdp+dr3,INVEN)
+summary(fit3INVEN)
+#----------------------------------------------------------
+#7.1
+consump=read.dta('consump.dta')
+head(consump)
+fitconsump=lm(gc~gc_1,consump)
+summary(fitconsump)
+#----------------------------------------------------------
+#7.2
+consump$i3_1=c(NA,consump$i3[1:(nrow(consump)-1)])
+fit2consump=lm(gc~gc_1+gy_1+i3_1,consump)
+summary(fit2consump)
+
+Ru=summary(fit2consump)$r.squared
+Rs=summary(fitconsump)$r.squared
+n=35;k=3;q=2
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#----------------------------------------------------------
+#8.1
+phillips=read.dta('phillips.dta')
+head(phillips)
+fitphillips=lm(unem~unem_1,phillips)
+summary(fitphillips)
+#----------------------------------------------------------
+#8.2
+fit2phillips=lm(unem~unem_1+inf_1,phillips)
+summary(fit2phillips)
+#----------------------------------------------------------
+#9.1
+TRAFFIC2=read.dta('TRAFFIC2.DTA',convert.factors=F)
+head(TRAFFIC2)
+cor(TRAFFIC2$prcfat[-1],TRAFFIC2$prcfat_1[-1])
+acf(TRAFFIC2$prcfat,plot=F)[1]#与正常算法接近
+#----------------------------------------------------------
+#9.2
+TRAFFIC2$dprc=c(NA,diff(TRAFFIC2$prcfat))
+TRAFFIC2$dunem=c(NA,diff(TRAFFIC2$unem))
+fitTRAFFIC2=lm(dprc~feb+mar+apr+may+jun+jul+aug+sep+
+                  oct+nov+dec+t+wkends+dunem+
+                 spdlaw+beltlaw,TRAFFIC2)
+summary(fitTRAFFIC2)
+#----------------------------------------------------------
+#10.1
+phillips=read.dta('phillips.dta')
+head(phillips)
+phillips$inff=phillips$inf-phillips$inf_1
+fitphillips=lm(inff~unem,phillips[1:49,])
+summary(fitphillips)
+#----------------------------------------------------------
+#10.2
+fit2phillips=lm(inff~unem,phillips)
+summary(fit2phillips)
+#----------------------------------------------------------
+#10.3
+cor(phillips$unem[-1],phillips$unem_1[-1])
+acf(phillips$unem,plot=F)[1]
+#----------------------------------------------------------
+#10.4
+fit3phillips=lm(inff~cunem,phillips)
+summary(fit3phillips)
+#----------------------------------------------------------
+#11.1
+okun=read.dta('okun.dta')
+head(okun)
+fitokun=lm(pcrgdp~cunem,okun)
+summary(fitokun)
+#----------------------------------------------------------
+#11.2 11.3
+t=(-1.8909+2)/0.182;t
+pt(t,44)
+t=(3.3444-3)/0.1627;t
+1-pt(t,44)
+#----------------------------------------------------------
+#11.4
+okun$pcrgdp1=okun$pcrgdp-3+2*okun$cunem
+fit2okun=lm(pcrgdp1~cunem,okun)
+summary(fit2okun)
+#结果联合不显著
+#----------------------------------------------------------
+#12.1
+minwage=read.dta('minwage.dta')
+head(minwage)
+minwage$gwage232_1=c(NA,
+        minwage$gwage232[1:(nrow(minwage)-1)])
+cor(minwage$gwage232[-c(1,2)],minwage$gwage232_1[-c(1,2)])
+acf(minwage$gwage232[-1],plot=F)[1]
+#----------------------------------------------------------
+#12.2
+fit=lm(gwage232~gwage232_1+gmwage+gcpi,minwage)
+summary(fit)
+#----------------------------------------------------------
+#12.3
+minwage$gemp232_1=c(NA,
+                    minwage$gemp232[1:(nrow(minwage)-1)])
+fit2=lm(gwage232~gwage232_1+gmwage+gcpi+gemp232_1,minwage)
+summary(fit2)
+#----------------------------------------------------------
+#12.4
+fit3=lm(gwage232~gmwage+gcpi,minwage)
+summary(fit3)
+
+Ru=summary(fit2)$r.squared
+Rs=summary(fit3)$r.squared
+n=610;k=4;q=2
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#----------------------------------------------------------
+#12.5
+fit4=lm(gmwage~gwage232_1+gemp232_1,minwage)
+summary(fit4)
+#----------------------------------------------------------
+#####第十二章 习题#####
+library(foreign)
+library(sandwich)
+library(lmtest)
+summaryw <- function(model) {
+  s <- summary( model)
+  X <- model.matrix(model)
+  u2 <- residuals(model)^2
+  XDX <- 0
+  for(i in 1:nrow(X)) {
+    XDX <- XDX + u2[i]*X[i,]%*%t(X[i,])
+  }
+  XX1 <- solve(t(X)%*%X)
+  varcovar <- XX1 %*% XDX %*% XX1
+  stdh <- sqrt(diag(varcovar))
+  t <- model$coefficients/stdh
+  p <- 2*pnorm(-abs(t))
+  results <- cbind(model$coefficients, stdh, t, p)
+  dimnames(results) <- dimnames(summary(model)$coefficients)
+  results
+}
+#PW估计程序
+PW <- function(mod){
+  X <- model.matrix(mod)
+  y <- model.response(model.frame(mod))
+  e <- residuals(mod)
+  n <- length(e)
+  names <- colnames(X)
+  rho <- sum(e[1:(n-1)]*e[2:n])/sum(e^2)
+  y <- c(y[1] * (1 - rho^2)^0.5, y[2:n] - rho * y[1:(n-1)])
+  X <- rbind(X[1,] * (1 - rho^2)^0.5, X[2:n,] - rho * X[1:(n-1),])
+  mod <- lm(y ~ X - 1)
+  result <- list()
+  result$coef <- summary(mod)$coefficients
+  summary <- summary(mod, corr = F)
+  result$cov <- (summary$sigma^2) * summary$cov.unscaled
+  dimnames(result$cov) <- list(names, names)
+  result$sigma <- summary$sigma
+  result$rho <- rho
+  class(result) <- 'prais.winsten'
+  result
+}
+#CO估计程序
+CO <- function(mod){
+  X <- model.matrix(mod)
+  y <- model.response(model.frame(mod))
+  e <- residuals(mod)
+  n <- length(e)
+  names <- colnames(X)
+  rho <- sum(e[1:(n-1)]*e[2:n])/sum(e^2)
+  y <- y[2:n] - rho * y[1:(n-1)]
+  X <- X[2:n,] - rho * X[1:(n-1),]
+  mod <- lm(y ~ X - 1)
+  result <- list()
+  result$coef <- summary(mod)$coefficients
+  summary <- summary(mod, corr = F)
+  result$cov <- (summary$sigma^2) * summary$cov.unscaled
+  dimnames(result$cov) <- list(names, names)
+  result$sigma <- summary$sigma
+  result$rho <- rho
+  class(result) <- 'cochrane.orcutt'
+  result
+}
+#1
+FERTIL3=read.dta('FERTIL3.DTA',convert.factors=F)
+a=data.frame(gfr=FERTIL3$gfr,gfr_1=FERTIL3$gfr_1,
+             pe=FERTIL3$pe,pe_1=FERTIL3$pe_1,
+             pe_2=FERTIL3$pe_2,pe_3=FERTIL3$pe_3)
+head(a)
+a$gfrr=a[,1]-a[,2]
+a$pee=a[,3]-a[,4]
+a$pee1=a[,4]-a[,5]
+a$pee2=a[,5]-a[,6]
+fit=lm(gfrr~pee+pee1+pee2,a)
+a$u=c(NA,NA,NA,summary(fit)$resi)
+a$u_1=c(NA,a$u[-nrow(a)])
+fit2=lm(u~u_1,a)
+summary(fit2)
+#u_1系数显著，存在AR(1)序列相关
+#----------------------------------------------------------
+#2.1
+WAGEPRC=read.dta('WAGEPRC.DTA',convert.factors=F)
+head(WAGEPRC)
+fitWAGEPRC=lm(gprice~gwage+gwage_1+gwage_2+gwage_3+gwage_4+
+                gwage_5+gwage_6+gwage_7+gwage_8+gwage_9+
+                gwage_10+gwage_11+gwage_12,WAGEPRC)
+summary(fitWAGEPRC)
+WAGEPRC$u=c(rep(NA,13),summary(fitWAGEPRC)$resi)
+WAGEPRC$u_1=c(NA,WAGEPRC$u[-nrow(WAGEPRC)])
+fit=lm(u~u_1,WAGEPRC)
+summary(fit)
+#结果显示存在AR(1)序列相关
+#----------------------------------------------------------
+#2.2
+cof=CO(fitWAGEPRC)$coef;cof
+LRP=sum(cof[-1,1]);LRP
+#----------------------------------------------------------
+#2.3求LRP的标准误
+WAGEPRC$gwage1=WAGEPRC$gwage-WAGEPRC$gwage_1
+WAGEPRC$gwage2=WAGEPRC$gwage-WAGEPRC$gwage_2
+WAGEPRC$gwage3=WAGEPRC$gwage-WAGEPRC$gwage_3
+WAGEPRC$gwage4=WAGEPRC$gwage-WAGEPRC$gwage_4
+WAGEPRC$gwage5=WAGEPRC$gwage-WAGEPRC$gwage_5
+WAGEPRC$gwage6=WAGEPRC$gwage-WAGEPRC$gwage_6
+WAGEPRC$gwage7=WAGEPRC$gwage-WAGEPRC$gwage_7
+WAGEPRC$gwage8=WAGEPRC$gwage-WAGEPRC$gwage_8
+WAGEPRC$gwage9=WAGEPRC$gwage-WAGEPRC$gwage_9
+WAGEPRC$gwage10=WAGEPRC$gwage-WAGEPRC$gwage_10
+WAGEPRC$gwage11=WAGEPRC$gwage-WAGEPRC$gwage_11
+WAGEPRC$gwage12=WAGEPRC$gwage-WAGEPRC$gwage_12
+fit2WAGEPRC=lm(gprice~gwage+gwage1+gwage2+gwage3+gwage4+
+                gwage5+gwage6+gwage7+gwage8+gwage9+
+                gwage10+gwage11+gwage12,WAGEPRC)
+cof2=CO(fit2WAGEPRC)$coef;cof2
+#gwage的系数就是LRP
+t=(cof2[2,1]-1)/cof[2,2];t
+1-pt(t,272)
+#LRP显著异与1
+#----------------------------------------------------------
+#3
+INVEN=read.dta('INVEN.DTA',convert.factors=F)
+head(INVEN)
+INVEN$dinv=c(NA,diff(INVEN$inven))
+INVEN$dgdp=c(NA,diff(INVEN$gdp))
+fitINVEN=lm(dinv~dgdp,INVEN)
+INVEN$u=c(NA,summary(fitINVEN)$resi)
+INVEN$u_1=c(NA,INVEN$u[-nrow(INVEN)])
+fit=lm(u~u_1,INVEN)
+summary(fit)
+#结果显示不存在AR(1)序列相关,不需要CO估计
+#----------------------------------------------------------
+#4.1
+NYSE=read.dta('NYSE.DTA',convert.factors=F)
+head(NYSE)
+fitNYSE=lm(return~return_1,NYSE)
+NYSE$u2=c(NA,NA,summary(fitNYSE)$resi^2)
+fit2NYSE=lm(u2~return_1,NYSE)
+summary(fit2NYSE)
+hhat=fitted(fit2NYSE)
+length(hhat[hhat<0])
+#----------------------------------------------------------
+#4.2
+fit3NYSE=lm(u2~return_1+I(return_1^2),NYSE)
+summary(fit3NYSE)
+hhat2=fitted(fit3NYSE)
+length(hhat2[hhat2<0])
+#----------------------------------------------------------
+#4.3
+fit4NYSE=lm(return~return_1,weights=1/hhat2,NYSE[-c(1,2),])
+summary(fit4NYSE)
+#结果与fitNYSE的结果不一样
+#----------------------------------------------------------
+#4.4
+NYSE$u2_1=c(NA,NYSE$u2[-nrow(NYSE)])
+fit=lm(u2~u2_1,NYSE)
+h=fitted(fit)
+fit5NYSE=lm(return~return_1,weights=1/h,NYSE[-c(1,2,3),])
+summary(fit5NYSE)
+#结果与fit4NYSE的结果不一样
+#----------------------------------------------------------
+#5.1 5.2 5.3 5.4
+FAIR=read.dta('FAIR.DTA',convert.factors=F)
+head(FAIR)
+fitFAIR=lm(demwins~partyWH+incum+partyWH:gnews+
+             partyWH:inf,FAIR[-21,])
+summary(fitFAIR)
+
+yhat=fitted(fitFAIR)
+length(yhat[yhat<0]);length(yhat[yhat>1])
+
+demwins.hat=ifelse(yhat>0.5,1,0)
+sum(diag(table(demwins.hat,FAIR$demwins[-21])))
+
+predict(fitFAIR,data.frame(partyWH=1,incum=1,
+                           gnews=3,inf=3.019))
+#----------------------------------------------------------
+#5.5 5.6
+FAIR1=FAIR[-21,]
+FAIR1$u=summary(fitFAIR)$resi
+FAIR1$u_1=c(NA,FAIR1$u[-nrow(FAIR1)])
+fit=lm(u~u_1,FAIR1)
+summaryw(fit)
+
+summaryw(fitFAIR)
+#----------------------------------------------------------
+#6.1
+consump=read.dta('consump.dta')
+head(consump)
+fitconsump=lm(gc~gy,consump)
+summary(fitconsump)
+consump$u=c(NA,summary(fitconsump)$resi)
+consump$u_1=c(NA,consump$u[-nrow(consump)])
+fit=lm(u~u_1,consump)
+summary(fit)
+#结果显示不存在AR(1)序列相关
+#----------------------------------------------------------
+#6.2
+fit2consump=lm(gc~gc_1,consump)
+summary(fit2consump)
+consump$u2=c(NA,NA,summary(fit2consump)$resi^2)
+fit3consump=lm(u2~gc_1+I(gc_1^2),consump)
+summary(fit3consump)
+#结果显示无异方差
+#----------------------------------------------------------
+#7
+BARIUM=read.dta('BARIUM.DTA',convert.factors=F)
+head(BARIUM)
+fitBARIUM=lm(lchnimp~lchempi+lgas+lrtwex+
+               befile6+affile6+afdec6,BARIUM)
+CO(fitBARIUM)$coef
+PW(fitBARIUM)$coef
+#----------------------------------------------------------
+#8.1
+TRAFFIC2=read.dta('TRAFFIC2.DTA',convert.factors=F)
+head(TRAFFIC2)
+fitTRAFFIC2=lm(prcfat~feb+mar+apr+may+jun+jul+aug+sep+
+      oct+nov+dec+wkends+unem+spdlaw+beltlaw+t,TRAFFIC2)
+TRAFFIC2$u=summary(fitTRAFFIC2)$resi
+TRAFFIC2$u_1=c(NA,TRAFFIC2$u[-nrow(TRAFFIC2)])
+fit=lm(u~u_1,TRAFFIC2)
+summary(fit)
+#结果显示存在AR(1)序列相关
+#----------------------------------------------------------
+#8.2 8.3
+coeftest(fitTRAFFIC2,vcov=NeweyWest(fitTRAFFIC2,lag=4))
+
+PW(fitTRAFFIC2)$coef
+summary(fitTRAFFIC2)
+#----------------------------------------------------------
+#9.1
+FISH=read.dta('FISH.DTA',convert.factors=F)
+head(FISH)
+fitFISH=lm(lavgprc~mon+tues+wed+thurs+t,FISH)
+fit2FISH=lm(lavgprc~t,FISH)
+
+Ru=summary(fitFISH)$r.squared
+Rs=summary(fit2FISH)$r.squared
+n=97;k=5;q=4
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#结果显示联合不显著
+#----------------------------------------------------------
+#9.2
+fit3FISH=lm(lavgprc~mon+tues+wed+thurs+t+wave2+wave3,FISH)
+summary(fit3FISH)
+#----------------------------------------------------------
+#9.5 9.6 9.7
+FISH$u=summary(fit3FISH)$resi
+FISH$u_1=c(NA,FISH$u[-nrow(FISH)])
+fit=lm(u~u_1,FISH)
+summary(fit)
+#结果显示AR(1)存在序列相关
+coeftest(fit3FISH,vcov=NeweyWest(fit3FISH,lag=4))
+
+PW(fit3FISH)$coef
+#----------------------------------------------------------
+#10.1
+phillips=read.dta('phillips.dta')
+head(phillips)
+fitphillips=lm(inf~unem,phillips)
+summary(fitphillips)
+#----------------------------------------------------------
+#10.2 10.3 10.4
+phillips$u=summary(fitphillips)$resi
+phillips$u_1=c(NA,phillips$u[-nrow(phillips)])
+fit=lm(u~u_1,phillips)
+summary(fit)
+#存在序列相关
+PW(fitphillips)$coef
+CO(fitphillips)$coef
+#----------------------------------------------------------
+#11.1
+NYSE=read.dta('NYSE.DTA',convert.factors=F)
+head(NYSE)
+fitNYSE=lm(return~return_1,NYSE)
+summary(fitNYSE)
+u2=summary(fitNYSE)$resi^2
+mean(u2);min(u2);max(u2)
+#----------------------------------------------------------
+#11.2 11.3 11.4
+NYSE$u2=c(NA,NA,summary(fitNYSE)$resi^2)
+fit=lm(u2~return_1+I(return_1^2),NYSE)
+summary(fit)#存在异方差
+
+cof=coefficients(fit);cof
+r=abs(cof[2]/cof[3]/2);r
+predict(fit,data.frame(return_1=r))
+
+uhat=fitted(fit)
+length(uhat[uhat<0])
+#----------------------------------------------------------
+#11.5
+NYSE$u2_1=c(NA,NYSE$u2[-nrow(NYSE)])
+fit2=lm(u2~u2_1,NYSE)
+summary(fit2)#存在异方差
+#----------------------------------------------------------
+#11.6
+NYSE$u2_2=c(NA,NYSE$u2_1[-nrow(NYSE)])
+fit3=lm(u2~u2_1+u2_2,NYSE)
+summary(fit3)#存在异方差
+#----------------------------------------------------------
+#12
+INVEN=read.dta('INVEN.DTA',convert.factors=F)
+head(INVEN)
+INVEN$dinv=c(NA,diff(INVEN$inven))
+INVEN$dgdp=c(NA,diff(INVEN$gdp))
+fitINVEN=lm(dinv~dgdp,INVEN)
+INVEN$u=c(NA,summary(fitINVEN)$resi)
+INVEN$u_1=c(NA,INVEN$u[-nrow(INVEN)])
+fit=lm(u~u_1,INVEN)
+summary(fit)
+#不存在序列相关
+PW(fitINVEN)$coef
+#----------------------------------------------------------
+#13.1
+okun=read.dta('okun.dta')
+head(okun)
+fitokun=lm(pcrgdp~cunem,okun)
+okun$u=c(NA,summary(fitokun)$resi)
+okun$u_1=c(NA,okun$u[-nrow(okun)])
+fit2okun=lm(u~u_1+cunem,okun)
+summary(fit2okun)
+#不存在序列相关
+#----------------------------------------------------------
+#13.2 13.3
+okun$u2=c(NA,summary(fitokun)$resi^2)
+fit3okun=lm(u2~cunem,okun)
+summary(fit3okun)
+#存在异方差
+summaryw(fitokun)
+summary(fitokun)
+#----------------------------------------------------------
+#14.1 14.2 14.3 14.4
+minwage=read.dta('minwage.dta')
+head(minwage)
+fitminwage=lm(gwage232~gmwage+gcpi,minwage)
+minwage$u=c(NA,summary(fitminwage)$resi)
+minwage$u_1=c(NA,minwage$u[-nrow(minwage)])
+fit=lm(u~u_1,minwage)
+summary(fit)
+#存在序列相关
+coeftest(fitminwage,vcov=NeweyWest(fitminwage,lag=12))
+summary(fitminwage)
+summaryw(fitminwage)
+bptest(fitminwage)
+#----------------------------------------------------------
+#14.5
+fit2minwage=lm(gwage232~gcpi+gmwage+gmwage_1+gmwage_2+
+                 gmwage_3+gmwage_4+gmwage_5+gmwage_6+
+                 gmwage_7+gmwage_8+gmwage_9+gmwage_10+
+                 gmwage_11+gmwage_12,minwage)
+Ru=summary(fit2minwage)$r.squared
+Rs=summary(fitminwage)$r.squared
+n=599;k=14;q=12
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#联合显著
+summary(fit2minwage)
+summaryw(fit2minwage)
+#----------------------------------------------------------
+#####第十三章 习题#####
+library(foreign)
+summaryw <- function(model) {
+  s <- summary( model)
+  X <- model.matrix(model)
+  u2 <- residuals(model)^2
+  XDX <- 0
+  for(i in 1:nrow(X)) {
+    XDX <- XDX + u2[i]*X[i,]%*%t(X[i,])
+  }
+  XX1 <- solve(t(X)%*%X)
+  varcovar <- XX1 %*% XDX %*% XX1
+  stdh <- sqrt(diag(varcovar))
+  t <- model$coefficients/stdh
+  p <- 2*pnorm(-abs(t))
+  results <- cbind(model$coefficients, stdh, t, p)
+  dimnames(results) <- dimnames(summary(model)$coefficients)
+  results
+}
+PW <- function(mod){
+  X <- model.matrix(mod)
+  y <- model.response(model.frame(mod))
+  e <- residuals(mod)
+  n <- length(e)
+  names <- colnames(X)
+  rho <- sum(e[1:(n-1)]*e[2:n])/sum(e^2)
+  y <- c(y[1] * (1 - rho^2)^0.5, y[2:n] - rho * y[1:(n-1)])
+  X <- rbind(X[1,] * (1 - rho^2)^0.5, X[2:n,] - rho * X[1:(n-1),])
+  mod <- lm(y ~ X - 1)
+  result <- list()
+  result$coef <- summary(mod)$coefficients
+  summary <- summary(mod, corr = F)
+  result$cov <- (summary$sigma^2) * summary$cov.unscaled
+  dimnames(result$cov) <- list(names, names)
+  result$sigma <- summary$sigma
+  result$rho <- rho
+  class(result) <- 'prais.winsten'
+  result
+}
+#1.1
+FERTIL1=read.dta('FERTIL1.DTA',convert.factors=F)
+head(FERTIL1)
+fitFERTIL1=lm(kids~educ+age+I(age^2)+black+east+
+                northcen+west+farm+othrural+town+
+                smcity+y74+y76+y78+y80+y82+y84,FERTIL1)
+summary(fitFERTIL1)
+fit2FERTIL1=lm(kids~educ+age+I(age^2)+black+east+
+                 northcen+west+y74+y76+y78+y80+
+                 y82+y84,FERTIL1)
+summary(fit2FERTIL1)
+
+Ru=summary(fitFERTIL1)$r.squared
+Rs=summary(fit2FERTIL1)$r.squared
+n=1129;k=17;q=4
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#联合不显著
+#----------------------------------------------------------
+#1.2
+fit3FERTIL1=lm(kids~educ+age+I(age^2)+black+farm+
+                 othrural+town+smcity+y74+y76+y78+
+                 y80+y82+y84,FERTIL1)
+summary(fit3FERTIL1)
+
+Ru=summary(fitFERTIL1)$r.squared
+Rs=summary(fit3FERTIL1)$r.squared
+n=1129;k=17;q=3
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#联合显著
+#----------------------------------------------------------
+#1.3
+FERTIL1$u2=summary(fitFERTIL1)$resi^2
+fit4FERTIL1=lm(u2~y74+y76+y78+y80+y82+y84,FERTIL1)
+summary(fit4FERTIL1)
+
+Ruhat=summary(fit4FERTIL1)$r.squared
+n=1129;k=6
+f=Ruhat/(1-Ruhat)*(n-k-1)/k;f
+1-pf(f,k,n-k-1)
+#存在异方差
+#----------------------------------------------------------
+#1.4
+fit5FERTIL1=lm(kids~age+I(age^2)+black+east+
+                northcen+west+farm+othrural+town+
+                smcity+educ*y74+educ*y76+educ*y78+
+                 educ*y80+educ*y82+educ*y84,FERTIL1)
+summary(fit5FERTIL1)
+
+Ru=summary(fit5FERTIL1)$r.squared
+Rs=summary(fitFERTIL1)$r.squared
+n=1129;k=23;q=6
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#不联合显著
+#----------------------------------------------------------
+#3.1
+KIELMC=read.dta('KIELMC.DTA',convert.factors=F)
+head(KIELMC)
+fit=lm(lprice~y81*ldist,KIELMC)
+summary(fit)
+#----------------------------------------------------------
+#3.3
+fit2=lm(lprice~y81*ldist+age+I(age^2)+rooms+baths+
+          lintst+lland+larea,KIELMC)
+summary(fit2)
+#----------------------------------------------------------
+#5.1
+RENTAL=read.dta('RENTAL.DTA',convert.factors=F)
+head(RENTAL)
+fit=lm(lrent~y90+lpop+lavginc+pctstu,RENTAL)
+summary(fit)
+#----------------------------------------------------------
+#5.3 5.4
+fit2=lm(clrent~clpop+clavginc+cpctstu,RENTAL)
+summary(fit2)
+summaryw(fit2)
+#----------------------------------------------------------
+#7.1
+GPA3=read.dta('GPA3.DTA',convert.factors=F)
+head(GPA3)
+fit=lm(trmgpa~spring+sat+hsperc+female+black+white+
+         +frstsem+tothrs+crsgpa+season,GPA3)
+summary(fit)
+#----------------------------------------------------------
+#7.3
+fit2=lm(ctrmgpa~ctothrs+ccrsgpa+season,GPA3)
+summary(fit2)
+#----------------------------------------------------------
+#9.1
+CRIME4=read.dta('CRIME4.DTA',convert.factors=F)
+head(CRIME4)
+CRIME4$clwcon=c(NA,diff(CRIME4$lwcon))
+CRIME4$clwtuc=c(NA,diff(CRIME4$lwtuc))
+CRIME4$clwtrd=c(NA,diff(CRIME4$lwtrd))
+CRIME4$clwfir=c(NA,diff(CRIME4$lwfir))
+CRIME4$clwser=c(NA,diff(CRIME4$lwser))
+CRIME4$clwmfg=c(NA,diff(CRIME4$lwmfg))
+CRIME4$clwfed=c(NA,diff(CRIME4$lwfed))
+CRIME4$clwsta=c(NA,diff(CRIME4$lwsta))
+CRIME4$clwloc=c(NA,diff(CRIME4$lwloc))
+
+fit=lm(clcrmrte~d83+d84+d85+d86+d87+clprbarr+clprbcon+
+         clprbpri+clavgsen+clpolpc+clwcon+clwtuc+clwtrd+
+         +clwfir+clwser+clwmfg+clwfed+clwsta+clwloc,CRIME4)
+summary(fit)
+#----------------------------------------------------------
+#9.2
+fit2=lm(clcrmrte~d83+d84+d85+d86+d87+clprbarr+clprbcon+
+         clprbpri+clavgsen+clpolpc,CRIME4)
+summary(fit2)
+
+Ru=summary(fit)$r.squared
+Rs=summary(fit2)$r.squared
+n=540;k=19;q=9
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#不联合显著
+#----------------------------------------------------------
+#11.1
+mathpnl=read.dta('mathpnl.DTA')
+head(mathpnl)
+fit=lm(math4~y93+y94+y95+y96+y97+y98+lrexpp+lenrol+
+          lunch,mathpnl)
+summary(fit)
+#----------------------------------------------------------
+#11.2
+mathpnl$clrexpp=mathpnl$lrexpp-mathpnl$lrexpp_1
+mathpnl$clenrol=c(NA,diff(mathpnl$lenrol))
+fit2=lm(cmath4~y94+y95+y96+y97+y98+clrexpp+clenrol+
+          clunch,mathpnl)
+summary(fit2)
+#----------------------------------------------------------
+#11.3 11.4 11.5
+mathpnl$clrexpp_1=c(NA,diff(mathpnl$lrexpp_1))
+mathpnl$clrexpp_1=mathpnl$clrexpp-mathpnl$clrexpp_1
+fit3=lm(cmath4~y95+y96+y97+y98+clrexpp+clenrol+
+          clunch+clrexpp_1,mathpnl)
+summary(fit3)
+summaryw(fit3)
+PW(fit3)$coef
+#----------------------------------------------------------
+#11.6
+a=data.frame(u=summary(fit3)$resi)
+a$u_1=c(NA,a$u[-nrow(a)])
+fit4=lm(u~u_1,a)
+summary(fit4)
+#----------------------------------------------------------
+#11.7
+fit5=lm(cmath4~y95+y96+y97+y98+clrexpp+clrexpp_1,mathpnl)
+summary(fit5)
+
+Ru=summary(fit3)$r.squared
+Rs=summary(fit5)$r.squared
+n=2750;k=9;q=2
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#----------------------------------------------------------
+#####第十四章 习题#####
+library(foreign)
+#单样本聚类相关稳健标准误
+cl<- function(dat,fm, cluster){
+  attach(dat, warn.conflicts = F)
+  library(sandwich);library(lmtest)
+  M <- length(unique(cluster))   
+  N <- length(cluster)            
+  K <- fm$rank		             
+  dfc <- (M/(M-1))*((N-1)/(N-K))  
+  uj  <- apply(estfun(fm),2, function(x) tapply(x, cluster, sum));
+  vcovCL <- dfc*sandwich(fm, meat=crossprod(uj)/N)
+  coeftest(fm, vcovCL) }
+#双样本聚类相关稳健标准误
+mcl <- function(dat,fm, cluster1, cluster2){
+  attach(dat, warn.conflicts = F)
+  library(sandwich);library(lmtest)
+  cluster12 = paste(cluster1,cluster2, sep="")
+  M1  <- length(unique(cluster1))
+  M2  <- length(unique(cluster2))   
+  M12 <- length(unique(cluster12))
+  N   <- length(cluster1)          
+  K   <- fm$rank             
+  dfc1  <- (M1/(M1-1))*((N-1)/(N-K))  
+  dfc2  <- (M2/(M2-1))*((N-1)/(N-K))  
+  dfc12 <- (M12/(M12-1))*((N-1)/(N-K))  
+  u1j   <- apply(estfun(fm), 2, function(x) tapply(x, cluster1,  sum)) 
+  u2j   <- apply(estfun(fm), 2, function(x) tapply(x, cluster2,  sum)) 
+  u12j  <- apply(estfun(fm), 2, function(x) tapply(x, cluster12, sum)) 
+  vc1   <-  dfc1*sandwich(fm, meat=crossprod(u1j)/N )
+  vc2   <-  dfc2*sandwich(fm, meat=crossprod(u2j)/N )
+  vc12  <- dfc12*sandwich(fm, meat=crossprod(u12j)/N)
+  vcovMCL <- vc1 + vc2 - vc12
+  coeftest(fm, vcovMCL)}
+#1.1
+RENTAL=read.dta('RENTAL.DTA',convert.factors=F)
+head(RENTAL)
+fit=lm(lrent~y90+lpop+lavginc+pctstu,RENTAL)
+summary(fit)
+#----------------------------------------------------------
+#1.3
+fitfd=plm(lrent~y90+lpop+lavginc+pctstu,method='fd',RENTAL)
+summary(fitfd)#一阶差分法
+#----------------------------------------------------------
+#1.4
+fitfe=plm(lrent~y90+lpop+lavginc+pctstu,RENTAL)
+summary(fitfe)#一阶差分法
+#T=2时，一阶差分估计量和固定效应估计量相同
+#----------------------------------------------------------
+#3
+JTRAIN=read.dta('JTRAIN.DTA',convert.factors=F)
+head(JTRAIN)
+JTRAIN=plm.data(JTRAIN,index=c('fcode','year'))
+fitfe=plm(hrsemp~d88+d89+grant+grant_1+lemploy,
+         method='within',JTRAIN)
+summary(fitfe)
+n=135;N=135*3
+#----------------------------------------------------------
+#7.2
+MURDER=read.dta('MURDER.DTA',convert.factors=F)
+head(MURDER1)
+MURDER=plm.data(MURDER,index=c('id','year'))
+MURDER1=MURDER[MURDER$year!=87,]
+fit=lm(mrdrte~d93+exec+unem,MURDER1)
+summary(fit)
+#----------------------------------------------------------
+#9.1
+PENSION=read.dta('PENSION.DTA',convert.factors=F)
+head(PENSION)
+fit=lm(pctstck~choice+prftshr+female+age+educ+finc25+
+         finc35+finc50+finc75+finc100+finc101+wealth89+
+         +stckin89+irain89,PENSION)
+summary(fit)
+#----------------------------------------------------------
+#9.2 9.3 9.4
+fit2=lm(pctstck~choice+prftshr+female+age+educ,PENSION)
+summary(fit2)
+
+Ru=summary(fit)$r.squared
+Rs=summary(fit2)$r.squared
+n=194;k=14;q=9
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#不联合显著
+length(table(PENSION$id))
+
+cl(PENSION,fit,PENSION$id)
+#----------------------------------------------------------
+#####第十五章 习题#####
+library(foreign)
+library(systemfit)
+#1.1
+WAGE2=read.dta('WAGE2.DTA',convert.factors=F)
+head(WAGE2)
+fit=systemfit(lwage~educ,'2SLS',~sibs,WAGE2)
+summary(fit)
+
+fit2=lm(lwage~sibs,WAGE2)
+summary(fit2)
+#----------------------------------------------------------
+#1.2
+fit3=lm(educ~brthord,WAGE2)
+summary(fit3)
+#----------------------------------------------------------
+#1.3
+fit4=systemfit(lwage~educ,'2SLS',~brthord,WAGE2)
+summary(fit4)
+#----------------------------------------------------------
+#1.4
+fit5=lm(educ~sibs+brthord,WAGE2)
+summary(fit5)
+#brthord显著不为0
+#----------------------------------------------------------
+#1.5
+fit6=systemfit(lwage~educ+sibs,'2SLS',~brthord+sibs,WAGE2)
+summary(fit6)
+#----------------------------------------------------------
+#1.6
+WAGE2=na.omit(WAGE2[,c('brthord','educ','sibs')])
+cor(fitted(fit5),WAGE2$sibs)
+#----------------------------------------------------------
+#3.2
+CARD=read.dta('CARD.DTA',convert.factors=F)
+head(CARD)
+fit1=lm(IQ~nearc4,CARD)
+summary(fit1)
+#----------------------------------------------------------
+#3.3
+fit2=lm(IQ~nearc4+smsa66+reg662+reg663+reg664+reg665+
+          reg666+reg667+reg668+reg669,CARD)
+summary(fit2)
+#----------------------------------------------------------
+#5.1
+CARD=read.dta('CARD.DTA',convert.factors=F)
+head(CARD)
+CARD1=CARD[,c('educ','nearc4','exper','black','smsa',
+               'south','smsa66','reg662','reg663',
+              'reg664','reg665','reg666','reg667',
+              'reg668','reg669')]
+CARD1=na.omit(CARD1)
+fit1=lm(educ~nearc4+exper+I(exper^2)+black+smsa+
+          south+smsa66+reg662+reg663+reg664+reg665+
+          reg666+reg667+reg668+reg669,CARD1)
+summary(fit1)
+CARD1$u=summary(fit1)$resi
+CARD1$lwage=CARD$lwage
+fit2=lm(lwage~educ+exper+I(exper^2)+black+smsa+
+        south+smsa66+reg662+reg663+reg664+reg665+
+        reg666+reg667+reg668+reg669+u,CARD1)
+summary(fit2)
+#u不显著,说明educ外生
+#----------------------------------------------------------
+#5.2
+a=lwage~educ+exper+I(exper^2)+black+smsa+
+  south+smsa66+reg662+reg663+reg664+reg665+
+  reg666+reg667+reg668+reg669
+b=~nearc2+nearc4+exper+I(exper^2)+black+smsa+
+  south+smsa66+reg662+reg663+reg664+reg665+
+  reg666+reg667+reg668+reg669
+fit3=systemfit(a,'2SLS',b,CARD)
+summary(fit3)
+#----------------------------------------------------------
+#5.3
+CARD=cbind(CARD,summary(fit3)$residuals)
+fit4=lm(eq1~nearc2+nearc4+exper+I(exper^2)+black+smsa+
+          south+smsa66+reg662+reg663+reg664+reg665+
+          reg666+reg667+reg668+reg669,CARD)
+R2=summary(fit4)$r.squared
+n=3010;q=1
+1-pchisq(n*R2,q)
+#通过过渡识别检验
+#----------------------------------------------------------
+#7.1
+phillips=read.dta('phillips.dta')
+head(phillips)
+fit1=lm(cinf~unem,phillips)
+summary(fit1)
+#----------------------------------------------------------
+#7.3
+phillips$unem_1=c(NA,phillips$unem[-nrow(phillips)])
+fit2=lm(unem~unem_1,phillips)
+summary(fit2)
+#----------------------------------------------------------
+#7.4
+fit3=systemfit(cinf~unem,'2SLS',~unem_1,phillips)
+summary(fit3)
+#----------------------------------------------------------
+#9.1
+WAGE2=read.dta('WAGE2.DTA',convert.factors=F)
+head(WAGE2)
+a=lwage~educ+exper+tenure+black
+b=~sibs+exper+tenure+black
+fit=systemfit(a,'2SLS',b,WAGE2)
+summary(fit)
+#----------------------------------------------------------
+#9.2
+fit2=lm(educ~sibs+exper+tenure+black,WAGE2)
+summary(fit2)
+WAGE2$edhat=fitted(fit2)
+fit3=lm(lwage~educ+exper+tenure+black+edhat,WAGE2)
+summary(fit3)
+#fit3中exper,tenure,black,intercept系数与fit中的一样
+#----------------------------------------------------------
+#9.3
+fit4=lm(educ~sibs,WAGE2)
+summary(fit4)
+WAGE2$ehat=fitted(fit4)
+fit5=lm(lwage~educ+exper+tenure+black+ehat,WAGE2)
+summary(fit5)
+#----------------------------------------------------------
+#####第十六章 习题#####
+library(foreign)
+library(systemfit)
+#1.4
+SMOKE=read.dta('SMOKE.DTA',convert.factors=F)
+head(SMOKE)
+fit=lm(lincome~cigs+educ+age+I(age^2),SMOKE)
+summary(fit)
+#----------------------------------------------------------
+#1.5
+fit2=lm(cigs~educ+age+I(age^2)+
+          lcigpric+restaurn,SMOKE)
+summary(fit2)
+#----------------------------------------------------------
+#1.6
+fit3=systemfit(lincome~cigs+educ+age+I(age^2),'2SLS',
+               ~educ+age+I(age^2)+lcigpric+restaurn,SMOKE)
+summary(fit3)
+#----------------------------------------------------------
+#3.1
+OPENNESS=read.dta('OPENNESS.DTA',convert.factors=F)
+head(OPENNESS)
+fit=lm(inf~open,OPENNESS)
+summary(fit)
+fit2=systemfit(inf~open,'2SLS',~lland,OPENNESS)
+summary(fit2)
+#----------------------------------------------------------
+#3.2
+fit3=lm(open~land+lland,OPENNESS)
+summary(fit3)
+#用lland为IV
+#----------------------------------------------------------
+#3.3
+fit4=systemfit(inf~open+lpcinc+oil,'2SLS',
+               ~lland+lpcinc+oil,OPENNESS)
+summary(fit4)
+#----------------------------------------------------------
+#7.1
+CRIME4=read.dta('CRIME4.DTA',convert.factors=F)
+head(CRIME4)
+fit=lm(clcrmrte~d83+d84+d85+d86+d87+clprbarr+clprbcon+
+         clprbpri+clavgsen+clpolpc,CRIME4)
+summary(fit)
+#----------------------------------------------------------
+#7.3
+fit2=lm(clpolpc~d83+d84+d85+d86+d87+clprbarr+clprbcon+
+         clprbpri+clavgsen+cltaxpc,CRIME4)
+summary(fit2)
+#cltaxpc显著为0,不是一个好的IV
+#----------------------------------------------------------
+#9.2
+airfare=read.dta('airfare.dta')
+head(airfare)
+fit=lm(lpassen~lfare+ldist+I(ldist^2),airfare)
+summary(fit)
+#----------------------------------------------------------
+#9.4
+fit2=lm(lfare~concen+ldist+I(ldist^2),airfare)
+summary(fit2)
+#----------------------------------------------------------
+#9.5
+fit3=systemfit(lpassen~lfare+ldist+I(ldist^2),'2SLS',
+               ~concen+ldist+I(ldist^2),airfare)
+summary(fit3)
+#----------------------------------------------------------
+#####第十七章 习题#####
+library(foreign)
+library(VGAM)
+library(sampleSelection)
+summaryw <- function(model) {
+  s <- summary( model)
+  X <- model.matrix(model)
+  u2 <- residuals(model)^2
+  XDX <- 0
+  for(i in 1:nrow(X)) {
+    XDX <- XDX + u2[i]*X[i,]%*%t(X[i,])
+  }
+  XX1 <- solve(t(X)%*%X)
+  varcovar <- XX1 %*% XDX %*% XX1
+  stdh <- sqrt(diag(varcovar))
+  t <- model$coefficients/stdh
+  p <- 2*pnorm(-abs(t))
+  results <- cbind(model$coefficients, stdh, t, p)
+  dimnames(results) <- dimnames(summary(model)$coefficients)
+  results
+}
+#1.2
+PNTSPRD=read.dta('PNTSPRD.DTA',convert.factors=F)
+head(PNTSPRD)
+fit=lm(favwin~spread,PNTSPRD)
+summary(fit)
+summaryw(fit)
+cof1=summary(fit)$coef
+cof2=summaryw(fit)
+1-pt((cof1[1,1]-0.5)/cof1[1,2],551)
+1-pt((cof2[1,1]-0.5)/cof2[1,2],551)
+#均显著
+#----------------------------------------------------------
+#1.3 1.4 1.5
+predict(fit,data.frame(spread=10))
+
+fit2=glm(favwin~spread,family=binomial(link='probit'),
+         PNTSPRD)
+summary(fit2)
+#不拒绝
+pnorm(predict(fit2,data.frame(spread=10)))
+#----------------------------------------------------------
+#1.6
+fit3=glm(favwin~spread+favhome+fav25+und25,
+         family=binomial(link='probit'),PNTSPRD)
+summary(fit3)
+Lu=logLik(fit3);Lu#无约束模型的对数似然值
+Lr=logLik(fit2);Lr
+LR=2*(Lu-Lr);LR
+q=3
+1-pchisq(LR,q)
+#不联合显著
+#----------------------------------------------------------
+#3.1
+FRINGE=read.dta('FRINGE.DTA',convert.factors=F)
+head(FRINGE)
+nrow(FRINGE[FRINGE$pension==0,])/nrow(FRINGE)
+range(FRINGE$pension)
+#----------------------------------------------------------
+#3.2
+fit=vglm(pension~exper+age+tenure+educ+depends+married+
+           white+male,tobit,FRINGE)
+summary(fit)
+#----------------------------------------------------------
+#3.3
+cof=coef(fit)
+estd=exp(cof[2]);estd
+pr1=cof[1]+10*cof[3]+35*cof[4]+10*cof[5]+16*cof[6]+
+    +cof[9]+cof[10]
+pr2=cof[1]+10*cof[3]+35*cof[4]+10*cof[5]+16*cof[6]
+wm=pnorm(pr1/estd)*pr1+estd*dnorm(pr1/estd)
+bf=pnorm(pr2/estd)*pr2+estd*dnorm(pr2/estd)
+wm-bf
+#----------------------------------------------------------
+#3.4
+fit2=vglm(pension~exper+age+tenure+educ+depends+married+
+           white+male+union,tobit,FRINGE)
+summary(fit2)
+#----------------------------------------------------------
+#3.5
+fit3=vglm(peratio~exper+age+tenure+educ+depends+married+
+            white+male+union,tobit,FRINGE)
+summary(fit3)
+#----------------------------------------------------------
+#5.1
+FERTIL1=read.dta('FERTIL1.DTA',convert.factors=F)
+head(FERTIL1)
+fit=glm(kids~educ++age+I(age^2)+black+east+
+             northcen+west+farm+othrural+town+
+             smcity+y74+y76+y78+y80+y82+y84,
+        family=poisson,FERTIL1)
+summary(fit)
+#----------------------------------------------------------
+#5.2
+cof=coef(fit);cof
+exp(cof[5])-1
+#----------------------------------------------------------
+#5.3
+yhat=fitted(fit)
+u2=(FERTIL1$kids-yhat)^2
+n=1129;k=17
+sqrt(mean(u2/yhat)*n/(n-k-1))
+#分散不足
+#----------------------------------------------------------
+#5.4
+cor(FERTIL1$kids,yhat)
+summary(lm(FERTIL1$kids~yhat))$r.squared
+#cor(FERTIL1$kids,yhat)^2
+#----------------------------------------------------------
+#7.1
+MROZ=read.dta('MROZ.DTA',convert.factors=F)
+head(MROZ)
+MROZ=MROZ[MROZ$inlf==1,]
+fit=lm(lwage~educ+exper+I(exper^2)+nwifeinc+age+kidslt6+
+         kidsge6,MROZ)
+summary(fit)
+#----------------------------------------------------------
+#7.2
+fit2=heckit(inlf~.,lwage~educ+exper+I(exper^2)+
+              nwifeinc+age+kidslt6+kidsge6,MROZ)
+summary(fit2)
+#----------------------------------------------------------
+#9.1
+APPLE=read.dta('APPLE.DTA',convert.factors=F)
+head(APPLE)
+nrow(APPLE[APPLE$ecolbs==0,])
+#----------------------------------------------------------
+#9.3
+APPLE$ecolbs=as.factor(APPLE$ecolbs)
+fit=vglm(ecolbs~ecoprc+regprc+faminc+hhsize,
+        ,tobit,data=APPLE)
+summary(fit)
+#----------------------------------------------------------
+#11.1
+cps=read.dta('cps91.dta')
+head(cps)
+nrow(cps[cps$inlf!=0,])/nrow(cps)
+#----------------------------------------------------------
+#11.2
+cps1=cps[cps$inlf!=0,]
+fit=lm(lwage~educ+exper+I(exper^2)+black+hispanic,cps1)
+summary(fit)
+#----------------------------------------------------------
+#11.3
+fit2=glm(inlf~educ+exper+I(exper^2)+black+hispanic+
+           nwifeinc+kidlt6,
+         family=binomial(link='probit'),cps1)
+summary(fit2)
+#----------------------------------------------------------
+#13.1
+HTV=read.dta('HTV.DTA',convert.factors=F)
+head(HTV)
+fit=lm(lwage~educ+abil+exper+nc+west+south+urban,HTV)
+summary(fit)
+#----------------------------------------------------------
+#13.2
+HTV1=HTV[HTV$educ<16,]
+fit2=lm(lwage~educ+abil+exper+nc+west+south+urban,HTV1)
+summary(fit2)
+1-nrow(HTV1)/nrow(HTV)
+#----------------------------------------------------------
+#13.3
+HTV2=HTV[HTV$wage<20,]
+fit3=lm(lwage~educ+abil+exper+nc+west+south+urban,HTV2)
+summary(fit3)
+#----------------------------------------------------------
+#####第十八章 习题#####
+library(foreign)
+#1.1
+WAGEPRC=read.dta('WAGEPRC.DTA',convert.factors=F)
+head(WAGEPRC)
+fit=lm(gprice~gprice_1+gwage,WAGEPRC)
+summary(fit)
+cof=summary(fit)$coef
+IP=cof[3,1];IP#即期倾向
+LRP=IP/(1-cof[2,1]);LRP#长期倾向
+#----------------------------------------------------------
+#1.3
+fit2=lm(gprice~gprice_1+gwage+gwage_1,WAGEPRC)
+summary(fit2)
+cof=summary(fit2)$coef
+IP2=cof[3,1];IP2#即期倾向
+LRP2=(IP2+cof[4,1])/(1-cof[2,1]);LRP2#长期倾向
+#----------------------------------------------------------
+#3.1
+VOLAT=read.dta('VOLAT.DTA',convert.factors=F)
+head(VOLAT)
+fit=lm(pcip~pcip_1+pcip_2+pcip_3,VOLAT)
+summary(fit)
+VOLAT$pcip_4=c(NA,VOLAT$pcip_3[-nrow(VOLAT)])
+fit2=lm(pcip~pcip_1+pcip_2+pcip_3+pcip_4,VOLAT)
+summary(fit2)
+#----------------------------------------------------------
+#3.2
+fit3=lm(pcip~pcip_1+pcip_2+pcip_3+
+        pcsp_1+pcsp_2+pcsp_3,VOLAT)
+summary(fit3)
+
+Ru=summary(fit3)$r.squared
+Rs=summary(fit)$r.squared
+n=554;k=6;q=3
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#联合显著,pcsp是pcip的格兰杰原因
+#----------------------------------------------------------
+#3.3
+VOLAT$ci3_3=c(NA,VOLAT$ci3_2[-nrow(VOLAT)])
+fit4=lm(pcip~pcip_1+pcip_2+pcip_3+
+          pcsp_1+pcsp_2+pcsp_3+
+          ci3_1+ci3_2+ci3_3,VOLAT)
+summary(fit4)
+fit5=lm(pcip~pcip_1+pcip_2+pcip_3+
+        ci3_1+ci3_2+ci3_3,VOLAT)
+summary(fit5)
+
+Ru=summary(fit4)$r.squared
+Rs=summary(fit5)$r.squared
+n=554;k=9;q=3
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#在i3三阶滞后条件下,联合显著,pcsp是pcip的格兰杰原因
+#----------------------------------------------------------
+#5.1
+INTQRT=read.dta('INTQRT.DTA',convert.factors=F)
+head(INTQRT)
+fit=lm(hy6~hy3_1,INTQRT)
+summary(fit)
+INTQRT$chy3_2=c(NA,INTQRT$chy3_1[-nrow(INTQRT)])
+fit2=lm(hy6~hy3_1+chy3+chy3_1+chy3_2,INTQRT)
+summary(fit2)
+cof=summary(fit2)$coef
+t=(cof[2,1]-1)/cof[2,2];t
+1-pt(t,120)
+#----------------------------------------------------------
+#5.2
+INTQRT$hy3_2=c(NA,INTQRT$hy3_1[-nrow(INTQRT)])
+INTQRT$hy3_3=c(NA,INTQRT$hy3_2[-nrow(INTQRT)])
+INTQRT$hy6_2=c(NA,INTQRT$hy6_1[-nrow(INTQRT)])
+INTQRT$hy6_hy3=INTQRT$hy6_1-INTQRT$hy3_2
+INTQRT$hy6_hy3_1=INTQRT$hy6_2-INTQRT$hy3_3
+fit3=lm(chy6~chy3_1+hy6_hy3+chy3_2+hy6_hy3_1,INTQRT)
+summary(fit3)
+fit4=lm(chy6~chy3_1+hy6_hy3,INTQRT)
+summary(fit4)
+
+Ru=summary(fit3)$r.squared
+Rs=summary(fit4)$r.squared
+n=121;k=4;q=2
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#----------------------------------------------------------
+#7.1
+BARIUM=read.dta('BARIUM.DTA',convert.factors=F)
+head(BARIUM)
+fit=lm(chnimp~t,BARIUM[1:119,])
+summary(fit)
+ser=summary(fit)$sigma;ser#回归标准误
+#----------------------------------------------------------
+#7.2
+BARIUM$chnimp_1=c(NA,BARIUM$chnimp[-nrow(BARIUM)])
+fit2=lm(chnimp~chnimp_1,BARIUM[1:119,])
+summary(fit2)
+ser2=summary(fit2)$sigma;ser2
+#fit 模型较好
+#----------------------------------------------------------
+#7.3
+pr1=predict(fit,data.frame(t=BARIUM$t[-c(1:119)]))
+pr2=predict(fit2,
+    data.frame(chnimp_1=BARIUM$chnimp_1[-c(1:119)]))
+RSEM=sqrt(mean((BARIUM$chnimp[-(1:119)]-pr1)^2));RSEM
+MAE=mean(abs(BARIUM$chnimp[-(1:119)]-pr1));MAE
+RSEM2=sqrt(mean((BARIUM$chnimp[-(1:119)]-pr2)^2));RSEM2
+MAE2=mean(abs(BARIUM$chnimp[-(1:119)]-pr2));MAE2
+#fit 模型较好
+#----------------------------------------------------------
+#7.4
+fit3=lm(chnimp~t+feb+mar+apr+may+jun+jul+aug+sep+oct+nov+
+          dec,BARIUM[1:119,])
+summary(fit3)
+
+Ru=summary(fit3)$r.squared
+Rs=summary(fit)$r.squared
+n=119;k=12;q=11
+f=(Ru-Rs)/(1-Ru)*(n-k-1)/q;f
+1-pf(f,q,n-k-1)
+#不是联合显著
+#----------------------------------------------------------
+#9.1
+consump=read.dta('consump.dta')
+head(consump)
+consump$y_1=c(NA,consump$y[-nrow(consump)])
+consump$t=c(1:nrow(consump))
+fit=lm(y~t+y_1,consump[1:31,])
+summary(fit)
+#----------------------------------------------------------
+#9.2
+pr1990=predict(fit,data.frame(t=32,y_1=consump$y[31]))
+e=consump$y[32]-pr1990;e
+#----------------------------------------------------------
+#9.3
+pr1991=predict(fit,data.frame(t=33,y_1=pr1990))
+MAE=abs(consump$y[33]-pr1990);MAE
+#----------------------------------------------------------
+#9.4
+fit2=lm(y~t,consump[1:31,])
+summary(fit2)
+pr19911=predict(fit2,data.frame(t=33))
+MAE2=abs(consump$y[33]-pr19911);MAE2
+#----------------------------------------------------------
+#11.1
+VOLAT=read.dta('VOLAT.DTA',convert.factors=F)
+head(VOLAT)
+VOLAT$lsp500=log(VOLAT$sp500)
+VOLAT$lip=log(VOLAT$ip)
+VOLAT$t=c(1:nrow(VOLAT))
+VOLAT$lsp500_1=c(NA,VOLAT$lsp500[-nrow(VOLAT)])
+VOLAT$lsp500_2=c(NA,VOLAT$lsp500_1[-nrow(VOLAT)])
+VOLAT$lsp500_3=c(NA,VOLAT$lsp500_2[-nrow(VOLAT)])
+VOLAT$lsp500_4=c(NA,VOLAT$lsp500_3[-nrow(VOLAT)])
+VOLAT$lsp500_5=c(NA,VOLAT$lsp500_4[-nrow(VOLAT)])
+VOLAT$lip_1=c(NA,VOLAT$lip[-nrow(VOLAT)])
+VOLAT$lip_2=c(NA,VOLAT$lip_1[-nrow(VOLAT)])
+VOLAT$lip_3=c(NA,VOLAT$lip_2[-nrow(VOLAT)])
+VOLAT$lip_4=c(NA,VOLAT$lip_3[-nrow(VOLAT)])
+VOLAT$lip_5=c(NA,VOLAT$lip_4[-nrow(VOLAT)])
+VOLAT$clsp500=VOLAT$lsp500-VOLAT$lsp500_1
+VOLAT$clsp500_1=VOLAT$lsp500_1-VOLAT$lsp500_2
+VOLAT$clsp500_2=VOLAT$lsp500_2-VOLAT$lsp500_3
+VOLAT$clsp500_3=VOLAT$lsp500_3-VOLAT$lsp500_4
+VOLAT$clsp500_4=VOLAT$lsp500_4-VOLAT$lsp500_5
+VOLAT$clip=VOLAT$lip-VOLAT$lip_1
+VOLAT$clip_1=VOLAT$lip_1-VOLAT$lip_2
+VOLAT$clip_2=VOLAT$lip_2-VOLAT$lip_3
+VOLAT$clip_3=VOLAT$lip_3-VOLAT$lip_4
+VOLAT$clip_4=VOLAT$lip_4-VOLAT$lip_5
+#不含趋势项
+fitlsp=lm(clsp500~lsp500_1+clsp500_1+clsp500_2+clsp500_3+
+          clsp500_4,VOLAT)
+summary(fitlsp)
+#lsp500_1的t值为-0.794,对比表18.2
+#在10%不拒绝存在单位根的原假设
+fitlip=lm(clip~lip_1+clip_1+clip_2+clip_3+
+            clip_4,VOLAT)
+summary(fitlip)
+#lip_1的t值为-1.372,对比表18.2
+#在10%不拒绝存在单位根的原假设
+#含趋势项
+fitlsp2=lm(clsp500~lsp500_1+clsp500_1+clsp500_2+clsp500_3+
+            clsp500_4+t,VOLAT)
+summary(fitlsp2)
+#lsp500_1的t值为-2.2,对比表18.2
+#在10%不拒绝存在单位根的原假设
+fitlip2=lm(clip~lip_1+clip_1+clip_2+clip_3+
+            clip_4+t,VOLAT)
+summary(fitlip2)
+#lip_1的t值为-2.519,对比表18.2
+#在10%不拒绝存在单位根的原假设
+#----------------------------------------------------------
+#11.2
+fit=lm(lsp500~lip,VOLAT)
+summary(fit)
+#----------------------------------------------------------
+#11.3
+VOLAT$u=summary(fit)$resi
+VOLAT$u_1=c(NA,VOLAT$u[-nrow(VOLAT)])
+VOLAT$u_2=c(NA,VOLAT$u_1[-nrow(VOLAT)])
+VOLAT$u_3=c(NA,VOLAT$u_2[-nrow(VOLAT)])
+VOLAT$cu=VOLAT$u-VOLAT$u_1
+VOLAT$cu_1=VOLAT$u_1-VOLAT$u_2
+VOLAT$cu_2=VOLAT$u_2-VOLAT$u_3
+fitu=lm(cu~u_1+cu_1+cu_2,VOLAT)
+summary(fitu)
+#u_1的t统计量为-1.573,对比表18.4
+#在10%的水平上不拒绝原假设,即lip和lsp500不是协整的
+#----------------------------------------------------------
+#11.4
+fit2=lm(lsp500~lip+t,VOLAT)
+summary(fit2)
+VOLAT$u2=summary(fit2)$resi
+VOLAT$u2_1=c(NA,VOLAT$u2[-nrow(VOLAT)])
+VOLAT$u2_2=c(NA,VOLAT$u2_1[-nrow(VOLAT)])
+VOLAT$u2_3=c(NA,VOLAT$u2_2[-nrow(VOLAT)])
+VOLAT$cu2=VOLAT$u2-VOLAT$u2_1
+VOLAT$cu2_1=VOLAT$u2_1-VOLAT$u2_2
+VOLAT$cu2_2=VOLAT$u2_2-VOLAT$u2_3
+fitu2=lm(cu2~u2_1+cu2_1+cu2_2,VOLAT)
+summary(fitu2)
+#u_1的t统计量为-1.877,对比表18.5
+#在10%的水平上不拒绝原假设,即lip和lsp500不是协整的
+#----------------------------------------------------------
+#13.1
+TRAFFIC2=read.dta('TRAFFIC2.DTA',convert.factors=F)
+head(TRAFFIC2)
+TRAFFIC2$ltotacc=log(TRAFFIC2$totacc)
+TRAFFIC2$ltotacc_1=c(NA,TRAFFIC2$ltotacc[-nrow(TRAFFIC2)])
+TRAFFIC2$cltotacc=TRAFFIC2$ltotacc-TRAFFIC2$ltotacc_1
+fit=lm(cltotacc~ltotacc_1,TRAFFIC2)
+summary(fit)
+#ltotacc_1的t值为-3.31,对比表18.2
+#在2.5%的水平上拒绝原假设,即不存在单位根
+#----------------------------------------------------------
+#13.2
+TRAFFIC2$ltotacc_2=c(NA,TRAFFIC2$ltotacc_1[-nrow(TRAFFIC2)])
+TRAFFIC2$ltotacc_3=c(NA,TRAFFIC2$ltotacc_2[-nrow(TRAFFIC2)])
+TRAFFIC2$cltotacc=TRAFFIC2$ltotacc-TRAFFIC2$ltotacc_1
+TRAFFIC2$cltotacc_1=TRAFFIC2$ltotacc_1-TRAFFIC2$ltotacc_2
+TRAFFIC2$cltotacc_2=TRAFFIC2$ltotacc_2-TRAFFIC2$ltotacc_3
+fit2=lm(cltotacc~ltotacc_1+cltotacc_1+cltotacc_2,TRAFFIC2)
+summary(fit2)
+#ltotacc_1的t值为-1.501,对比表18.2
+#在10%的水平上不拒绝原假设,即存在单位根
+#----------------------------------------------------------
+#13.3
+fit3=lm(cltotacc~ltotacc_1+cltotacc_1+cltotacc_2+t,TRAFFIC2)
+summary(fit3)
+#ltotacc_1的t值为-3.667,对比表18.3
+#在2.5%的水平上拒绝原假设,即不存在单位根
+#----------------------------------------------------------
+#13.5
+TRAFFIC2$prcfat_2=c(NA,TRAFFIC2$prcfat_1[-nrow(TRAFFIC2)])
+TRAFFIC2$prcfat_3=c(NA,TRAFFIC2$prcfat_2[-nrow(TRAFFIC2)])
+TRAFFIC2$cprcfat=TRAFFIC2$prcfat-TRAFFIC2$prcfat_1
+TRAFFIC2$cprcfat_1=TRAFFIC2$prcfat_1-TRAFFIC2$prcfat_2
+TRAFFIC2$cprcfat_2=TRAFFIC2$prcfat_2-TRAFFIC2$prcfat_3
+#不含时间趋势项
+fit4=lm(cprcfat~prcfat_1+cprcfat_1+cprcfat_2,TRAFFIC2)
+summary(fit4)
+#prcfat_1的t值为-4.744,对比表18.2
+#在1%的水平上拒绝原假设,即不存在单位根
+fit5=lm(cprcfat~prcfat_1+cprcfat_1+cprcfat_2+t,TRAFFIC2)
+summary(fit5)
+#prcfat_1的t值为-5.288,对比表18.3
+#在1%的水平上拒绝原假设,即不存在单位根

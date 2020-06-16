@@ -1,0 +1,23 @@
+-----------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\stata11\ado\personal\Net_course_A\A1_intro\mylog1.log
+  log type:  text
+ opened on:  16 Mar 2010, 17:48:04
+
+.          dis "Part I：统计分析"
+Part I：统计分析
+
+.          sum price weight length
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+       price |        74    6165.257    2949.496       3291      15906
+      weight |        74    3019.459    777.1936       1760       4840
+      length |        74    187.9324    22.26634        142        233
+
+.       log close                          // _mylog1.log_-over-__   
+      name:  <unnamed>
+       log:  D:\stata11\ado\personal\Net_course_A\A1_intro\mylog1.log
+  log type:  text
+ closed on:  16 Mar 2010, 17:48:04
+-----------------------------------------------------------------------------------------

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<!--
+
+        This HTML file was computer-generated on 16 Mar 2010 at 17:55:18 by
+        hyperlog, a Stata program written by John Eng (jeng@jhmi.edu).
+
+-->
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<TITLE>Stata Do-File</TITLE>
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+function goLink(linkName) {
+    window.parent.displayFrame.location.href = window.parent.displayFrame.location.pathname + "#" + linkName;
+    }
+</SCRIPT>
+<STYLE TYPE="text/css">
+PRE.hyperlog {font-family: Andale Mono, Lucida Console, Courier, Courier New, monospace; font-size: 11px}
+A.hyperlog:link, A.hyperlog:visited, A.hyperlog:active {text-decoration: none; color: blue}
+</STYLE>
+</HEAD>
+<BODY BGCOLOR=WHITE>
+<PRE CLASS=hyperlog>
+      
+   *- Á·Ï°01
+   *- Ä³ÄêÄ³ÔÂµÄÄ³Ò»Ìì
+      
+     cap log close
+     log using mylog01.log, replace
+      
+<A CLASS=hyperlog HREF="javascript:goLink('Link0')">       sysuse nlsw88, clear</A>
+<A CLASS=hyperlog HREF="javascript:goLink('Link1')">       desc</A>
+<A CLASS=hyperlog HREF="javascript:goLink('Link2')">       summ</A>
+<A CLASS=hyperlog HREF="javascript:goLink('Link3')">       regress wage hours ttl_exp</A>
+      
+     log close
+     exit
+</PRE>
+</BODY>
+</HTML>

@@ -1,0 +1,61 @@
+{smcl}
+{* 1aug2003}{...}
+{hline}
+help for {hi:gossip}{right:(L. Hamilton)}
+{hline}
+
+{title:Moving first-order autocorrelations}
+
+{p 8 12}{cmd:gossip} {it:yvar timevar} {cmd:,} {cmdab:sp:an}{cmd:(}
+{it:#}{cmd:)} [ {cmdab:gen:erate}{cmd:(}{it:newvar}{cmd:)} 
+{cmdab:gr:aph} ]
+
+
+{title:Description}
+
+{p}{cmd:gossip} calculates first-order autocorrelations of time series 
+{it:yvar}, within a moving window of span {it:#}.  For example, if we
+specify {cmd:span(}7{cmd:)} {cmd:gen(}{it:new}{cmd:)}, then the first 
+through 3rd values of {it:new} are missing.  The 4th value of {it:new} 
+equals the lag-1 autocorrelation of {it:yvar} across observations 1 
+through 7.  The 5th value of {it:new} equals the lag-1 autocorrelation 
+of {it:yvar} across observations 2 through 8, and so forth.  The last 
+3 values of {it:new} are missing.  See Topliss (2001) for a rationale 
+and applications of this statistic to atmosphere-ocean data.  
+{browse "http://www.stata.com/bookstore/sws.html":Statistics with Stata}
+ (2004) discusses the {cmd:gossip} program itself.{p_end}
+
+{p}{cmd:gossip} requires {cmd:tsset} data.  {it:timevar} is the time 
+variable to be used for graphing.{p_end}
+
+
+{title:Options}
+
+{p 0 4}{cmd:span(}{it:#}{cmd:)} specifies the width of the window for 
+calculating autocorrelations.  This option is required; {it:#} should be
+ an odd integer.
+
+{p 0 4}{cmd:gen(}{it:newvar}{cmd:)} creates a new variable holding the 
+autocorrelation coefficients.
+
+{p 0 4}{cmd:graph} requests a spike plot of lag-1 autocorrelations vs.
+{it:timevar}.
+
+
+{title:Examples}
+
+{p 8 12}{inp:. gossip water month, span(13) graph}{p_end}
+{p 8 12}{inp:. gossip water month, span(9) gen(autowater)}{p_end}
+{p 8 12}{inp:. gossip water month, span(17) gen(autowater) graph}{p_end}
+
+
+{title:References}
+
+{p 0 4}Hamilton, Lawrence C.  2004.  
+{browse "http://www.stata.com/bookstore/sws.html":Statistics with Stata}.
+ Pacific Grove, CA:  Duxbury.{p_end}
+
+{p 0 4}Topliss, Brenda J.  2001.  "Climate variability I:  A conceptual
+approach to ocean-atmosphere feedback."  In Abstracts for AGU Chapman
+Conference, The North Atlantic Oscillation, Nov. 28 - Dec 1, 2000, 
+Ourense, Spain.{p_end}

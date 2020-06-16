@@ -1,0 +1,47 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+       log:  {res}D:\Stata\statafiles\panel data.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}10 Jun 2010, 17:17:54
+
+{com}. reg vfrall beertax if (year==1982), r
+
+{txt}Linear regression                                      Number of obs ={res}      48
+                                                       {txt}F(  1,    46) ={res}    1.25
+                                                       {txt}Prob > F      = {res} 0.2687
+                                                       {txt}R-squared     = {res} 0.0133
+                                                       {txt}Root MSE      = {res} .67048
+
+{txt}{hline 13}{c TT}{hline 64}
+             {c |}               Robust
+      vfrall {c |}      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+{hline 13}{char +}{hline 64}
+     beertax {c |}  {res} .1484603   .1326054     1.12   0.269    -.1184604    .4153811
+{txt}       _cons {c |}  {res} 2.010381   .1495728    13.44   0.000     1.709307    2.311456
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. areg vfrall beertax y82 y83 y84 y85 y86 y87, absorb(state) r
+
+{txt}Linear regression, absorbing indicators                Number of obs ={res}     336
+                                                       {txt}F({res}  7{txt},{res}   281{txt}) ={res}    3.70
+                                                       {txt}Prob > F      ={res}  0.0008
+                                                       {txt}R-squared     ={res}  0.9089
+                                                       {txt}Adj R-squared ={res}  0.8914
+                                                       {txt}Root MSE      = {res} .18788
+
+{txt}{hline 13}{c TT}{hline 64}
+             {c |}               Robust
+      vfrall {c |}      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+     beertax {c |}  {res}-.6399799   .2547149    -2.51   0.013    -1.141371   -.1385884
+         {txt}y82 {c |}  {res} .0518038     .05387     0.96   0.337    -.0542361    .1578438
+         {txt}y83 {c |}  {res}-.0280991   .0436586    -0.64   0.520    -.1140385    .0578404
+         {txt}y84 {c |}  {res}-.0206167    .036067    -0.57   0.568    -.0916125     .050379
+         {txt}y85 {c |}  {res}-.0721725   .0348882    -2.07   0.039     -.140848    -.003497
+         {txt}y86 {c |}  {res} .0139393   .0368396     0.38   0.705    -.0585772    .0864559
+         {txt}y87 {c |}  {res} .0009018   .0389422     0.02   0.982    -.0757536    .0775571
+       {txt}_cons {c |}  {res} 2.376666   .1211026    19.63   0.000     2.138283     2.61505
+{txt}{hline 13}{c +}{hline 64}
+       state {c |}   absorbed                                      (48 categories)
+
+{com}. exit, clear

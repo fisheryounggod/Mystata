@@ -1,0 +1,455 @@
+From: <ÓÉ Microsoft Internet Explorer 5 ±£´æ>
+Subject: Re: st: Matrix Algebra
+Date: Wed, 7 Oct 2009 17:36:54 +0800
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0000_01CA4774.C31174C0"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3350
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0000_01CA4774.C31174C0
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://statalist.org/archive/2002-10/msg00144.html
+
+=EF=BB=BF<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- MHonArc v2.5.5 --><!--X-Subject: Re: st: Matrix Algebra =
+--><!--X-From-R13: Oysbafb [venaqn <rpetjNpfi.jnejvpx.np.hx> =
+--><!--X-Date: Mon, 7 Oct 2002 07:40:46 &#45;0400 --><!--X-Message-Id: =
+Pine.SOL.4.44.0210071227190.15545&#45;100000@mimosa.csv.warwick.ac.uk =
+--><!--X-Content-Type: text/plain --><!--X-Reference: =
+Pine.SOL.4.44.0210070952270.7367&#45;100000@mimosa.csv.warwick.ac.uk =
+--><!--X-Head-End--><HTML><HEAD><TITLE>Re: st: Matrix Algebra</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dutf-8"><LINK rev=3Dmade=20
+href=3D"mailto:ecrgw@csv.warwick.ac.uk">
+<META content=3D"MSHTML 6.00.2900.3603" name=3DGENERATOR></HEAD>
+<BODY bgColor=3D#ffffff><A href=3D"http://statalist.org/map.html"><IMG =
+alt=3DStata=20
+src=3D"http://statalist.org/images/logo.gif" align=3Dleft =
+border=3D0></A> <IMG=20
+alt=3D"The Stata listserver" =
+src=3D"http://statalist.org/images/h/statalist.gif">=20
+<FONT =
+face=3Darial,helvetica,helv><!--X-Body-Begin--><!--X-User-Header--><!--X-=
+User-Header-End--><!--X-TopPNI-->
+<HR>
+[<A href=3D"http://statalist.org/archive/2002-10/msg00143.html">Date =
+Prev</A>][<A=20
+href=3D"http://statalist.org/archive/2002-10/msg00145.html">Date =
+Next</A>][<A=20
+href=3D"http://statalist.org/archive/2002-10/msg00140.html">Thread =
+Prev</A>][<A=20
+href=3D"http://statalist.org/archive/2002-10/msg00146.html">Thread =
+Next</A>][<A=20
+href=3D"http://statalist.org/archive/2002-10/maillist.html#00144">Date=20
+index</A>][<A=20
+href=3D"http://statalist.org/archive/2002-10/index.html#00144">Thread =
+index</A>] =
+<!--X-TopPNI-End--><!--X-MsgBody--><!--X-Subject-Header-Begin-->
+<H1>Re: st: Matrix Algebra</H1>
+<HR>
+<!--X-Subject-Header-End--><!--X-Head-of-Message-->
+<TABLE cellSpacing=3D0 cellPadding=3D0 border=3D0>
+  <TBODY>
+  <TR>
+    <TD vAlign=3Dtop align=3Dright><FONT=20
+      face=3Darial,helvetica,helv><B>From</B></FONT></TD>
+    <TD vAlign=3Dtop align=3Dleft><FONT =
+face=3Darial,helvetica,helv>&nbsp; Alfonso=20
+      Miranda &lt;<A=20
+      =
+href=3D"mailto:ecrgw@csv.warwick.ac.uk">ecrgw@csv.warwick.ac.uk</A>&gt;</=
+FONT></TD>
+  <TR>
+    <TD vAlign=3Dtop align=3Dright><FONT=20
+    face=3Darial,helvetica,helv><B>To</B></FONT></TD>
+    <TD vAlign=3Dtop align=3Dleft><FONT =
+face=3Darial,helvetica,helv>&nbsp; <A=20
+      =
+href=3D"mailto:statalist@hsphsun2.harvard.edu">statalist@hsphsun2.harvard=
+.edu</A></FONT></TD>
+  <TR>
+    <TD vAlign=3Dtop align=3Dright><FONT=20
+      face=3Darial,helvetica,helv><B>Subject</B></FONT></TD>
+    <TD vAlign=3Dtop align=3Dleft><FONT =
+face=3Darial,helvetica,helv>&nbsp; Re: st:=20
+      Matrix Algebra</FONT></TD>
+  <TR>
+    <TD vAlign=3Dtop align=3Dright><FONT=20
+      face=3Darial,helvetica,helv><B>Date</B></FONT></TD>
+    <TD vAlign=3Dtop align=3Dleft><FONT =
+face=3Darial,helvetica,helv>&nbsp; Mon, 7=20
+      Oct 2002 12:40:16 +0100 =
+(BST)</FONT></TD></TR></TBODY></TABLE><!--X-Head-of-Message-End--><!--X-H=
+ead-Body-Sep-Begin-->
+<HR>
+</FONT><FONT face=3Dfixed =
+size=3D+1><!--X-Head-Body-Sep-End--><!--X-Body-of-Message--><PRE>Dear =
+stata listers,
+
+In my last post I said that matrix mymat and matrix H were different.
+Having a second look I found that
+
+mymat =3D 12.4869*H
+
+
+Thus, Stata is giving me the correct matrix except for a constant. I
+believe Stata is doing some sort of standarization when unsing the
+variable res2 as an analytical weigh, isn't it ?. Could any one explain
+me how does it works?
+
+Thank you,
+
+Alfonso.
+
+
+
+On Mon, 7 Oct 2002, Alfonso MIranda wrote:
+
+&gt; Note: Apologies if this mail comes out twice.
+&gt;
+&gt;
+&gt; Dear Statalisters,
+&gt;
+&gt; I am trying to estimate a count model with endogenous switching as
+&gt; proposed by Terza(1998). It involves the use of a two-step method =
+of
+&gt; moments estimator. First stage is done using a probit and second =
+stage is
+&gt; done using non-linear least squares. I basically have coded all but =
+the
+&gt; correction for the covariance matrix. For calculating such a matrix =
+I have
+&gt; to create an intermediate matrix that has the following general =
+form:
+&gt;
+&gt; Y =3D A'*W*A
+&gt;
+&gt; A is nxk matrix and W is a nxn diagonal matrix with regression's
+&gt; squared errors in the diagonal and zeros elsewhere. Lets say that I =
+have
+&gt; variables a1 a2 a3 forming matrix A. And that the squared errors =
+are saved
+&gt; as variable res2. I have more than 20,000 observations in my =
+dataset.
+&gt;
+&gt; Since it is not possible to create matrices of 20,000x20,000 in =
+Stata, I
+&gt; was very kindly suggested by Michael Blasnik to use the weighting =
+feature
+&gt; of matrix accum for calculating matrix Y. Basically he suggested to =
+use:
+&gt;
+&gt; .mat accum a1 a2 a3 [aw=3Dres], noc
+&gt;
+&gt; In order to check that this solution is correct I drop observations =
+after
+&gt; estimating my model, and residuals, and kept only 200 observations. =
+Then,
+&gt; as also kindly suggested by Nick Cox, I calculate matrix A and W in =
+the
+&gt; following way:
+&gt;
+&gt; .mkmat a1 a2 a3, matrix(A)
+&gt; .local n =3D _N
+&gt; .matrix W =3D J(`n',`n',0)
+&gt; .forval i=3D1/`n' { W[`i',`i']=3Dres2[`i'] }
+&gt; .matrix mymat =3D A'*W*A
+&gt; .matrix list mymat
+&gt;
+&gt; .symmetric mymat[3,3]
+&gt;              a1          a2         a3
+&gt;       a1  62054.362
+&gt;       a2  60504.697  60504.697
+&gt;       a3  1004.4707  1004.4707  1004.4707
+&gt;
+&gt;
+&gt; This matrix is what I want but with large data it cannot be =
+calculated
+&gt; using Nick's suggestion. Now, using the weighting feature of matrix =
+accum
+&gt;
+&gt;  .matrix accum H =3D a1 a2 a3 [aw=3Dres2], noc
+&gt; (sum of wgt is   2.4974e+03)
+&gt; (obs=3D200)
+&gt;
+&gt; .matrix list H
+&gt;
+&gt; symmetric H[3,3]
+&gt;             a1         a2          a3
+&gt;      a1  4969.5487
+&gt;      a2  4845.4456  4845.4456
+&gt;      a3  80.441821  80.441821  80.441821
+&gt;
+&gt; Clearly, mymat and H are different. Jiang, Tao very kindly =
+suggested an
+&gt; alternative which would be:
+&gt;
+&gt; .sca m=3D10000
+&gt; .matrix accum Z=3D a1 a2 a3 [fw=3Dres2+m], noc
+&gt; .matrix accum Z2=3D a1 a2 a3, noc
+&gt; .matrix Z=3DZ1-m*Z2
+&gt;
+&gt; however, since res2 is not a integer number, frequency weights =
+cannot be
+&gt; estimated. I did what Jiang, Tao suggested using analytic weigths:
+&gt;
+&gt; sca m=3D10000
+&gt; matrix accum Z1=3D   g1c g1cat g1ind [aw=3Dres2+m], noc
+&gt; (sum of wgt is   2.0002e+07)
+&gt; (obs=3D200)
+&gt;
+&gt; matrix accum Z2=3D a1 a2 a3, noc
+&gt; (obs=3D200)
+&gt; matrix Z=3DZ1-m*Z2
+&gt;
+&gt;  matrix list Z
+&gt;
+&gt; symmetric Z[3,3]
+&gt;            a1          a2           a3
+&gt;   a1   -4.670e+08
+&gt;   a2   -4.438e+08  -4.438e+08
+&gt;   a3   -4512856     -4512856     -4512856
+&gt;
+&gt; Which is also different to maymat. It seems then that all suggested
+&gt; strategies do not yield the matrix that I need. Does anyone has =
+other
+&gt; idea?
+&gt;
+&gt; Many thanks,
+&gt;
+&gt; Alfonso Miranda
+&gt; University of Warwick
+&gt;
+&gt;
+&gt;
+&gt; *
+&gt; *   For searches and help try:
+&gt; *   <A =
+href=3D"http://www.stata.com/support/faqs/res/findit.html">http://www.sta=
+ta.com/support/faqs/res/findit.html</A>
+&gt; *   <A =
+href=3D"http://www.stata.com/support/statalist/faq">http://www.stata.com/=
+support/statalist/faq</A>
+&gt; *   <A =
+href=3D"http://www.ats.ucla.edu/stat/stata/">http://www.ats.ucla.edu/stat=
+/stata/</A>
+&gt;
+
+*
+*   For searches and help try:
+*   <A =
+href=3D"http://www.stata.com/support/faqs/res/findit.html">http://www.sta=
+ta.com/support/faqs/res/findit.html</A>
+*   <A =
+href=3D"http://www.stata.com/support/statalist/faq">http://www.stata.com/=
+support/statalist/faq</A>
+*   <A =
+href=3D"http://www.ats.ucla.edu/stat/stata/">http://www.ats.ucla.edu/stat=
+/stata/</A>
+</PRE><!--X-Body-of-Message-End--><!--X-MsgBody-End--><!--X-Follow-Ups-->=
+</FONT>
+<HR>
+<FONT face=3Darial,helvetica,helv>
+<UL>
+  <LI><STRONG>Follow-Ups</STRONG>:=20
+  <UL>
+    <LI><STRONG><A =
+href=3D"http://statalist.org/archive/2002-10/msg00146.html"=20
+    name=3D00146>Re: st: Matrix Algebra</A></STRONG>=20
+    <UL>
+      <LI><EM>From:</EM> "Michael Blasnik"=20
+      =
+&lt;michael.blasnik@verizon.net&gt;</LI></UL></LI></UL></LI></UL><!--X-Fo=
+llow-Ups-End--><!--X-References-->
+<UL>
+  <LI><STRONG>References</STRONG>:=20
+  <UL>
+    <LI><STRONG><A =
+href=3D"http://statalist.org/archive/2002-10/msg00140.html"=20
+    name=3D00140>st: Matrix Algebra</A></STRONG>=20
+    <UL>
+      <LI><EM>From:</EM> Alfonso MIranda=20
+    =
+&lt;ecrgw@csv.warwick.ac.uk&gt;</LI></UL></LI></UL></LI></UL><!--X-Refere=
+nces-End--><!--X-BotPNI-->
+<UL>
+  <LI>Prev by Date: <STRONG><A=20
+  href=3D"http://statalist.org/archive/2002-10/msg00143.html">st: Re: =
+Matrix=20
+  algebra</A></STRONG>=20
+  <LI>Next by Date: <STRONG><A=20
+  href=3D"http://statalist.org/archive/2002-10/msg00145.html">st: Re: =
+Matrix=20
+  Algebra</A></STRONG>=20
+  <LI>Previous by thread: <STRONG><A=20
+  href=3D"http://statalist.org/archive/2002-10/msg00140.html">st: Matrix =
+
+  Algebra</A></STRONG>=20
+  <LI>Next by thread: <STRONG><A=20
+  href=3D"http://statalist.org/archive/2002-10/msg00146.html">Re: st: =
+Matrix=20
+  Algebra</A></STRONG>=20
+  <LI>Index(es):=20
+  <UL>
+    <LI><A=20
+    =
+href=3D"http://statalist.org/archive/2002-10/maillist.html#00144"><STRONG=
+>Date</STRONG></A>=20
+
+    <LI><A=20
+    =
+href=3D"http://statalist.org/archive/2002-10/index.html#00144"><STRONG>Th=
+read</STRONG></A>=20
+    =
+</LI></UL></LI></UL><!--X-BotPNI-End--><!--X-User-Footer--><!--X-User-Foo=
+ter-End--></FONT>
+<HR>
+
+<HR>
+
+<TABLE cellSpacing=3D0 cellPadding=3D2 width=3D"100%" align=3Dcenter =
+bgColor=3D#ffffff=20
+border=3D0>
+  <TBODY>
+  <TR>
+    <TD vAlign=3Dtop align=3Dmiddle><FONT =
+face=3Darial,helvetica,helv,sans-serif=20
+      size=3D1>=C2=A9 Copyright 1996=E2=80=932009 StataCorp LP =
+&nbsp;&nbsp;|&nbsp;&nbsp; <A=20
+      style=3D"COLOR: #000066; TEXT-DECORATION: none"=20
+      href=3D"http://statalist.org/terms.html">Terms of use</A>=20
+      &nbsp;&nbsp;|&nbsp;&nbsp; <A style=3D"COLOR: #000066; =
+TEXT-DECORATION: none"=20
+      href=3D"http://statalist.org/privacy.html">Privacy</A>=20
+      &nbsp;&nbsp;|&nbsp;&nbsp; <A style=3D"COLOR: #000066; =
+TEXT-DECORATION: none"=20
+      href=3D"http://statalist.org/company/contact.html">Contact us</A>=20
+      &nbsp;&nbsp;|&nbsp;&nbsp; <A style=3D"COLOR: #000066; =
+TEXT-DECORATION: none"=20
+      href=3D"http://statalist.org/news/whatsnew.html">What's new</A>=20
+      &nbsp;&nbsp;|&nbsp;&nbsp; <A style=3D"COLOR: #000066; =
+TEXT-DECORATION: none"=20
+      href=3D"http://statalist.org/site.html">Site index</A>=20
+</FONT></TD></TR></TBODY></TABLE></BODY></HTML>
+
+------=_NextPart_000_0000_01CA4774.C31174C0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://statalist.org/images/logo.gif
+
+R0lGODlhiAArAMQAAABdfv///4Cuv0CGnr/X3+/19xBnhp/Cz2CariBxjt/r73CktlCQpq/M18/h
+57vU3TB7lo+4x3epukSIoBFoh5m+y1WTqSJzj8zf5Yizw93p7maesjN9mAAAAAAAAAAAACH5BAAA
+AAAALAAAAACIACsAQAX/ICCOZGmeaKqubOu+cGoIRWDfeK4Xje77kZ/wRoCUFMPhIfkrCAwiC+bx
+kKB0h5hKoNOmBjrBSUfworg5WCKCZPoUJjSOZHDbbWITmYS421s9fj5lcV10NYJCeSV7JAyJQ2aS
+k5SVlpeYmZqWDwABGwEcFRcmYJA5S5AKgac3B32QDYitNgMsBrOqRidyNycIua2LJI0lqbQ2myOs
+N7Ykvckj0AELL6Y4wyPFAAQ6CS/TLAPj5OXm51ArCefq5+7vA9+l5rspEPD45Mr7/P0lGVUqPKDg
+r6BBSRgoBJiwcOAJAw6QBTgm6ECwRAhEUPSzMVGBdCva4IgAclI4SwMu/zpjlIMQpRk7WHTL4USA
+zZs4BSxYmeIkCgMDcgrF2TGbiG0mEiAYynTmnBYdBSkoKcKniAQXhY1pWWKBxKfKpvEEYHUaA2th
+tuJwyY0m1S2GWGQV5KBQmhG4vt4w6onrCFh6A7DwSovA26pxSUAQSYsvUhGAkR2cTLmy5cuYM2ve
+RGECqc2g/UmQQKXChE6hU2vqFEBDBQASJqwwwICpbZxBb9tGsEC30AXyStT2PXQ48ZsMQFqoYKGz
+hAwpEkSkZfFU1DsZRTyKxZhuPRbMTq2yLrFAgjqQClz3wzbFej9BIL2neyq+xAYsdNS9ZJVSZBvV
+6OGXJU75ssIOh3nR384k1+ylFhGYLGgCYek90VNiJCQwnxuODVjCAAWe0sJ/Hn0nDYYAkKiVgGuZ
+sOEdLywwlx1G9ffiHR22iNeMkJiRT1A+BIfYXdrtgMCP41DoIIsQLqMfkuN0xE+DtZRQlg4JnkBl
+ADk2KUKI7a0g4Qn3QDkAA+HZICRZiW2XQwRQKonHgzaw1ZECRyIpJQtu0pLdMxjeSCOdAbTXnWSz
+SeTAYQtCwKMfXdZpgn0SsTAdJA78yQuKIhiwwKGCRFooCho+yoRqqKaq6qqstlpQCAA7
+
+------=_NextPart_000_0000_01CA4774.C31174C0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://statalist.org/images/h/statalist.gif
+
+R0lGODlhLAErAPcAAP///wAAALu7u4iIiOHn61x8kkRERBEREczMzK6+yYyjss/Y3+7u7uzw8pis
+urvI0aK0wZCmtZOot4mgsLPCzMzW3YKbrPX3+OPp7H2WqNTc4uru8ejt8H+YqoqhsdLb4bnG0ISc
+rdzj6I6ktPT2+LDAyvP19/H09v3+/sjT2kBlf+js70puhtvi5/7+/t3d3eXq7ff5+t7l6cvV3D5k
+foCZqvr7++7y9Pr7/Pv8/Pz9/a29yL3K09Xe4/39/T9lf/n6+/f4+fDz9UNogWWEmCIiIkRpgjMz
+M2ZmZnd3d1Fzi0BmgGuInJmZmYWdrtbe5E1wiFN1jKqqqqCzwGiGmkZrhEZqg52wvVh5kElthWGA
+lbTDzdnh5nWQo09xidjg5ZWquKm6xcTQ2Ehshaa4xJerudHa4KO1wqq7xmyJnVR2jaCyv56xvsbR
+2dff5GKBlvT298DN1ebr7nqUppKnto2js52xvt/l6rLBy3GNoKS2wt3k6Njf5ZuvvKe4xJquvJar
+uXiTpZSpuG6KnsXR2ZesuXiSpKu8x3eSpIGaq7XDzXuVp9DZ4LC/ym2KnbbEzlV3jnyWp3SQolh5
+j6G0wO7x86a3w8fS2mWDmJyvvYaervHz9evv8efs78HN1oeer2SCl77L00Vpg1BzitPc4uTp7Ult
+hld4j/j6+rbFzr/L1Ki5xam6xu/y9OXq7rzJ0qW3w7/M1cnU287X3uvv8s3X3uDm6miFmnmTpZmt
+u7jGz0JngYuisoefr3aRo/L19nuVpsXQ2O3w87fFz8LO1sLO18PP1/b4+drh5l9/lEFmgE9yinKO
+oVVVVVp6kWOCl1Z3jnSPokxvh2B/lUxwiGqHm1J0i4eerl19k5+yv3CMn1l6kF5+k2+Mn0tuh9fe
+5PL193mTpnSQo4uisfP295uuvPb3+YKaq6S2w8bS2c/Z35Gntlx8k3qVpniSpbXEznOPoXKNoaW2
+w2qIm/X3+dzj52GAllt7kfT3+G2Knl18k9/m6q+/yXiTpFByiezv8iH5BAAAAAAALAAAAAAsASsA
+QAj/AGnQ+PFDhYolS5Qp27VriMMhRoyIsmKlisUxY7JkMcWChTdp0qhBgeKl5LJRSpRYsxYliho1
+kCBBOzUJC5Ztzu4V2ImNG7dk07RoefPmGShMRIjcWkqlWjUmTNI4GjSom7Y8eZjBiyapiy9EhgLh
+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
+Ow==
+
+------=_NextPart_000_0000_01CA4774.C31174C0--

@@ -1,0 +1,20 @@
+	(1)
+VARIABLES	price
+	
+mpg	-58.85
+	(83.28)
+rep78	863.6***
+	(322.1)
+headroom	-707.5
+	(445.2)
+trunk	-12.42
+	(105.2)
+weight	2.504***
+	(0.681)
+Constant	-839.1
+	(3620)
+	
+Observations	69
+R-squared	0.400
+Standard errors in parentheses	
+*** p<0.01, ** p<0.05, * p<0.1	

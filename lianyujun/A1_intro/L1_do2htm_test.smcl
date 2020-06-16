@@ -1,0 +1,95 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}D:\stata11\ado\personal\Net_course_A\A1_intro\L1_do2htm_test.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}16 Mar 2010, 22:19:01
+{txt}
+{com}. 
+. * 应用 -do2htm- 命令制作网页
+. 
+.    cd `c(sysdir_personal)'Net_course_A\A1_intro
+{res}D:\stata11\ado\personal\Net_course_A\A1_intro
+{txt}
+{com}. 
+.    sysuse auto, clear      // -> Note1: 调入数据
+{txt}(1978 Automobile Data)
+
+{com}. 
+.    sum                     // 基本统计量
+
+{txt}    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 56}
+{space 8}make {c |}{res}         0
+{txt}{space 7}price {c |}{res}        74    6165.257    2949.496       3291      15906
+{txt}{space 9}mpg {c |}{res}        74     21.2973    5.785503         12         41
+{txt}{space 7}rep78 {c |}{res}        69    3.405797    .9899323          1          5
+{txt}{space 4}headroom {c |}{res}        74    2.993243    .8459948        1.5          5
+{txt}{hline 13}{c +}{hline 56}
+{space 7}trunk {c |}{res}        74    13.75676    4.277404          5         23
+{txt}{space 6}weight {c |}{res}        74    3019.459    777.1936       1760       4840
+{txt}{space 6}length {c |}{res}        74    187.9324    22.26634        142        233
+{txt}{space 8}turn {c |}{res}        74    39.64865    4.399354         31         51
+{txt}displacement {c |}{res}        74    197.2973    91.83722         79        425
+{txt}{hline 13}{c +}{hline 56}
+{space 2}gear_ratio {c |}{res}        74    3.014865    .4562871       2.19       3.89
+{txt}{space 5}foreign {c |}{res}        74    .2972973    .4601885          0          1
+{txt}
+{com}. 
+.    d,d                     // 样本概况描述
+
+{txt}Contains data from {res}D:\stata11\ado\base/a/auto.dta
+{txt}  obs:{res}            74{txt} (max=    1,008,244)      {res}1978 Automobile Data
+{txt} vars:{res}            12{txt} (max=        5,000)      {res}13 Apr 2009 17:45
+{txt}width:{res}            43{txt} (max=       60,000)      {res}
+{txt} size:{res}         3,478{txt} (max=   52,428,792)      {res}  (_dta has notes)
+{txt}{hline}
+              storage  display     value
+variable name   type   format      label      variable label
+{hline}
+{p 0 48}{res}{bind:make           }{txt}{bind: str18  }{bind:{txt}%-18s      }{space 1}{bind:         }{bind:  }{res}{res}Make and Model{p_end}
+{p 0 48}{bind:price          }{txt}{bind: int    }{bind:{txt}%8.0gc     }{space 1}{bind:         }{bind:  }{res}{res}Price{p_end}
+{p 0 48}{bind:mpg            }{txt}{bind: int    }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}Mileage (mpg){p_end}
+{p 0 48}{bind:rep78          }{txt}{bind: int    }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}Repair Record 1978{p_end}
+{p 0 48}{bind:headroom       }{txt}{bind: float  }{bind:{txt}%6.1f      }{space 1}{bind:         }{bind:  }{res}{res}Headroom (in.){p_end}
+{p 0 48}{bind:trunk          }{txt}{bind: int    }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}Trunk space (cu. ft.){p_end}
+{p 0 48}{bind:weight         }{txt}{bind: int    }{bind:{txt}%8.0gc     }{space 1}{bind:         }{bind:  }{res}{res}Weight (lbs.){p_end}
+{p 0 48}{bind:length         }{txt}{bind: int    }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}Length (in.){p_end}
+{p 0 48}{bind:turn           }{txt}{bind: int    }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}Turn Circle (ft.) {p_end}
+{p 0 48}{bind:displacement   }{txt}{bind: int    }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}Displacement (cu. in.){p_end}
+{p 0 48}{bind:gear_ratio     }{txt}{bind: float  }{bind:{txt}%6.2f      }{space 1}{bind:         }{bind:  }{res}{res}Gear Ratio{p_end}
+{p 0 48}{bind:foreign        }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:origin   }{bind:  }{res}{res}Car type{p_end}
+{txt}{hline}
+Sorted by:  {res}foreign
+{txt}
+{com}.   
+. *- 绘制一张图形
+.      #delimit ;            // -> 注意此处的断行方法
+{txt}delimiter now ;
+{com}.       grss twoway (scatter price wei)
+>            (lfit price wei),
+>            title("散点图和线性拟合图");
+#grssbefore#'L1_do2htm_test1.png'#grssafter#
+{txt}
+{com}.      #delimit cr
+{txt}delimiter now cr
+{com}. 
+. *- 再绘制一张图形
+.      sysuse nlsw88, clear
+{txt}(NLSW, 1988 extract)
+
+{com}.      gen lnwage = ln(wage)
+{txt}
+{com}.      grss histogram lnwage, normal
+#grssbefore#'L1_do2htm_test2.png'#grssafter#
+{txt}
+{com}.      
+. 
+{txt}end of do-file
+      name:  {res}<unnamed>
+       {txt}log:  {res}D:\stata11\ado\personal\Net_course_A\A1_intro\L1_do2htm_test.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}16 Mar 2010, 22:19:14
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

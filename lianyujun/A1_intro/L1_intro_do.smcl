@@ -1,0 +1,9 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+       log:  {res}H:\stata10\ado\personal\Net_course_A\A1_intro\L1_intro_do.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}11 Aug 2009, 11:13:00
+{txt}
+{com}. cap log close
+{smcl}
+{com}{sf}{ul off}

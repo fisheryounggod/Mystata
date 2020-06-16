@@ -1,0 +1,70 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+       log:  {res}D:\Stata\statafiles\chen11111.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}21 Dec 2010, 13:46:04
+
+{com}. tab
+{err}varlist required
+{txt}{search r(100):r(100);}
+
+{com}. sum
+
+{txt}    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 56}
+         eff {c |}{res}        30    .5993193     .208179   .3142018          1
+        {txt}var2 {c |}{res}        30    .6726582    .2297473   .3137874          1
+        {txt}var3 {c |}{res}        30    .6877417    .2190882   .3192599          1
+        {txt}var4 {c |}{res}        30    .7171921    .2332985   .2928265          1
+        {txt}var5 {c |}{res}        30    .7558727    .2283363   .3251783          1
+{txt}{hline 13}{c +}{hline 56}
+        var6 {c |}{res}        30    .7783402    .2343855   .3137241          1
+        {txt}var7 {c |}{res}        30     .784357    .2313868   .3235959          1
+        {txt}var8 {c |}{res}        30    .7609663    .2185031   .3184153          1
+        {txt}var9 {c |}{res}        30    .7464744    .2224284   .3230216          1
+       {txt}var10 {c |}{res}        30     .747159    .2257578   .3205325          1
+{txt}{hline 13}{c +}{hline 56}
+       var11 {c |}{res}        30    .7391529    .2318114   .3083999          1
+
+{com}. gen eff2=eff^2
+
+. tab eff2
+
+       {txt}eff2 {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+   .0987228 {c |}{res}          1        3.33        3.33
+{txt}   .1019082 {c |}{res}          1        3.33        6.67
+{txt}   .1379668 {c |}{res}          1        3.33       10.00
+{txt}   .1415916 {c |}{res}          1        3.33       13.33
+{txt}   .1689215 {c |}{res}          1        3.33       16.67
+{txt}    .186203 {c |}{res}          1        3.33       20.00
+{txt}   .2190313 {c |}{res}          1        3.33       23.33
+{txt}   .2224727 {c |}{res}          1        3.33       26.67
+{txt}   .2340961 {c |}{res}          1        3.33       30.00
+{txt}   .2415139 {c |}{res}          1        3.33       33.33
+{txt}    .272424 {c |}{res}          1        3.33       36.67
+{txt}   .2736325 {c |}{res}          1        3.33       40.00
+{txt}   .2839065 {c |}{res}          1        3.33       43.33
+{txt}   .2843888 {c |}{res}          1        3.33       46.67
+{txt}   .2856888 {c |}{res}          1        3.33       50.00
+{txt}   .2880152 {c |}{res}          1        3.33       53.33
+{txt}   .3155636 {c |}{res}          1        3.33       56.67
+{txt}   .3458062 {c |}{res}          1        3.33       60.00
+{txt}   .3564296 {c |}{res}          1        3.33       63.33
+{txt}   .3591837 {c |}{res}          1        3.33       66.67
+{txt}   .3690523 {c |}{res}          1        3.33       70.00
+{txt}   .3970499 {c |}{res}          1        3.33       73.33
+{txt}   .4008721 {c |}{res}          1        3.33       76.67
+{txt}   .4294837 {c |}{res}          1        3.33       80.00
+{txt}   .6184018 {c |}{res}          1        3.33       83.33
+{txt}          1 {c |}{res}          5       16.67      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}         30      100.00
+
+{com}. log close
+       {txt}log:  {res}D:\Stata\statafiles\chen11111.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}21 Dec 2010, 13:49:49
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

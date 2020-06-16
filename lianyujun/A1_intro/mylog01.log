@@ -1,0 +1,89 @@
+-----------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\stata11\ado\personal\Net_course_A\A1_intro\mylog01.log
+  log type:  text
+ opened on:  16 Mar 2010, 17:54:47
+
+.       
+.        sysuse nlsw88, clear
+(NLSW, 1988 extract)
+
+.        desc
+
+Contains data from D:\stata11\ado\base/n/nlsw88.dta
+  obs:         2,246                          NLSW, 1988 extract
+ vars:            17                          1 May 2009 22:52
+ size:        69,626 (99.9% of memory free)   (_dta has notes)
+-----------------------------------------------------------------------------------------
+              storage  display     value
+variable name   type   format      label      variable label
+-----------------------------------------------------------------------------------------
+idcode          int    %8.0g                  NLS id
+age             byte   %8.0g                  age in current year
+race            byte   %8.0g       racelbl    race
+married         byte   %8.0g       marlbl     married
+never_married   byte   %8.0g                  never married
+grade           byte   %8.0g                  current grade completed
+collgrad        byte   %16.0g      gradlbl    college graduate
+south           byte   %8.0g                  lives in south
+smsa            byte   %9.0g       smsalbl    lives in SMSA
+c_city          byte   %8.0g                  lives in central city
+industry        byte   %23.0g      indlbl     industry
+occupation      byte   %22.0g      occlbl     occupation
+union           byte   %8.0g       unionlbl   union worker
+wage            float  %9.0g                  hourly wage
+hours           byte   %8.0g                  usual hours worked
+ttl_exp         float  %9.0g                  total work experience
+tenure          float  %9.0g                  job tenure (years)
+-----------------------------------------------------------------------------------------
+Sorted by:  idcode
+
+.        summ
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+      idcode |      2246    2612.654    1480.864          1       5159
+         age |      2246    39.15316    3.060002         34         46
+        race |      2246    1.282725    .4754413          1          3
+     married |      2246    .6420303    .4795099          0          1
+never_marr~d |      2246    .1041852    .3055687          0          1
+-------------+--------------------------------------------------------
+       grade |      2244    13.09893    2.521246          0         18
+    collgrad |      2246    .2368655    .4252538          0          1
+       south |      2246    .4194123    .4935728          0          1
+        smsa |      2246    .7039181    .4566292          0          1
+      c_city |      2246    .2916296    .4546139          0          1
+-------------+--------------------------------------------------------
+    industry |      2232    8.189516    3.010875          1         12
+  occupation |      2237    4.642825    3.408897          1         13
+       union |      1878    .2454739    .4304825          0          1
+        wage |      2246    7.766949    5.755523   1.004952   40.74659
+       hours |      2242    37.21811    10.50914          1         80
+-------------+--------------------------------------------------------
+     ttl_exp |      2246    12.53498    4.610208   .1153846   28.88461
+      tenure |      2231     5.97785    5.510331          0   25.91667
+
+.        regress wage hours ttl_exp
+
+      Source |       SS       df       MS              Number of obs =    2242
+-------------+------------------------------           F(  2,  2239) =   97.98
+       Model |  5978.66381     2  2989.33191           Prob > F      =  0.0000
+    Residual |  68309.1577  2239  30.5087797           R-squared     =  0.0805
+-------------+------------------------------           Adj R-squared =  0.0797
+       Total |  74287.8215  2241  33.1494072           Root MSE      =  5.5235
+
+------------------------------------------------------------------------------
+        wage |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       hours |   .0568453   .0114072     4.98   0.000     .0344755     .079215
+     ttl_exp |   .3013915   .0260076    11.59   0.000     .2503899    .3523931
+       _cons |   1.879377   .4864704     3.86   0.000      .925397    2.833357
+------------------------------------------------------------------------------
+
+.       
+.      log close
+      name:  <unnamed>
+       log:  D:\stata11\ado\personal\Net_course_A\A1_intro\mylog01.log
+  log type:  text
+ closed on:  16 Mar 2010, 17:54:48
+-----------------------------------------------------------------------------------------

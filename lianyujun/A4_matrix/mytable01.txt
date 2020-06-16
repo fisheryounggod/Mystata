@@ -1,0 +1,12 @@
+Table 1: statistics of key variables
+	N	mean	sd	min	max	
+wage	      2246	  7.766949	 5.7555229	 1.0049518	  40.74659	
+age	      2246	 39.153161	 3.0600022	        34	        46	
+ttl_exp	      2246	 12.534977	 4.6102075	 .11538462	 28.884615	
+hours	      2242	 37.218109	 10.509135	         1	        80	
+  Table 2: correlation of key variables
+	wage	age	ttl_exp	hours	
+wage	         1	-.01126478	  .4173754	  .2395363	
+age	-.01126478	         1	  .1325396	-.03719981	
+ttl_exp	  .4173754	  .1325396	         1	 .23295722	
+hours	  .2395363	-.03719981	 .23295722	         1	

@@ -1,0 +1,218 @@
+{smcl}
+
+{txt}{net "from http://repec.org/bocode":SSC} Stata modules created or revised 2010-02-17 to 2010-03-17
+{hline}
+
+{net "describe http://repec.org/bocode/z/zmap":ZMAP}
+{txt} module for binned scatter maps
+{txt} Authors: Nicholas J. Cox       Req: Stata version 8
+
+{txt} Created: 2010-03-15
+
+{net "describe http://repec.org/bocode/c/curvefit":CURVEFIT}
+{txt} module to produces curve estimation regression statistics and related plots between two variables for 11 different curve estimation regression models
+{txt} Authors: Liu Wei       Req: Stata version 10.0
+
+{txt} Created: 2010-03-15
+
+{net "describe http://repec.org/bocode/s/spmlreg":SPMLREG}
+{txt} module to estimate the spatial lag, the spatial error, the spatial durbin, and the general spatial models by maximum likelihood
+{txt} Authors: P. Wilner Jeanty       Req: Stata version 10.0 
+
+{txt} Created: 2010-03-11
+
+{net "describe http://repec.org/bocode/s/spwmatfill":SPWMATFILL}
+{txt} module to assign first nearest neighbors to observations with no contiguous neighbors
+{txt} Authors: P. Wilner Jeanty       Req: Stata version 9.2 
+
+{txt} Created: 2010-03-11
+
+{net "describe http://repec.org/bocode/d/dagfit":DAGFIT}
+{txt} module to fit a Generalized Beta (Type 2) distribution to grouped data via ML
+{txt} Authors: Austin Nichols       Req: Stata version 8.2
+
+{txt} Created: 2010-05-05
+
+{net "describe http://repec.org/bocode/g/gbgfit":GBGFIT}
+{txt} module to fit a Generalized Beta (Type 2) distribution to grouped data via ML
+{txt} Authors: Austin Nichols       Req: Stata version 8.2
+
+{txt} Created: 2010-05-05
+
+{net "describe http://repec.org/bocode/s/smgfit":SMGFIT}
+{txt} module to fit a Singh-Maddala distribution to grouped data via ML
+{txt} Authors: Austin Nichols       Req: Stata version 8.2
+
+{txt} Created: 2010-05-05
+
+{net "describe http://repec.org/bocode/c/cns":CNS}
+{txt} module to compute Consensus Measure for Ordinal Scales
+{txt} Authors: Matthew Openshaw       Req: Stata version 10.1
+
+{txt} Created: 2010-02-28
+
+{net "describe http://repec.org/bocode/s/stpm2":STPM2}
+{txt} module to estimate flexible parametric survival models
+{txt} Authors: Paul Lambert       Req: Stata version 11
+
+{txt} Created: 2010-02-23
+
+{net "describe http://repec.org/bocode/c/cem":CEM}
+{txt} module to perform Coarsened Exact Matching
+{txt} Authors:  Matthew Blackwell  Stefano Iacus  Gary King  Giuseppe Porro       Req: Stata version 10.1
+
+{txt} Created: 2010-02-19
+
+{net "describe http://repec.org/bocode/s/spike":SPIKE}
+{txt} module to allow for a zero willingness to pay
+{txt} Authors: Joao Pedro Azevedo       Req: Stata version 8.0
+
+{txt} Created: 2010-02-19
+
+{net "describe http://repec.org/bocode/t/turnbull":TURNBULL}
+{txt} module to estimate the Turnbull empirical distribution estimator of willingness to pay
+{txt} Authors: Joao Pedro Azevedo       Req: Stata version 8.0
+
+{txt} Created: 2010-02-19
+
+{net "describe http://repec.org/bocode/f/ftrans":FTRANS}
+{txt} module to batch convert file formats
+{txt} Authors: Liu Wei       Req: Stata version 10 and Stat/Transfer
+
+{txt} Revised: 2010-03-07
+
+{net "describe http://repec.org/bocode/f/freplace":FREPLACE}
+{txt} module to batch convert ASCII text or binary patterns in files
+{txt} Authors: Liu Wei       Req: Stata version 9 
+
+{txt} Revised: 2010-03-07
+
+{net "describe http://repec.org/bocode/a/anketest":ANKETEST}
+{txt} module to perform diagnostic tests for spatial autocorrelation in the residuals of OLS, SAR, IV, and IV-SAR models
+{txt} Authors: P. Wilner Jeanty       Req: Stata version 9.2 
+
+{txt} Revised: 2010-03-11
+
+{net "describe http://repec.org/bocode/s/splagvar":SPLAGVAR}
+{txt} module to generate spatially lagged variables, construct the Moran Scatter plot, and calculate Moran's I statistics
+{txt} Authors: P. Wilner Jeanty       Req: Stata version 9.2 
+
+{txt} Revised: 2010-03-11
+
+{net "describe http://repec.org/bocode/s/spwmatrix":SPWMATRIX}
+{txt} module to generate, import, and export spatial weights
+{txt} Authors: P. Wilner Jeanty       Req: Stata version 9.2 
+
+{txt} Revised: 2010-03-11
+
+{net "describe http://repec.org/bocode/n/nearstat":NEARSTAT}
+{txt} module to calculate distance-based variables and export distance matrix to text file
+{txt} Authors: P. Wilner Jeanty       Req: Stata version 10.1
+
+{txt} Revised: 2010-03-11
+
+{net "describe http://repec.org/bocode/h/hlp2winpdf":HLP2WINPDF}
+{txt} module to convert Stata's help files into pdf in Windows environment
+{txt} Authors: P. Wilner Jeanty       Req: Stata version 9.2, Windows, Ghostscript
+
+{txt} Revised: 2010-03-11
+
+{net "describe http://repec.org/bocode/d/diff":DIFF}
+{txt} module to perform Differences in Differences estimation
+{txt} Authors: Juan M. Villa       Req: Stata version 10.0
+
+{txt} Revised: 2010-03-15
+
+{net "describe http://repec.org/bocode/s/saswrapper":SASWRAPPER}
+{txt} module to run a SAS program from within Stata
+{txt} Authors: Dan Blanchette       Req: Stata version 8.0
+
+{txt} Revised: 2010-02-17
+
+{net "describe http://repec.org/bocode/t/texsave":TEXSAVE}
+{txt} module to save a dataset in LaTeX format
+{txt} Authors: Julian Reif       Req: Stata version 10
+
+{txt} Revised: 2010-05-05
+
+{net "describe http://repec.org/bocode/r/regsave":REGSAVE}
+{txt} module to save regression results to a Stata-formatted dataset 
+{txt} Authors: Julian Reif       Req: Stata version 10 
+
+{txt} Revised: 2010-03-14
+
+{net "describe http://repec.org/bocode/v/vlc":VLC}
+{txt} module to compare value labels across datasets
+{txt} Authors: Austin Nichols       Req: Stata version 8.2
+
+{txt} Revised: 2010-02-23
+
+{net "describe http://repec.org/bocode/p/paretofit":PARETOFIT}
+{txt} module to fit a Type 1 Pareto distribution
+{txt} Authors: Stephen P. Jenkins  Philippe Van Kerm       Req: Stata version 8.0
+
+{txt} Revised: 2010-02-23
+
+{net "describe http://repec.org/bocode/x/xtoverid":XTOVERID}
+{txt} module to calculate tests of overidentifying restrictions after xtreg, xtivreg, xtivreg2, xthtaylor
+{txt} Authors: Mark E Schaffer  Steven Stillman       Req: Stata version 8.2 and ((ivreg2 | ivreg29) + ranktest) or ivreg28 from SSC
+
+{txt} Revised: 2010-03-07
+
+{net "describe http://repec.org/bocode/s/sq":SQ}
+{txt} module for sequence analysis
+{txt} Authors: Ulrich Kohler  Magdalena Luniak  Christian Brzinsky-Fay       Req: Stata version 10
+
+{txt} Revised: 2010-03-11
+
+{net "describe http://repec.org/bocode/f/fprank":FPRANK}
+{txt} module to compute Two-Sample Fligner-Policello Robust Rank Order Test
+{txt} Authors: Mamoun BenMamoun       Req: Stata version 9.2
+
+{txt} Revised: 2010-02-19
+
+{net "describe http://repec.org/bocode/s/sizefx":SIZEFX}
+{txt} module to compute effect size correlations
+{txt} Authors: Matthew Openshaw       Req: Stata version 9.1
+
+{txt} Revised: 2010-02-28
+
+{net "describe http://repec.org/bocode/g/grqreg":GRQREG}
+{txt} module to graph the coefficients of a quantile regression
+{txt} Authors:  Joao Pedro Azevedo       Req: Stata version 8.2
+
+{txt} Revised: 2010-03-10
+
+{net "describe http://repec.org/bocode/s/stripplot":STRIPPLOT}
+{txt} module for strip plots (one-way dot plots) 
+{txt} Authors: Nicholas J. Cox       Req: Stata version 8.2
+
+{txt} Revised: 2010-03-15
+
+{net "describe http://repec.org/bocode/i/ivreg2":IVREG2}
+{txt} module for extended instrumental variables/2SLS and GMM estimation
+{txt} Authors: Christopher F Baum  Mark E Schaffer  Steven Stillman       Req: Stata version 10.1
+
+{txt} Revised: 2010-02-28
+
+{net "describe http://repec.org/bocode/d/diagt":DIAGT}
+{txt} module to report summary statistics for diagnostic tests compared to true disease status
+{txt} Authors: Paul Seed       Req: Stata version 6.0
+
+{txt} Revised: 2010-02-19
+
+{net "describe http://repec.org/bocode/i/ineqdeco":INEQDECO}
+{txt} module to calculate inequality indices with decomposition by subgroup
+{txt} Authors: Stephen P. Jenkins       Req: Stata version 8.2 (5.0 for ineqdeco5)
+
+{txt} Revised: 2010-02-24
+
+{net "describe http://repec.org/bocode/i/ineqdec0":INEQDEC0}
+{txt} module to calculate inequality indices with decomposition by subgroup
+{txt} Authors: Stephen P. Jenkins       Req: Stata version 8.2 (5.0 for ineqdeco5)
+
+{txt} Revised: 2010-02-24
+
+{hline}
+{txt} End of recent additions and updates
+

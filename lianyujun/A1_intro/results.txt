@@ -1,0 +1,7 @@
+foreign	_stats	turn	trunk	length
+Domestic	count	52	52	52
+Domestic	mean	41.44	14.75	196.13
+Domestic	sd	3.97	4.31	20.05
+Foreign	count	22	22	22
+Foreign	mean	35.41	11.41	168.55
+Foreign	sd	1.50	3.22	13.68

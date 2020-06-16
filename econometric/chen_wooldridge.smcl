@@ -1,0 +1,1258 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+       log:  {res}F:\book\MBA课程\计量经济学\statafiles\chen_wooldridge.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 7 Aug 2009, 22:16:04
+
+{com}. reg lrent y90 lpop lavginc pctstu
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     128
+{txt}{hline 13}{char +}{hline 30}           F(  4,   123) ={res}  190.92
+    {txt}   Model {char |} {res} 12.1080112     4  3.02700281           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res}  1.9501234   123  .015854662           {txt}R-squared     = {res} 0.8613
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.8568
+    {txt}   Total {char |} {res} 14.0581346   127  .110693974           {txt}Root MSE      = {res} .12592
+
+{txt}{hline 13}{c TT}{hline 64}
+       lrent {c |}      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+{hline 13}{char +}{hline 64}
+         y90 {c |}  {res} .2622267   .0347632     7.54   0.000     .1934151    .3310384
+{txt}        lpop {c |}  {res} .0406863   .0225154     1.81   0.073    -.0038815    .0852541
+{txt}     lavginc {c |}  {res} .5714461   .0530981    10.76   0.000     .4663417    .6765504
+{txt}      pctstu {c |}  {res} .0050436   .0010192     4.95   0.000     .0030262     .007061
+{txt}       _cons {c |}  {res}-.5688069   .5348808    -1.06   0.290    -1.627571    .4899568
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. browse
+
+. describ
+
+{txt}Contains data from {res}F:\book\MBA课程\计量经济学\statafiles\RENTAL.DTA
+{txt}  obs:{res}           128                          
+{txt} vars:{res}            23                          17 Aug 1999 22:38
+{txt} size:{res}        10,880{txt} (99.9% of memory free)
+{hline 79}
+              storage  display     value
+variable name   type   format      label      variable label
+{hline 79}
+{res}city           {txt} byte   %9.0g                  {res}city label, 1 to 64
+year           {txt} byte   %9.0g                  {res}80 or 90
+pop            {txt} float  %9.0g                  {res}city population
+enroll         {txt} float  %9.0g                  {res}# college students enrolled
+rent           {txt} int    %9.0g                  {res}average rent
+rnthsg         {txt} float  %9.0g                  {res}renter occupied units
+tothsg         {txt} float  %9.0g                  {res}occupied housing units
+avginc         {txt} float  %9.0g                  {res}per capita income
+lenroll        {txt} float  %9.0g                  {res}log(enroll)
+lpop           {txt} float  %9.0g                  {res}log(pop)
+lrent          {txt} float  %9.0g                  {res}log(rent)
+ltothsg        {txt} float  %9.0g                  {res}log(tothsg)
+lrnthsg        {txt} float  %9.0g                  {res}log(rnthsg)
+lavginc        {txt} float  %9.0g                  {res}log(avginc)
+clenroll       {txt} float  %9.0g                  {res}change in lrent from 80 to 90
+clpop          {txt} float  %9.0g                  {res}change in lpop
+clrent         {txt} float  %9.0g                  {res}change in lrent
+cltothsg       {txt} float  %9.0g                  {res}change in ltothsg
+clrnthsg       {txt} float  %9.0g                  {res}change in lrnthsg
+clavginc       {txt} float  %9.0g                  {res}change in lavginc
+pctstu         {txt} float  %9.0g                  {res}percent of population students
+cpctstu        {txt} float  %9.0g                  {res}change in pctstu
+y90            {txt} byte   %9.0g                  {res}=1 if year == 90
+{txt}{hline 79}
+Sorted by:  {res}city  year
+
+{com}. browse
+
+. reg clrent clpop clavginc cpctstu
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      64
+{txt}{hline 13}{char +}{hline 30}           F(  3,    60) ={res}    9.51
+    {txt}   Model {char |} {res} .231738668     3  .077246223           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} .487362198    60  .008122703           {txt}R-squared     = {res} 0.3223
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2884
+    {txt}   Total {char |} {res} .719100867    63  .011414299           {txt}Root MSE      = {res} .09013
+
+{txt}{hline 13}{c TT}{hline 64}
+      clrent {c |}      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+{hline 13}{char +}{hline 64}
+       clpop {c |}  {res} .0722456   .0883426     0.82   0.417     -.104466    .2489571
+{txt}    clavginc {c |}  {res} .3099605   .0664771     4.66   0.000     .1769865    .4429346
+{txt}     cpctstu {c |}  {res} .0112033   .0041319     2.71   0.009     .0029382    .0194684
+{txt}       _cons {c |}  {res} .3855214   .0368245    10.47   0.000     .3118615    .4591813
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. xtreg lrent  lpop lavginc pctstu, fe
+{err}must specify panelvar; use xtset
+{txt}{search r(459):r(459);}
+
+{com}. iss city
+{err}unrecognized command:  iss
+{txt}{search r(199):r(199);}
+
+{com}. iis city
+
+. tis year
+
+. xtreg lrent  lpop lavginc pctstu, fe
+
+{txt}Fixed-effects (within) regression               Number of obs      = {res}      128
+{txt}Group variable: {res}city                            {txt}Number of groups   = {res}       64
+
+{txt}R-sq:  within  = {res}0.9337                         {txt}Obs per group: min = {res}        2
+{txt}       between = {res}0.4318                                        {txt}avg = {res}      2.0
+{txt}       overall = {res}0.6871                                        {txt}max = {res}        2
+
+                                                {txt}F({res}3{txt},{res}61{txt})            = {res}   286.17
+{txt}corr(u_i, Xb)  = {res}-0.5424                        {txt}Prob > F           =    {res}0.0000
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}       lrent{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}        lpop{col 14}{c |}{result}{space 2} .2973714{col 26}{space 2} .1428761{col 37}{space 1}    2.08{col 46}{space 3}0.042{col 55}{space 3}  .011673{col 67}{space 3} .5830699
+{col 1}{text}     lavginc{col 14}{c |}{result}{space 2} .9401806{col 26}{space 2}  .047028{col 37}{space 1}   19.99{col 46}{space 3}0.000{col 55}{space 3} .8461424{col 67}{space 3} 1.034219
+{col 1}{text}      pctstu{col 14}{c |}{result}{space 2} .0187151{col 26}{space 2} .0067851{col 37}{space 1}    2.76{col 46}{space 3}0.008{col 55}{space 3} .0051474{col 67}{space 3} .0322828
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2}-7.274619{col 26}{space 2}  1.36934{col 37}{space 1}   -5.31{col 46}{space 3}0.000{col 55}{space 3}-10.01278{col 67}{space 3}-4.536454
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+     sigma_u {c |} {res} .20426627
+{txt}     sigma_e {c |} {res} .10626435
+{txt}         rho {c |} {res} .78700888{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+F test that all u_i=0:     F({res}63{txt}, {res}61{txt}) = {res}    3.04              {txt}Prob > F = {res}0.0000
+
+{com}. xtreg lrent  y90  lpop lavginc pctstu, fe
+
+{txt}Fixed-effects (within) regression               Number of obs      = {res}      128
+{txt}Group variable: {res}city                            {txt}Number of groups   = {res}       64
+
+{txt}R-sq:  within  = {res}0.9765                         {txt}Obs per group: min = {res}        2
+{txt}       between = {res}0.2173                                        {txt}avg = {res}      2.0
+{txt}       overall = {res}0.7597                                        {txt}max = {res}        2
+
+                                                {txt}F({res}4{txt},{res}60{txt})            = {res}   624.15
+{txt}corr(u_i, Xb)  = {res}-0.1297                        {txt}Prob > F           =    {res}0.0000
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}       lrent{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}         y90{col 14}{c |}{result}{space 2} .3855214{col 26}{space 2} .0368245{col 37}{space 1}   10.47{col 46}{space 3}0.000{col 55}{space 3} .3118615{col 67}{space 3} .4591813
+{col 1}{text}        lpop{col 14}{c |}{result}{space 2} .0722456{col 26}{space 2} .0883426{col 37}{space 1}    0.82{col 46}{space 3}0.417{col 55}{space 3} -.104466{col 67}{space 3} .2489571
+{col 1}{text}     lavginc{col 14}{c |}{result}{space 2} .3099605{col 26}{space 2} .0664771{col 37}{space 1}    4.66{col 46}{space 3}0.000{col 55}{space 3} .1769865{col 67}{space 3} .4429346
+{col 1}{text}      pctstu{col 14}{c |}{result}{space 2} .0112033{col 26}{space 2} .0041319{col 37}{space 1}    2.71{col 46}{space 3}0.009{col 55}{space 3} .0029382{col 67}{space 3} .0194684
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2} 1.409384{col 26}{space 2} 1.167238{col 37}{space 1}    1.21{col 46}{space 3}0.232{col 55}{space 3}-.9254394{col 67}{space 3} 3.744208
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+     sigma_u {c |} {res} .15905877
+{txt}     sigma_e {c |} {res} .06372873
+{txt}         rho {c |} {res}  .8616755{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+F test that all u_i=0:     F({res}63{txt}, {res}60{txt}) = {res}    6.67              {txt}Prob > F = {res}0.0000
+
+{com}. browse
+
+. use "F:\book\MBA课程\计量经济学\statafiles\CRIME4.DTA", clear
+
+. browse
+
+. describe
+
+{txt}Contains data from {res}F:\book\MBA课程\计量经济学\statafiles\CRIME4.DTA
+{txt}  obs:{res}           630                          
+{txt} vars:{res}            59                          17 Aug 1999 13:52
+{txt} size:{res}       131,040{txt} (98.8% of memory free)
+{hline 79}
+              storage  display     value
+variable name   type   format      label      variable label
+{hline 79}
+{res}county         {txt} int    %9.0g                  {res}county identifier
+year           {txt} byte   %9.0g                  {res}81 to 87
+crmrte         {txt} float  %9.0g                  {res}crimes committed per person
+prbarr         {txt} float  %9.0g                  {res}'probability' of arrest
+prbconv        {txt} float  %9.0g                  {res}'probability' of conviction
+prbpris        {txt} float  %9.0g                  {res}'probability' of prison sentenc
+avgsen         {txt} float  %9.0g                  {res}avg. sentence, days
+polpc          {txt} float  %9.0g                  {res}police per capita
+density        {txt} float  %9.0g                  {res}people per sq. mile
+taxpc          {txt} float  %9.0g                  {res}tax revenue per capita
+west           {txt} byte   %9.0g                  {res}=1 if in western N.C.
+central        {txt} byte   %9.0g                  {res}=1 if in central N.C.
+urban          {txt} byte   %9.0g                  {res}=1 if in SMSA
+pctmin80       {txt} float  %9.0g                  {res}perc. minority, 1980
+wcon           {txt} float  %9.0g                  {res}weekly wage, construction
+wtuc           {txt} float  %9.0g                  {res}wkly wge, trns, util, commun
+wtrd           {txt} float  %9.0g                  {res}wkly wge, whlesle, retail trade
+wfir           {txt} float  %9.0g                  {res}wkly wge, fin, ins, real est
+wser           {txt} float  %9.0g                  {res}wkly wge, service industry
+wmfg           {txt} float  %9.0g                  {res}wkly wge, manufacturing
+wfed           {txt} float  %9.0g                  {res}wkly wge, fed employees
+wsta           {txt} float  %9.0g                  {res}wkly wge, state employees
+wloc           {txt} float  %9.0g                  {res}wkly wge, local gov emps
+mix            {txt} float  %9.0g                  {res}offense mix: face-to-face/other
+pctymle        {txt} float  %9.0g                  {res}percent young male
+d82            {txt} byte   %9.0g                  {res}=1 if year == 82
+d83            {txt} byte   %9.0g                  {res}=1 if year == 83
+d84            {txt} byte   %9.0g                  {res}=1 if year == 84
+d85            {txt} byte   %9.0g                  {res}=1 if year == 85
+d86            {txt} byte   %9.0g                  {res}=1 if year == 86
+d87            {txt} byte   %9.0g                  {res}=1 if year == 87
+lcrmrte        {txt} float  %9.0g                  {res}log(crmrte)
+lprbarr        {txt} float  %9.0g                  {res}log(prbarr)
+lprbconv       {txt} float  %9.0g                  {res}log(prbconv)
+lprbpris       {txt} float  %9.0g                  {res}log(prbpris)
+lavgsen        {txt} float  %9.0g                  {res}log(avgsen)
+lpolpc         {txt} float  %9.0g                  {res}log(polpc)
+ldensity       {txt} float  %9.0g                  {res}log(density)
+ltaxpc         {txt} float  %9.0g                  {res}log(taxpc)
+lwcon          {txt} float  %9.0g                  {res}log(wcon)
+lwtuc          {txt} float  %9.0g                  {res}log(wtuc)
+lwtrd          {txt} float  %9.0g                  {res}log(wtrd)
+lwfir          {txt} float  %9.0g                  {res}log(wfir)
+lwser          {txt} float  %9.0g                  {res}log(wser)
+lwmfg          {txt} float  %9.0g                  {res}log(wmfg)
+lwfed          {txt} float  %9.0g                  {res}log(wfed)
+lwsta          {txt} float  %9.0g                  {res}log(wsta)
+lwloc          {txt} float  %9.0g                  {res}log(wloc)
+lmix           {txt} float  %9.0g                  {res}log(mix)
+lpctymle       {txt} float  %9.0g                  {res}log(pctymle)
+lpctmin        {txt} float  %9.0g                  {res}log(pctmin)
+clcrmrte       {txt} float  %9.0g                  {res}lcrmrte - lcrmrte[_n-1]
+clprbarr       {txt} float  %9.0g                  {res}lprbarr - lprbarr[_n-1]
+clprbcon       {txt} float  %9.0g                  {res}lprbconv - lprbconv[_n-1]
+clprbpri       {txt} float  %9.0g                  {res}lprbpri - lprbpri[t-1]
+clavgsen       {txt} float  %9.0g                  {res}lavgsen - lavgsen[t-1]
+clpolpc        {txt} float  %9.0g                  {res}lpolpc - lpolpc[t-1]
+cltaxpc        {txt} float  %9.0g                  {res}ltaxpc - ltaxpc[t-1]
+clmix          {txt} float  %9.0g                  {res}lmix - lmix[t-1]
+{txt}{hline 79}
+Sorted by:  {res}county  year
+
+{com}. 
+. 
+. iis
+{txt}(i() has not been defined)
+
+{com}. use "F:\book\MBA课程\计量经济学\Stata简明讲义\Stata简明讲义\WAGEPRC.DTA", clear
+
+. browse
+
+. use "F:\book\MBA课程\计量经济学\Stata简明讲义\Stata简明讲义\WAGEPRC.DTA", clear
+
+. use "F:\book\MBA课程\计量经济学\statafiles\CRIME4.DTA", clear
+
+. ttest
+{err}varlist required
+{txt}{search r(100):r(100);}
+
+{com}. tsset
+{err}time variable not set, use -tsset varname ...-
+{txt}{search r(111):r(111);}
+
+{com}. help tsset
+
+. browse
+
+. tsset year
+{res}{err}repeated time values in sample
+{txt}{search r(451):r(451);}
+
+{com}. tis year
+
+. iis
+{txt}(i() has not been defined)
+
+{com}. xreg lcrmrte lgrbarr lprbconv, fe
+{err}unrecognized command:  xreg
+{txt}{search r(199):r(199);}
+
+{com}. xtreg lcrmrte lgrbarr lprbconv, fe
+{err}variable lgrbarr not found
+{txt}{search r(111):r(111);}
+
+{com}. xtreg lcrmrte lprbarr lprbconv, fe
+{err}must specify panelvar; use xtset
+{txt}{search r(459):r(459);}
+
+{com}. help panelvar
+
+. search panelvar
+{txt}
+{title:Keyword search}
+
+{p 8 19} Keywords:  {res}panelvar{txt}{p_end}
+{p 10 19} Search: {res} (1) Official help files, FAQs, Examples, SJs, and STBs{txt}{p_end}
+
+{title:Search of official help files, FAQs, Examples, SJs, and STBs}
+
+{s6hlp}
+{smcl}
+{s6hlp}
+{smcl}
+{s6hlp}
+{smcl}
+{s6hlp}
+{smcl}
+{s6hlp}
+{smcl}
+{s6hlp}
+{smcl}
+{s6hlp}
+{smcl}
+{s6hlp}
+{smcl}
+{s6hlp}
+{smcl}
+{s6hlp}
+{smcl}
+{s6hlp}
+{smcl}
+
+
+(end of search)
+
+{com}. log using "F:\book\MBA课程\计量经济学\statafiles\chen_wooldridge.smcl"
+{err}log file already open
+{txt}{search r(604):r(604);}
+
+{com}. use "F:\book\MBA课程\计量经济学\statafiles\wagepan.dta"
+
+. describe
+
+{txt}Contains data from {res}F:\book\MBA课程\计量经济学\statafiles\wagepan.dta
+{txt}  obs:{res}         4,360                          
+{txt} vars:{res}            44                          17 Aug 1999 23:55
+{txt} size:{res}       239,800{txt} (97.7% of memory free)
+{hline 79}
+              storage  display     value
+variable name   type   format      label      variable label
+{hline 79}
+{res}nr             {txt} int    %9.0g                  {res}person identifier
+year           {txt} int    %9.0g                  {res}1980 to 1987
+agric          {txt} byte   %9.0g                  {res}=1 if in agriculture
+black          {txt} byte   %9.0g                  {res}=1 if black
+bus            {txt} byte   %9.0g                  {res}
+construc       {txt} byte   %9.0g                  {res}=1 if in construction
+ent            {txt} byte   %9.0g                  {res}
+exper          {txt} byte   %9.0g                  {res}labor mkt experience
+fin            {txt} byte   %9.0g                  {res}
+hisp           {txt} byte   %9.0g                  {res}=1 if Hispanic
+poorhlth       {txt} byte   %9.0g                  {res}=1 if in poor health
+hours          {txt} int    %9.0g                  {res}annual hours worked
+manuf          {txt} byte   %9.0g                  {res}=1 if in manufacturing
+married        {txt} byte   %9.0g                  {res}=1 if married
+min            {txt} byte   %9.0g                  {res}
+nrthcen        {txt} byte   %9.0g                  {res}=1 if north central
+nrtheast       {txt} byte   %9.0g                  {res}=1 if north east
+occ1           {txt} byte   %9.0g                  {res}
+occ2           {txt} byte   %9.0g                  {res}
+occ3           {txt} byte   %9.0g                  {res}
+occ4           {txt} byte   %9.0g                  {res}
+occ5           {txt} byte   %9.0g                  {res}
+occ6           {txt} byte   %9.0g                  {res}
+occ7           {txt} byte   %9.0g                  {res}
+occ8           {txt} byte   %9.0g                  {res}
+occ9           {txt} byte   %9.0g                  {res}
+per            {txt} byte   %9.0g                  {res}
+pro            {txt} byte   %9.0g                  {res}
+pub            {txt} byte   %9.0g                  {res}
+rur            {txt} byte   %9.0g                  {res}
+south          {txt} byte   %9.0g                  {res}=1 if south
+educ           {txt} byte   %9.0g                  {res}years of schooling
+tra            {txt} byte   %9.0g                  {res}
+trad           {txt} byte   %9.0g                  {res}
+union          {txt} byte   %9.0g                  {res}=1 if in union
+lwage          {txt} float  %9.0g                  {res}log(wage)
+d81            {txt} byte   %9.0g                  {res}=1 if year == 1981
+d82            {txt} byte   %9.0g                  {res}
+d83            {txt} byte   %9.0g                  {res}
+d84            {txt} byte   %9.0g                  {res}
+d85            {txt} byte   %9.0g                  {res}
+d86            {txt} byte   %9.0g                  {res}
+d87            {txt} byte   %9.0g                  {res}
+expersq        {txt} int    %9.0g                  {res}exper^2
+{txt}{hline 79}
+Sorted by:  {res}nr
+
+{com}. browse
+
+. use "F:\book\MBA课程\计量经济学\statafiles\CRIME4.DTA", clear
+
+. browse
+
+. ist
+{err}unrecognized command:  ist
+{txt}{search r(199):r(199);}
+
+{com}. tis
+{txt}(t() has not been defined)
+
+{com}. iss country
+{err}unrecognized command:  iss
+{txt}{search r(199):r(199);}
+
+{com}. iis country
+{err}variable country not found
+{txt}{search r(111):r(111);}
+
+{com}. iis county
+
+. tis year
+
+. xtreg lcrmrte lprbarr lprbconv, fe
+
+{txt}Fixed-effects (within) regression               Number of obs      = {res}      630
+{txt}Group variable: {res}county                          {txt}Number of groups   = {res}       90
+
+{txt}R-sq:  within  = {res}0.0668                         {txt}Obs per group: min = {res}        7
+{txt}       between = {res}0.5470                                        {txt}avg = {res}      7.0
+{txt}       overall = {res}0.4536                                        {txt}max = {res}        7
+
+                                                {txt}F({res}2{txt},{res}538{txt})           = {res}    19.24
+{txt}corr(u_i, Xb)  = {res}0.5848                         {txt}Prob > F           =    {res}0.0000
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}     lcrmrte{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}     lprbarr{col 14}{c |}{result}{space 2}-.1956514{col 26}{space 2} .0370502{col 37}{space 1}   -5.28{col 46}{space 3}0.000{col 55}{space 3}-.2684322{col 67}{space 3}-.1228707
+{col 1}{text}    lprbconv{col 14}{c |}{result}{space 2}-.1204633{col 26}{space 2} .0219218{col 37}{space 1}   -5.50{col 46}{space 3}0.000{col 55}{space 3}-.1635262{col 67}{space 3}-.0774004
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2}-3.942008{col 26}{space 2} .0569337{col 37}{space 1}  -69.24{col 46}{space 3}0.000{col 55}{space 3}-4.053848{col 67}{space 3}-3.830169
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+     sigma_u {c |} {res} .48386982
+{txt}     sigma_e {c |} {res} .17665703
+{txt}         rho {c |} {res} .88238496{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+F test that all u_i=0:     F({res}89{txt}, {res}538{txt}) = {res}   34.42             {txt}Prob > F = {res}0.0000
+
+{com}. browse
+
+. xtreg lcrmrte d82-d87 lprbarr lprbconv lprbpris lavgsen lpolpc, fe
+
+{txt}Fixed-effects (within) regression               Number of obs      = {res}      630
+{txt}Group variable: {res}county                          {txt}Number of groups   = {res}       90
+
+{txt}R-sq:  within  = {res}0.4342                         {txt}Obs per group: min = {res}        7
+{txt}       between = {res}0.4066                                        {txt}avg = {res}      7.0
+{txt}       overall = {res}0.4042                                        {txt}max = {res}        7
+
+                                                {txt}F({res}11{txt},{res}529{txt})          = {res}    36.91
+{txt}corr(u_i, Xb)  = {res}0.2068                         {txt}Prob > F           =    {res}0.0000
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}     lcrmrte{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}         d82{col 14}{c |}{result}{space 2} .0125802{col 26}{space 2} .0215416{col 37}{space 1}    0.58{col 46}{space 3}0.559{col 55}{space 3}-.0297373{col 67}{space 3} .0548977
+{col 1}{text}         d83{col 14}{c |}{result}{space 2}-.0792813{col 26}{space 2} .0213399{col 37}{space 1}   -3.72{col 46}{space 3}0.000{col 55}{space 3}-.1212027{col 67}{space 3}-.0373598
+{col 1}{text}         d84{col 14}{c |}{result}{space 2}-.1177281{col 26}{space 2} .0216145{col 37}{space 1}   -5.45{col 46}{space 3}0.000{col 55}{space 3}-.1601888{col 67}{space 3}-.0752673
+{col 1}{text}         d85{col 14}{c |}{result}{space 2}-.1119561{col 26}{space 2} .0218459{col 37}{space 1}   -5.12{col 46}{space 3}0.000{col 55}{space 3}-.1548716{col 67}{space 3}-.0690407
+{col 1}{text}         d86{col 14}{c |}{result}{space 2}-.0818268{col 26}{space 2} .0214266{col 37}{space 1}   -3.82{col 46}{space 3}0.000{col 55}{space 3}-.1239185{col 67}{space 3}-.0397352
+{col 1}{text}         d87{col 14}{c |}{result}{space 2}-.0404704{col 26}{space 2} .0210392{col 37}{space 1}   -1.92{col 46}{space 3}0.055{col 55}{space 3}-.0818011{col 67}{space 3} .0008602
+{col 1}{text}     lprbarr{col 14}{c |}{result}{space 2}-.3597944{col 26}{space 2} .0324192{col 37}{space 1}  -11.10{col 46}{space 3}0.000{col 55}{space 3}-.4234806{col 67}{space 3}-.2961082
+{col 1}{text}    lprbconv{col 14}{c |}{result}{space 2}-.2858733{col 26}{space 2} .0212173{col 37}{space 1}  -13.47{col 46}{space 3}0.000{col 55}{space 3}-.3275538{col 67}{space 3}-.2441928
+{col 1}{text}    lprbpris{col 14}{c |}{result}{space 2}-.1827812{col 26}{space 2} .0324611{col 37}{space 1}   -5.63{col 46}{space 3}0.000{col 55}{space 3}-.2465496{col 67}{space 3}-.1190127
+{col 1}{text}     lavgsen{col 14}{c |}{result}{space 2}-.0044879{col 26}{space 2} .0264471{col 37}{space 1}   -0.17{col 46}{space 3}0.865{col 55}{space 3}-.0564421{col 67}{space 3} .0474663
+{col 1}{text}      lpolpc{col 14}{c |}{result}{space 2} .4241142{col 26}{space 2} .0263661{col 37}{space 1}   16.09{col 46}{space 3}0.000{col 55}{space 3} .3723191{col 67}{space 3} .4759093
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2}-1.604135{col 26}{space 2} .1685739{col 37}{space 1}   -9.52{col 46}{space 3}0.000{col 55}{space 3}-1.935292{col 67}{space 3}-1.272979
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+     sigma_u {c |} {res} .43487416
+{txt}     sigma_e {c |} {res} .13871215
+{txt}         rho {c |} {res} .90765322{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+F test that all u_i=0:     F({res}89{txt}, {res}529{txt}) = {res}   45.87             {txt}Prob > F = {res}0.0000
+
+{com}. xtreg lcrmrte d83-d87 lprbarr lprbconv lprbpris lavgsen lpolpc, fe
+
+{txt}Fixed-effects (within) regression               Number of obs      = {res}      630
+{txt}Group variable: {res}county                          {txt}Number of groups   = {res}       90
+
+{txt}R-sq:  within  = {res}0.4339                         {txt}Obs per group: min = {res}        7
+{txt}       between = {res}0.4068                                        {txt}avg = {res}      7.0
+{txt}       overall = {res}0.4042                                        {txt}max = {res}        7
+
+                                                {txt}F({res}10{txt},{res}530{txt})          = {res}    40.62
+{txt}corr(u_i, Xb)  = {res}0.2082                         {txt}Prob > F           =    {res}0.0000
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}     lcrmrte{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}         d83{col 14}{c |}{result}{space 2}-.0858746{col 26}{space 2} .0180975{col 37}{space 1}   -4.75{col 46}{space 3}0.000{col 55}{space 3}-.1214263{col 67}{space 3}-.0503229
+{col 1}{text}         d84{col 14}{c |}{result}{space 2}-.1244617{col 26}{space 2} .0182708{col 37}{space 1}   -6.81{col 46}{space 3}0.000{col 55}{space 3}-.1603538{col 67}{space 3}-.0885696
+{col 1}{text}         d85{col 14}{c |}{result}{space 2}-.1187975{col 26}{space 2} .0184278{col 37}{space 1}   -6.45{col 46}{space 3}0.000{col 55}{space 3}-.1549981{col 67}{space 3} -.082597
+{col 1}{text}         d86{col 14}{c |}{result}{space 2}-.0883884{col 26}{space 2} .0182331{col 37}{space 1}   -4.85{col 46}{space 3}0.000{col 55}{space 3}-.1242064{col 67}{space 3}-.0525705
+{col 1}{text}         d87{col 14}{c |}{result}{space 2} -.046513{col 26}{space 2} .0183077{col 37}{space 1}   -2.54{col 46}{space 3}0.011{col 55}{space 3}-.0824775{col 67}{space 3}-.0105485
+{col 1}{text}     lprbarr{col 14}{c |}{result}{space 2}-.3586798{col 26}{space 2} .0323428{col 37}{space 1}  -11.09{col 46}{space 3}0.000{col 55}{space 3}-.4222157{col 67}{space 3}-.2951439
+{col 1}{text}    lprbconv{col 14}{c |}{result}{space 2}-.2853752{col 26}{space 2}  .021187{col 37}{space 1}  -13.47{col 46}{space 3}0.000{col 55}{space 3}-.3269959{col 67}{space 3}-.2437545
+{col 1}{text}    lprbpris{col 14}{c |}{result}{space 2}-.1823206{col 26}{space 2} .0324313{col 37}{space 1}   -5.62{col 46}{space 3}0.000{col 55}{space 3}-.2460303{col 67}{space 3}-.1186109
+{col 1}{text}     lavgsen{col 14}{c |}{result}{space 2}-.0087142{col 26}{space 2} .0254219{col 37}{space 1}   -0.34{col 46}{space 3}0.732{col 55}{space 3}-.0586542{col 67}{space 3} .0412259
+{col 1}{text}      lpolpc{col 14}{c |}{result}{space 2}  .423301{col 26}{space 2} .0263129{col 37}{space 1}   16.09{col 46}{space 3}0.000{col 55}{space 3} .3716105{col 67}{space 3} .4749914
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2}-1.591664{col 26}{space 2} .1671119{col 37}{space 1}   -9.52{col 46}{space 3}0.000{col 55}{space 3}-1.919947{col 67}{space 3}-1.263381
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+     sigma_u {c |} {res} .43498468
+{txt}     sigma_e {c |} {res}  .1386259
+{txt}         rho {c |} {res} .90779999{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+F test that all u_i=0:     F({res}89{txt}, {res}530{txt}) = {res}   45.93             {txt}Prob > F = {res}0.0000
+
+{com}. xtreg lcrmrte d83-d87 lprbarr lprbconv lprbpris lavgsen lpolpc, fe cluster
+{err}option cluster incorrectly specified
+{txt}{search r(198):r(198);}
+
+{com}. xtreg lcrmrte d83-d87 lprbarr lprbconv lprbpris lavgsen lpolpc, fe, cluster
+{err}invalid 'cluster' 
+{txt}{search r(198):r(198);}
+
+{com}. xtreg lcrmrte d83-d87 lprbarr lprbconv lprbpris lavgsen lpolpc, fe county
+{err}option county not allowed
+{txt}{search r(198):r(198);}
+
+{com}. xtreg lcrmrte d83-d87 lprbarr lprbconv lprbpris lavgsen lpolpc, fe, county
+{err}invalid 'county' 
+{txt}{search r(198):r(198);}
+
+{com}. xtreg lcrmrte d83-d87 lprbarr lprbconv lprbpris lavgsen lpolpc, fe county
+{err}option county not allowed
+{txt}{search r(198):r(198);}
+
+{com}. xtreg lcrmrte d83-d87 lprbarr lprbconv lprbpris lavgsen lpolpc, fe
+
+{txt}Fixed-effects (within) regression               Number of obs      = {res}      630
+{txt}Group variable: {res}county                          {txt}Number of groups   = {res}       90
+
+{txt}R-sq:  within  = {res}0.4339                         {txt}Obs per group: min = {res}        7
+{txt}       between = {res}0.4068                                        {txt}avg = {res}      7.0
+{txt}       overall = {res}0.4042                                        {txt}max = {res}        7
+
+                                                {txt}F({res}10{txt},{res}530{txt})          = {res}    40.62
+{txt}corr(u_i, Xb)  = {res}0.2082                         {txt}Prob > F           =    {res}0.0000
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}     lcrmrte{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}         d83{col 14}{c |}{result}{space 2}-.0858746{col 26}{space 2} .0180975{col 37}{space 1}   -4.75{col 46}{space 3}0.000{col 55}{space 3}-.1214263{col 67}{space 3}-.0503229
+{col 1}{text}         d84{col 14}{c |}{result}{space 2}-.1244617{col 26}{space 2} .0182708{col 37}{space 1}   -6.81{col 46}{space 3}0.000{col 55}{space 3}-.1603538{col 67}{space 3}-.0885696
+{col 1}{text}         d85{col 14}{c |}{result}{space 2}-.1187975{col 26}{space 2} .0184278{col 37}{space 1}   -6.45{col 46}{space 3}0.000{col 55}{space 3}-.1549981{col 67}{space 3} -.082597
+{col 1}{text}         d86{col 14}{c |}{result}{space 2}-.0883884{col 26}{space 2} .0182331{col 37}{space 1}   -4.85{col 46}{space 3}0.000{col 55}{space 3}-.1242064{col 67}{space 3}-.0525705
+{col 1}{text}         d87{col 14}{c |}{result}{space 2} -.046513{col 26}{space 2} .0183077{col 37}{space 1}   -2.54{col 46}{space 3}0.011{col 55}{space 3}-.0824775{col 67}{space 3}-.0105485
+{col 1}{text}     lprbarr{col 14}{c |}{result}{space 2}-.3586798{col 26}{space 2} .0323428{col 37}{space 1}  -11.09{col 46}{space 3}0.000{col 55}{space 3}-.4222157{col 67}{space 3}-.2951439
+{col 1}{text}    lprbconv{col 14}{c |}{result}{space 2}-.2853752{col 26}{space 2}  .021187{col 37}{space 1}  -13.47{col 46}{space 3}0.000{col 55}{space 3}-.3269959{col 67}{space 3}-.2437545
+{col 1}{text}    lprbpris{col 14}{c |}{result}{space 2}-.1823206{col 26}{space 2} .0324313{col 37}{space 1}   -5.62{col 46}{space 3}0.000{col 55}{space 3}-.2460303{col 67}{space 3}-.1186109
+{col 1}{text}     lavgsen{col 14}{c |}{result}{space 2}-.0087142{col 26}{space 2} .0254219{col 37}{space 1}   -0.34{col 46}{space 3}0.732{col 55}{space 3}-.0586542{col 67}{space 3} .0412259
+{col 1}{text}      lpolpc{col 14}{c |}{result}{space 2}  .423301{col 26}{space 2} .0263129{col 37}{space 1}   16.09{col 46}{space 3}0.000{col 55}{space 3} .3716105{col 67}{space 3} .4749914
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2}-1.591664{col 26}{space 2} .1671119{col 37}{space 1}   -9.52{col 46}{space 3}0.000{col 55}{space 3}-1.919947{col 67}{space 3}-1.263381
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+     sigma_u {c |} {res} .43498468
+{txt}     sigma_e {c |} {res}  .1386259
+{txt}         rho {c |} {res} .90779999{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+F test that all u_i=0:     F({res}89{txt}, {res}530{txt}) = {res}   45.93             {txt}Prob > F = {res}0.0000
+
+{com}. xtreg lcrmrte d83-d87 lprbarr lprbconv lprbpris lavgsen lpolpc, fe, r
+{err}invalid 'r' 
+{txt}{search r(198):r(198);}
+
+{com}. xtreg lcrmrte d82-d87 lprbarr lprbconv lprbpris lavgsen lpolpc, fe
+
+{txt}Fixed-effects (within) regression               Number of obs      = {res}      630
+{txt}Group variable: {res}county                          {txt}Number of groups   = {res}       90
+
+{txt}R-sq:  within  = {res}0.4342                         {txt}Obs per group: min = {res}        7
+{txt}       between = {res}0.4066                                        {txt}avg = {res}      7.0
+{txt}       overall = {res}0.4042                                        {txt}max = {res}        7
+
+                                                {txt}F({res}11{txt},{res}529{txt})          = {res}    36.91
+{txt}corr(u_i, Xb)  = {res}0.2068                         {txt}Prob > F           =    {res}0.0000
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}     lcrmrte{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}         d82{col 14}{c |}{result}{space 2} .0125802{col 26}{space 2} .0215416{col 37}{space 1}    0.58{col 46}{space 3}0.559{col 55}{space 3}-.0297373{col 67}{space 3} .0548977
+{col 1}{text}         d83{col 14}{c |}{result}{space 2}-.0792813{col 26}{space 2} .0213399{col 37}{space 1}   -3.72{col 46}{space 3}0.000{col 55}{space 3}-.1212027{col 67}{space 3}-.0373598
+{col 1}{text}         d84{col 14}{c |}{result}{space 2}-.1177281{col 26}{space 2} .0216145{col 37}{space 1}   -5.45{col 46}{space 3}0.000{col 55}{space 3}-.1601888{col 67}{space 3}-.0752673
+{col 1}{text}         d85{col 14}{c |}{result}{space 2}-.1119561{col 26}{space 2} .0218459{col 37}{space 1}   -5.12{col 46}{space 3}0.000{col 55}{space 3}-.1548716{col 67}{space 3}-.0690407
+{col 1}{text}         d86{col 14}{c |}{result}{space 2}-.0818268{col 26}{space 2} .0214266{col 37}{space 1}   -3.82{col 46}{space 3}0.000{col 55}{space 3}-.1239185{col 67}{space 3}-.0397352
+{col 1}{text}         d87{col 14}{c |}{result}{space 2}-.0404704{col 26}{space 2} .0210392{col 37}{space 1}   -1.92{col 46}{space 3}0.055{col 55}{space 3}-.0818011{col 67}{space 3} .0008602
+{col 1}{text}     lprbarr{col 14}{c |}{result}{space 2}-.3597944{col 26}{space 2} .0324192{col 37}{space 1}  -11.10{col 46}{space 3}0.000{col 55}{space 3}-.4234806{col 67}{space 3}-.2961082
+{col 1}{text}    lprbconv{col 14}{c |}{result}{space 2}-.2858733{col 26}{space 2} .0212173{col 37}{space 1}  -13.47{col 46}{space 3}0.000{col 55}{space 3}-.3275538{col 67}{space 3}-.2441928
+{col 1}{text}    lprbpris{col 14}{c |}{result}{space 2}-.1827812{col 26}{space 2} .0324611{col 37}{space 1}   -5.63{col 46}{space 3}0.000{col 55}{space 3}-.2465496{col 67}{space 3}-.1190127
+{col 1}{text}     lavgsen{col 14}{c |}{result}{space 2}-.0044879{col 26}{space 2} .0264471{col 37}{space 1}   -0.17{col 46}{space 3}0.865{col 55}{space 3}-.0564421{col 67}{space 3} .0474663
+{col 1}{text}      lpolpc{col 14}{c |}{result}{space 2} .4241142{col 26}{space 2} .0263661{col 37}{space 1}   16.09{col 46}{space 3}0.000{col 55}{space 3} .3723191{col 67}{space 3} .4759093
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2}-1.604135{col 26}{space 2} .1685739{col 37}{space 1}   -9.52{col 46}{space 3}0.000{col 55}{space 3}-1.935292{col 67}{space 3}-1.272979
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+     sigma_u {c |} {res} .43487416
+{txt}     sigma_e {c |} {res} .13871215
+{txt}         rho {c |} {res} .90765322{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+F test that all u_i=0:     F({res}89{txt}, {res}529{txt}) = {res}   45.87             {txt}Prob > F = {res}0.0000
+
+{com}. browse
+
+. describe
+
+{txt}Contains data from {res}F:\book\MBA课程\计量经济学\statafiles\CRIME4.DTA
+{txt}  obs:{res}           630                          
+{txt} vars:{res}            59                          17 Aug 1999 13:52
+{txt} size:{res}       131,040{txt} (98.7% of memory free)
+{hline 79}
+              storage  display     value
+variable name   type   format      label      variable label
+{hline 79}
+{res}county         {txt} int    %9.0g                  {res}county identifier
+year           {txt} byte   %9.0g                  {res}81 to 87
+crmrte         {txt} float  %9.0g                  {res}crimes committed per person
+prbarr         {txt} float  %9.0g                  {res}'probability' of arrest
+prbconv        {txt} float  %9.0g                  {res}'probability' of conviction
+prbpris        {txt} float  %9.0g                  {res}'probability' of prison sentenc
+avgsen         {txt} float  %9.0g                  {res}avg. sentence, days
+polpc          {txt} float  %9.0g                  {res}police per capita
+density        {txt} float  %9.0g                  {res}people per sq. mile
+taxpc          {txt} float  %9.0g                  {res}tax revenue per capita
+west           {txt} byte   %9.0g                  {res}=1 if in western N.C.
+central        {txt} byte   %9.0g                  {res}=1 if in central N.C.
+urban          {txt} byte   %9.0g                  {res}=1 if in SMSA
+pctmin80       {txt} float  %9.0g                  {res}perc. minority, 1980
+wcon           {txt} float  %9.0g                  {res}weekly wage, construction
+wtuc           {txt} float  %9.0g                  {res}wkly wge, trns, util, commun
+wtrd           {txt} float  %9.0g                  {res}wkly wge, whlesle, retail trade
+wfir           {txt} float  %9.0g                  {res}wkly wge, fin, ins, real est
+wser           {txt} float  %9.0g                  {res}wkly wge, service industry
+wmfg           {txt} float  %9.0g                  {res}wkly wge, manufacturing
+wfed           {txt} float  %9.0g                  {res}wkly wge, fed employees
+wsta           {txt} float  %9.0g                  {res}wkly wge, state employees
+wloc           {txt} float  %9.0g                  {res}wkly wge, local gov emps
+mix            {txt} float  %9.0g                  {res}offense mix: face-to-face/other
+pctymle        {txt} float  %9.0g                  {res}percent young male
+d82            {txt} byte   %9.0g                  {res}=1 if year == 82
+d83            {txt} byte   %9.0g                  {res}=1 if year == 83
+d84            {txt} byte   %9.0g                  {res}=1 if year == 84
+d85            {txt} byte   %9.0g                  {res}=1 if year == 85
+d86            {txt} byte   %9.0g                  {res}=1 if year == 86
+d87            {txt} byte   %9.0g                  {res}=1 if year == 87
+lcrmrte        {txt} float  %9.0g                  {res}log(crmrte)
+lprbarr        {txt} float  %9.0g                  {res}log(prbarr)
+lprbconv       {txt} float  %9.0g                  {res}log(prbconv)
+lprbpris       {txt} float  %9.0g                  {res}log(prbpris)
+lavgsen        {txt} float  %9.0g                  {res}log(avgsen)
+lpolpc         {txt} float  %9.0g                  {res}log(polpc)
+ldensity       {txt} float  %9.0g                  {res}log(density)
+ltaxpc         {txt} float  %9.0g                  {res}log(taxpc)
+lwcon          {txt} float  %9.0g                  {res}log(wcon)
+lwtuc          {txt} float  %9.0g                  {res}log(wtuc)
+lwtrd          {txt} float  %9.0g                  {res}log(wtrd)
+lwfir          {txt} float  %9.0g                  {res}log(wfir)
+lwser          {txt} float  %9.0g                  {res}log(wser)
+lwmfg          {txt} float  %9.0g                  {res}log(wmfg)
+lwfed          {txt} float  %9.0g                  {res}log(wfed)
+lwsta          {txt} float  %9.0g                  {res}log(wsta)
+lwloc          {txt} float  %9.0g                  {res}log(wloc)
+lmix           {txt} float  %9.0g                  {res}log(mix)
+lpctymle       {txt} float  %9.0g                  {res}log(pctymle)
+lpctmin        {txt} float  %9.0g                  {res}log(pctmin)
+clcrmrte       {txt} float  %9.0g                  {res}lcrmrte - lcrmrte[_n-1]
+clprbarr       {txt} float  %9.0g                  {res}lprbarr - lprbarr[_n-1]
+clprbcon       {txt} float  %9.0g                  {res}lprbconv - lprbconv[_n-1]
+clprbpri       {txt} float  %9.0g                  {res}lprbpri - lprbpri[t-1]
+clavgsen       {txt} float  %9.0g                  {res}lavgsen - lavgsen[t-1]
+clpolpc        {txt} float  %9.0g                  {res}lpolpc - lpolpc[t-1]
+cltaxpc        {txt} float  %9.0g                  {res}ltaxpc - ltaxpc[t-1]
+clmix          {txt} float  %9.0g                  {res}lmix - lmix[t-1]
+{txt}{hline 79}
+Sorted by:  {res}county  year
+
+{com}. xtreg lcrmrte d82-d87 lprbarr lprbconv lprbpris lavgsen lpolpc lwcon lwtuc lwtrd lwfir lwser lwmfg lwfed lwsta lwloc  , fe
+
+{txt}Fixed-effects (within) regression               Number of obs      = {res}      630
+{txt}Group variable: {res}county                          {txt}Number of groups   = {res}       90
+
+{txt}R-sq:  within  = {res}0.4575                         {txt}Obs per group: min = {res}        7
+{txt}       between = {res}0.2518                                        {txt}avg = {res}      7.0
+{txt}       overall = {res}0.2687                                        {txt}max = {res}        7
+
+                                                {txt}F({res}20{txt},{res}520{txt})          = {res}    21.92
+{txt}corr(u_i, Xb)  = {res}0.0804                         {txt}Prob > F           =    {res}0.0000
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}     lcrmrte{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}         d82{col 14}{c |}{result}{space 2} .0188915{col 26}{space 2} .0251244{col 37}{space 1}    0.75{col 46}{space 3}0.452{col 55}{space 3}-.0304662{col 67}{space 3} .0682492
+{col 1}{text}         d83{col 14}{c |}{result}{space 2} -.055286{col 26}{space 2} .0330287{col 37}{space 1}   -1.67{col 46}{space 3}0.095{col 55}{space 3}-.1201721{col 67}{space 3} .0096001
+{col 1}{text}         d84{col 14}{c |}{result}{space 2}-.0615162{col 26}{space 2} .0410805{col 37}{space 1}   -1.50{col 46}{space 3}0.135{col 55}{space 3}-.1422204{col 67}{space 3} .0191879
+{col 1}{text}         d85{col 14}{c |}{result}{space 2}-.0397115{col 26}{space 2} .0561635{col 37}{space 1}   -0.71{col 46}{space 3}0.480{col 55}{space 3}-.1500468{col 67}{space 3} .0706237
+{col 1}{text}         d86{col 14}{c |}{result}{space 2}-.0001133{col 26}{space 2} .0680124{col 37}{space 1}   -0.00{col 46}{space 3}0.999{col 55}{space 3}-.1337262{col 67}{space 3} .1334996
+{col 1}{text}         d87{col 14}{c |}{result}{space 2} .0537042{col 26}{space 2} .0798953{col 37}{space 1}    0.67{col 46}{space 3}0.502{col 55}{space 3}-.1032532{col 67}{space 3} .2106615
+{col 1}{text}     lprbarr{col 14}{c |}{result}{space 2}-.3563515{col 26}{space 2} .0321591{col 37}{space 1}  -11.08{col 46}{space 3}0.000{col 55}{space 3}-.4195292{col 67}{space 3}-.2931738
+{col 1}{text}    lprbconv{col 14}{c |}{result}{space 2}-.2859539{col 26}{space 2} .0210513{col 37}{space 1}  -13.58{col 46}{space 3}0.000{col 55}{space 3}-.3273099{col 67}{space 3}-.2445979
+{col 1}{text}    lprbpris{col 14}{c |}{result}{space 2}-.1751355{col 26}{space 2} .0323403{col 37}{space 1}   -5.42{col 46}{space 3}0.000{col 55}{space 3}-.2386693{col 67}{space 3}-.1116017
+{col 1}{text}     lavgsen{col 14}{c |}{result}{space 2}-.0028739{col 26}{space 2} .0262108{col 37}{space 1}   -0.11{col 46}{space 3}0.913{col 55}{space 3} -.054366{col 67}{space 3} .0486181
+{col 1}{text}      lpolpc{col 14}{c |}{result}{space 2}    .4229{col 26}{space 2} .0263942{col 37}{space 1}   16.02{col 46}{space 3}0.000{col 55}{space 3} .3710476{col 67}{space 3} .4747524
+{col 1}{text}       lwcon{col 14}{c |}{result}{space 2}-.0345448{col 26}{space 2} .0391616{col 37}{space 1}   -0.88{col 46}{space 3}0.378{col 55}{space 3}-.1114792{col 67}{space 3} .0423896
+{col 1}{text}       lwtuc{col 14}{c |}{result}{space 2} .0459747{col 26}{space 2}  .019034{col 37}{space 1}    2.42{col 46}{space 3}0.016{col 55}{space 3} .0085817{col 67}{space 3} .0833677
+{col 1}{text}       lwtrd{col 14}{c |}{result}{space 2}-.0201766{col 26}{space 2} .0406073{col 37}{space 1}   -0.50{col 46}{space 3}0.619{col 55}{space 3}-.0999511{col 67}{space 3} .0595979
+{col 1}{text}       lwfir{col 14}{c |}{result}{space 2}-.0035445{col 26}{space 2}  .028333{col 37}{space 1}   -0.13{col 46}{space 3}0.900{col 55}{space 3}-.0592058{col 67}{space 3} .0521168
+{col 1}{text}       lwser{col 14}{c |}{result}{space 2} .0101264{col 26}{space 2} .0191915{col 37}{space 1}    0.53{col 46}{space 3}0.598{col 55}{space 3} -.027576{col 67}{space 3} .0478289
+{col 1}{text}       lwmfg{col 14}{c |}{result}{space 2}-.3005691{col 26}{space 2} .1094068{col 37}{space 1}   -2.75{col 46}{space 3}0.006{col 55}{space 3}-.5155028{col 67}{space 3}-.0856354
+{col 1}{text}       lwfed{col 14}{c |}{result}{space 2}-.3331226{col 26}{space 2}  .176448{col 37}{space 1}   -1.89{col 46}{space 3}0.060{col 55}{space 3}-.6797612{col 67}{space 3}  .013516
+{col 1}{text}       lwsta{col 14}{c |}{result}{space 2} .0215209{col 26}{space 2} .1130648{col 37}{space 1}    0.19{col 46}{space 3}0.849{col 55}{space 3}-.2005991{col 67}{space 3} .2436409
+{col 1}{text}       lwloc{col 14}{c |}{result}{space 2} .1810215{col 26}{space 2} .1180643{col 37}{space 1}    1.53{col 46}{space 3}0.126{col 55}{space 3}-.0509203{col 67}{space 3} .4129632
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2} .8931726{col 26}{space 2} 1.424067{col 37}{space 1}    0.63{col 46}{space 3}0.531{col 55}{space 3} -1.90446{col 67}{space 3} 3.690805
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+     sigma_u {c |} {res} .47756823
+{txt}     sigma_e {c |} {res} .13700505
+{txt}         rho {c |} {res} .92395784{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+F test that all u_i=0:     F({res}89{txt}, {res}520{txt}) = {res}   39.12             {txt}Prob > F = {res}0.0000
+
+{com}. 
+. test  lwcon lwtuc lwtrd lwfir lwser lwmfg lwfed lwsta lwloc
+
+{txt} ( 1)  {res}lwcon = 0
+{txt} ( 2)  {res}lwtuc = 0
+{txt} ( 3)  {res}lwtrd = 0
+{txt} ( 4)  {res}lwfir = 0
+{txt} ( 5)  {res}lwser = 0
+{txt} ( 6)  {res}lwmfg = 0
+{txt} ( 7)  {res}lwfed = 0
+{txt} ( 8)  {res}lwsta = 0
+{txt} ( 9)  {res}lwloc = 0
+
+{txt}       F(  9,   520) ={res}    2.47
+{txt}{col 13}Prob > F ={res}    0.0090
+
+{com}. use "F:\book\MBA课程\计量经济学\statafiles\JTRAIN.DTA", clear
+
+. describe
+
+{txt}Contains data from {res}F:\book\MBA课程\计量经济学\statafiles\JTRAIN.DTA
+{txt}  obs:{res}           471                          
+{txt} vars:{res}            30                          17 Aug 1999 16:48
+{txt} size:{res}        44,745{txt} (99.6% of memory free)
+{hline 79}
+              storage  display     value
+variable name   type   format      label      variable label
+{hline 79}
+{res}year           {txt} int    %9.0g                  {res}1987, 1988, or 1989
+fcode          {txt} float  %9.0g                  {res}firm code number
+employ         {txt} int    %9.0g                  {res}# employees at plant
+sales          {txt} float  %9.0g                  {res}annual sales, $
+avgsal         {txt} float  %9.0g                  {res}average employee salary
+scrap          {txt} float  %9.0g                  {res}scrap rate (per 100 items)
+rework         {txt} float  %9.0g                  {res}rework rate (per 100 items)
+tothrs         {txt} int    %9.0g                  {res}total hours training
+union          {txt} byte   %9.0g                  {res}=1 if unionized
+grant          {txt} byte   %9.0g                  {res}= 1 if received grant
+d89            {txt} byte   %9.0g                  {res}= 1 if year = 1989
+d88            {txt} byte   %9.0g                  {res}= 1 if year = 1988
+totrain        {txt} int    %9.0g                  {res}total employees trained
+hrsemp         {txt} float  %9.0g                  {res}tothrs/totrain
+lscrap         {txt} float  %9.0g                  {res}log(scrap)
+lemploy        {txt} float  %9.0g                  {res}log(employ)
+lsales         {txt} float  %9.0g                  {res}log(sales)
+lrework        {txt} float  %9.0g                  {res}log(rework)
+lhrsemp        {txt} float  %9.0g                  {res}log(1 + hrsemp)
+lscrap_1       {txt} float  %9.0g                  {res}lagged lscrap; missing 1987
+grant_1        {txt} byte   %9.0g                  {res}lagged grant; assumed 0 in 1987
+clscrap        {txt} float  %9.0g                  {res}lscrap - lscrap_1; year > 1987
+cgrant         {txt} byte   %9.0g                  {res}grant - grant_1
+clemploy       {txt} float  %9.0g                  {res}lemploy - lemploy[_n-1]
+clsales        {txt} float  %9.0g                  {res}lavgsal - lavgsal[_n-1]
+lavgsal        {txt} float  %9.0g                  {res}log(avgsal)
+clavgsal       {txt} float  %9.0g                  {res}lavgsal - lavgsal[_n-1]
+cgrant_1       {txt} byte   %9.0g                  {res}cgrant[_n-1]
+chrsemp        {txt} float  %9.0g                  {res}hrsemp - hrsemp[_n-1]
+clhrsemp       {txt} float  %9.0g                  {res}lhrsemp - lhrsemp[_n-1]
+{txt}{hline 79}
+Sorted by:  {res}fcode  year
+
+{com}. set more off
+
+. browse
+
+. iis
+{txt}i() is fcode
+
+{com}. fis
+{err}unrecognized command:  fis
+{txt}{search r(199):r(199);}
+
+{com}. tis
+{txt}t() is year
+
+{com}. xtreg hrsemp d88 d89 grant grant_1 lemploy, fe
+
+{txt}Fixed-effects (within) regression               Number of obs      = {res}      390
+{txt}Group variable: {res}fcode                           {txt}Number of groups   = {res}      135
+
+{txt}R-sq:  within  = {res}0.4909                         {txt}Obs per group: min = {res}        1
+{txt}       between = {res}0.0514                                        {txt}avg = {res}      2.9
+{txt}       overall = {res}0.2206                                        {txt}max = {res}        3
+
+                                                {txt}F({res}5{txt},{res}250{txt})           = {res}    48.21
+{txt}corr(u_i, Xb)  = {res}-0.0270                        {txt}Prob > F           =    {res}0.0000
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}      hrsemp{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}         d88{col 14}{c |}{result}{space 2}-1.098678{col 26}{space 2} 1.983157{col 37}{space 1}   -0.55{col 46}{space 3}0.580{col 55}{space 3}-5.004503{col 67}{space 3} 2.807148
+{col 1}{text}         d89{col 14}{c |}{result}{space 2} 4.090049{col 26}{space 2} 2.481125{col 37}{space 1}    1.65{col 46}{space 3}0.101{col 55}{space 3}-.7965232{col 67}{space 3}  8.97662
+{col 1}{text}       grant{col 14}{c |}{result}{space 2} 34.22818{col 26}{space 2} 2.858438{col 37}{space 1}   11.97{col 46}{space 3}0.000{col 55}{space 3} 28.59849{col 67}{space 3} 39.85787
+{col 1}{text}     grant_1{col 14}{c |}{result}{space 2} .5040804{col 26}{space 2} 4.127325{col 37}{space 1}    0.12{col 46}{space 3}0.903{col 55}{space 3} -7.62468{col 67}{space 3} 8.632841
+{col 1}{text}     lemploy{col 14}{c |}{result}{space 2}-.1762661{col 26}{space 2} 4.287935{col 37}{space 1}   -0.04{col 46}{space 3}0.967{col 55}{space 3}-8.621347{col 67}{space 3} 8.268815
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2} 9.324956{col 26}{space 2} 14.92757{col 37}{space 1}    0.62{col 46}{space 3}0.533{col 55}{space 3}-20.07487{col 67}{space 3} 38.72478
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+     sigma_u {c |} {res} 19.440153
+{txt}     sigma_e {c |} {res} 14.283358
+{txt}         rho {c |} {res} .64942011{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+F test that all u_i=0:     F({res}134{txt}, {res}250{txt}) = {res}    5.12            {txt}Prob > F = {res}0.0000
+
+{com}. xtreg hrsemp d88 d89 grant l.grant lemploy, fe
+
+{txt}Fixed-effects (within) regression               Number of obs      = {res}      261
+{txt}Group variable: {res}fcode                           {txt}Number of groups   = {res}      135
+
+{txt}R-sq:  within  = {res}0.5211                         {txt}Obs per group: min = {res}        1
+{txt}       between = {res}0.1083                                        {txt}avg = {res}      1.9
+{txt}       overall = {res}0.2316                                        {txt}max = {res}        2
+
+                                                {txt}F({res}4{txt},{res}122{txt})           = {res}    33.19
+{txt}corr(u_i, Xb)  = {res}-0.0954                        {txt}Prob > F           =    {res}0.0000
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}      hrsemp{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}         d88{col 14}{c |}{result}{space 2}-3.205972{col 26}{space 2} 2.874449{col 37}{space 1}   -1.12{col 46}{space 3}0.267{col 55}{space 3}-8.896231{col 67}{space 3} 2.484288
+{col 1}{text}         d89{col 14}{c |}{result}  (dropped)
+{col 1}{text}       grant{col 14}{c |}
+{col 1}{text}         --.{col 14}{c |}{result}{space 2} 38.29467{col 26}{space 2} 5.147533{col 37}{space 1}    7.44{col 46}{space 3}0.000{col 55}{space 3} 28.10462{col 67}{space 3} 48.48473
+{col 1}{text}         L1.{col 14}{c |}{result}{space 2} 9.287763{col 26}{space 2} 8.160884{col 37}{space 1}    1.14{col 46}{space 3}0.257{col 55}{space 3}-6.867522{col 67}{space 3} 25.44305
+{col 1}{text}     lemploy{col 14}{c |}{result}{space 2}-1.416885{col 26}{space 2}  8.34073{col 37}{space 1}   -0.17{col 46}{space 3}0.865{col 55}{space 3}-17.92819{col 67}{space 3} 15.09442
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2} 14.74279{col 26}{space 2} 30.53973{col 37}{space 1}    0.48{col 46}{space 3}0.630{col 55}{space 3}-45.71365{col 67}{space 3} 75.19924
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+     sigma_u {c |} {res} 22.288309
+{txt}     sigma_e {c |} {res} 16.149512
+{txt}         rho {c |} {res} .65573496{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+F test that all u_i=0:     F({res}134{txt}, {res}122{txt}) = {res}    3.51            {txt}Prob > F = {res}0.0000
+
+{com}. use "F:\book\MBA课程\计量经济学\statafiles\ezunem.dta", clear
+
+. browse
+
+. describe
+
+{txt}Contains data from {res}F:\book\MBA课程\计量经济学\statafiles\ezunem.dta
+{txt}  obs:{res}           198                          
+{txt} vars:{res}            37                          25 May 2002 14:30
+{txt} size:{res}        10,098{txt} (99.9% of memory free)
+{hline 79}
+              storage  display     value
+variable name   type   format      label      variable label
+{hline 79}
+{res}year           {txt} int    %9.0g                  {res}1980 to 1988
+uclms          {txt} float  %9.0g                  {res}unemployment claims
+ez             {txt} byte   %9.0g                  {res}=1 if have enterprise zone
+d81            {txt} byte   %9.0g                  {res}=1 if year == 1981
+d82            {txt} byte   %9.0g                  {res}=1 if year == 1982
+d83            {txt} byte   %9.0g                  {res}=1 if year == 1983
+d84            {txt} byte   %9.0g                  {res}=1 if year == 1984
+d85            {txt} byte   %9.0g                  {res}=1 if year == 1985
+d86            {txt} byte   %9.0g                  {res}=1 if year == 1986
+d87            {txt} byte   %9.0g                  {res}=1 if year == 1987
+d88            {txt} byte   %9.0g                  {res}=1 if year == 1988
+c1             {txt} byte   %9.0g                  {res}=1 if city == 1
+c2             {txt} byte   %9.0g                  {res}=1 if city == 2
+c3             {txt} byte   %9.0g                  {res}=1 if city == 3
+c4             {txt} byte   %9.0g                  {res}
+c5             {txt} byte   %9.0g                  {res}
+c6             {txt} byte   %9.0g                  {res}
+c7             {txt} byte   %9.0g                  {res}
+c8             {txt} byte   %9.0g                  {res}
+c9             {txt} byte   %9.0g                  {res}
+c10            {txt} byte   %9.0g                  {res}
+c11            {txt} byte   %9.0g                  {res}
+c12            {txt} byte   %9.0g                  {res}
+c13            {txt} byte   %9.0g                  {res}
+c14            {txt} byte   %9.0g                  {res}
+c15            {txt} byte   %9.0g                  {res}
+c16            {txt} byte   %9.0g                  {res}
+c17            {txt} byte   %9.0g                  {res}
+c18            {txt} byte   %9.0g                  {res}
+c19            {txt} byte   %9.0g                  {res}
+c20            {txt} byte   %9.0g                  {res}
+c21            {txt} byte   %9.0g                  {res}
+c22            {txt} byte   %9.0g                  {res}=1 if city == 22
+luclms         {txt} float  %9.0g                  {res}log(uclms)
+guclms         {txt} float  %9.0g                  {res}luclms - luclms[_n-1]
+cez            {txt} byte   %9.0g                  {res}ez - ez[_n-1]
+city           {txt} byte   %9.0g                  {res}city identifier, 1 through 22
+{txt}{hline 79}
+Sorted by:  {res}city  year
+
+{com}. reg guclms d82- d88 cez
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     176
+{txt}{hline 13}{char +}{hline 30}           F(  8,   167) ={res}   34.50
+    {txt}   Model {char |} {res} 12.8826331     8  1.61032914           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 7.79583815   167  .046681666           {txt}R-squared     = {res} 0.6230
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.6049
+    {txt}   Total {char |} {res} 20.6784713   175  .118162693           {txt}Root MSE      = {res} .21606
+
+{txt}{hline 13}{c TT}{hline 64}
+      guclms {c |}      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+{hline 13}{char +}{hline 64}
+         d82 {c |}  {res} .7787595   .0651444    11.95   0.000     .6501469    .9073721
+{txt}         d83 {c |}  {res}-.0331192   .0651444    -0.51   0.612    -.1617318    .0954934
+{txt}         d84 {c |}  {res}-.0171382   .0685455    -0.25   0.803    -.1524655    .1181891
+{txt}         d85 {c |}  {res}  .323081   .0666774     4.85   0.000     .1914417    .4547202
+{txt}         d86 {c |}  {res}  .292154   .0651444     4.48   0.000     .1635413    .4207666
+{txt}         d87 {c |}  {res} .0539481   .0651444     0.83   0.409    -.0746645    .1825607
+{txt}         d88 {c |}  {res}-.0170526   .0651444    -0.26   0.794    -.1456652    .1115601
+{txt}         cez {c |}  {res}-.1818775   .0781862    -2.33   0.021    -.3362382   -.0275169
+{txt}       _cons {c |}  {res}-.3216319    .046064    -6.98   0.000    -.4125748   -.2306891
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. bpagan d82 d83 d84 d85 d86 d87 d88 cez
+{err}unrecognized command:  bpagan
+{txt}{search r(199):r(199);}
+
+{com}. search bpagan
+{txt}
+{title:Keyword search}
+
+{p 8 19} Keywords:  {res}bpagan{txt}{p_end}
+{p 10 19} Search: {res} (1) Official help files, FAQs, Examples, SJs, and STBs{txt}{p_end}
+
+{title:Search of official help files, FAQs, Examples, SJs, and STBs}
+
+{s6hlp}
+{smcl}
+{s6hlp}
+{smcl}
+{s6hlp}
+{smcl}
+{s6hlp}
+{smcl}
+{s6hlp}
+
+Example . . . . . . . Textbook Examples:  Econometric Analysis, Fourth Edition
+        . . . . . . . . . . . . . . . . . .  UCLA Academic Technology Services
+        10/05   examples from the book ^Econometric Analysis, Fourth^
+                ^Edition^ by William Greene
+                @browser:http://www.ats.ucla.edu/stat/examples/greene/!http://www.ats.ucla.edu/stat/examples/greene/@
+{smcl}
+{s6hlp}
+{smcl}
+{s6hlp}
+{smcl}
+{s6hlp}
+
+STB-55  @net:stb 55 sg137!sg137@ .  Tests for heteroskedasticity in regression error distribution
+        (help @bpagan@, @whitetst@ if installed)  C. F. Baum, N. J. Cox & V. Wiggins
+        5/00    pp.15--17; STB Reprints Vol 10, pp.147--149
+        commands for White's test and Breusch and Pagan's test for
+        heteroskedasticity
+{smcl}
+{s6hlp}
+{smcl}
+{s6hlp}
+{smcl}
+{s6hlp}
+{smcl}
+
+
+(end of search)
+
+{com}. bpagan d82 d83 d84 d85 d86 d87 d88 cez
+{res} 
+{txt}Breusch-Pagan LM statistic: {res}  6.58428{txt}  Chi-sq({res} 8)  P-value =  .5821
+ 
+
+{com}. whitetst
+{txt}(22 missing values generated)
+(22 missing values generated)
+(22 missing values generated)
+(22 missing values generated)
+(22 missing values generated)
+(22 missing values generated)
+(22 missing values generated)
+(22 missing values generated)
+(22 missing values generated)
+
+White's general test statistic : {res} 12.84624{txt}  Chi-sq( 9)  P-value = {res} .1697
+
+{com}. iis
+{txt}(i() has not been defined)
+
+{com}. browse
+
+. iis city
+
+. tis year
+
+. xtreg luclms d81-d88 ez, fe
+
+{txt}Fixed-effects (within) regression               Number of obs      = {res}      198
+{txt}Group variable: {res}city                            {txt}Number of groups   = {res}       22
+
+{txt}R-sq:  within  = {res}0.8416                         {txt}Obs per group: min = {res}        9
+{txt}       between = {res}0.0002                                        {txt}avg = {res}      9.0
+{txt}       overall = {res}0.3528                                        {txt}max = {res}        9
+
+                                                {txt}F({res}9{txt},{res}167{txt})           = {res}    98.59
+{txt}corr(u_i, Xb)  = {res}-0.0039                        {txt}Prob > F           =    {res}0.0000
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}      luclms{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}         d81{col 14}{c |}{result}{space 2}-.3216319{col 26}{space 2} .0604573{col 37}{space 1}   -5.32{col 46}{space 3}0.000{col 55}{space 3}-.4409911{col 67}{space 3}-.2022727
+{col 1}{text}         d82{col 14}{c |}{result}{space 2} .1354957{col 26}{space 2} .0604573{col 37}{space 1}    2.24{col 46}{space 3}0.026{col 55}{space 3} .0161365{col 67}{space 3} .2548549
+{col 1}{text}         d83{col 14}{c |}{result}{space 2}-.2192554{col 26}{space 2} .0604573{col 37}{space 1}   -3.63{col 46}{space 3}0.000{col 55}{space 3}-.3386146{col 67}{space 3}-.0998962
+{col 1}{text}         d84{col 14}{c |}{result}{space 2}-.5791517{col 26}{space 2}  .062318{col 37}{space 1}   -9.29{col 46}{space 3}0.000{col 55}{space 3}-.7021844{col 67}{space 3}-.4561191
+{col 1}{text}         d85{col 14}{c |}{result}{space 2}-.5917868{col 26}{space 2} .0654955{col 37}{space 1}   -9.04{col 46}{space 3}0.000{col 55}{space 3}-.7210926{col 67}{space 3}-.4624811
+{col 1}{text}         d86{col 14}{c |}{result}{space 2}-.6212648{col 26}{space 2} .0654955{col 37}{space 1}   -9.49{col 46}{space 3}0.000{col 55}{space 3}-.7505705{col 67}{space 3} -.491959
+{col 1}{text}         d87{col 14}{c |}{result}{space 2}-.8889486{col 26}{space 2} .0654955{col 37}{space 1}  -13.57{col 46}{space 3}0.000{col 55}{space 3}-1.018254{col 67}{space 3}-.7596428
+{col 1}{text}         d88{col 14}{c |}{result}{space 2}-1.227633{col 26}{space 2} .0654955{col 37}{space 1}  -18.74{col 46}{space 3}0.000{col 55}{space 3}-1.356939{col 67}{space 3}-1.098327
+{col 1}{text}          ez{col 14}{c |}{result}{space 2}-.1044148{col 26}{space 2} .0554192{col 37}{space 1}   -1.88{col 46}{space 3}0.061{col 55}{space 3}-.2138274{col 67}{space 3} .0049978
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2} 11.69439{col 26}{space 2} .0427498{col 37}{space 1}  273.55{col 46}{space 3}0.000{col 55}{space 3} 11.60999{col 67}{space 3} 11.77879
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+     sigma_u {c |} {res} .55551522
+{txt}     sigma_e {c |} {res} .20051432
+{txt}         rho {c |} {res} .88473156{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+F test that all u_i=0:     F({res}21{txt}, {res}167{txt}) = {res}   68.94             {txt}Prob > F = {res}0.0000
+
+{com}. whitetst
+{err}last estimates not found
+{txt}{search r(301):r(301);}
+
+{com}. bpagan d82 d83 d84 d85 d86 d87 d88 cez
+{err}last estimates not found
+{txt}{search r(301):r(301);}
+
+{com}. bpagan
+{err}varlist required
+{txt}{search r(100):r(100);}
+
+{com}. xtreg luclms ez, fe
+
+{txt}Fixed-effects (within) regression               Number of obs      = {res}      198
+{txt}Group variable: {res}city                            {txt}Number of groups   = {res}       22
+
+{txt}R-sq:  within  = {res}0.3083                         {txt}Obs per group: min = {res}        9
+{txt}       between = {res}0.0002                                        {txt}avg = {res}      9.0
+{txt}       overall = {res}0.0785                                        {txt}max = {res}        9
+
+                                                {txt}F({res}1{txt},{res}175{txt})           = {res}    78.00
+{txt}corr(u_i, Xb)  = {res}-0.2147                        {txt}Prob > F           =    {res}0.0000
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}      luclms{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}          ez{col 14}{c |}{result}{space 2}-.7668601{col 26}{space 2} .0868293{col 37}{space 1}   -8.83{col 46}{space 3}0.000{col 55}{space 3}-.9382276{col 67}{space 3}-.5954927
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2} 11.36894{col 26}{space 2} .0353991{col 37}{space 1}  321.17{col 46}{space 3}0.000{col 55}{space 3} 11.29908{col 67}{space 3} 11.43881
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+     sigma_u {c |} {res} .59249639
+{txt}     sigma_e {c |} {res} .40931737
+{txt}         rho {c |} {res} .67693198{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+F test that all u_i=0:     F({res}21{txt}, {res}175{txt}) = {res}   17.99             {txt}Prob > F = {res}0.0000
+
+{com}. whitetst
+{err}last estimates not found
+{txt}{search r(301):r(301);}
+
+{com}. xtreg gluclms cez, fe
+{err}variable gluclms not found
+{txt}{search r(111):r(111);}
+
+{com}. xtreg guclms cez, fe
+
+{txt}Fixed-effects (within) regression               Number of obs      = {res}      176
+{txt}Group variable: {res}city                            {txt}Number of groups   = {res}       22
+
+{txt}R-sq:  within  = {res}0.0273                         {txt}Obs per group: min = {res}        8
+{txt}       between = {res}0.0094                                        {txt}avg = {res}      8.0
+{txt}       overall = {res}0.0260                                        {txt}max = {res}        8
+
+                                                {txt}F({res}1{txt},{res}153{txt})           = {res}     4.29
+{txt}corr(u_i, Xb)  = {res}-0.0555                        {txt}Prob > F           =    {res}0.0399
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}      guclms{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}         cez{col 14}{c |}{result}{space 2}-.2511664{col 26}{space 2} .1212098{col 37}{space 1}   -2.07{col 46}{space 3}0.040{col 55}{space 3}-.4906272{col 67}{space 3}-.0117055
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2} -.145116{col 26}{space 2} .0278899{col 37}{space 1}   -5.20{col 46}{space 3}0.000{col 55}{space 3} -.200215{col 67}{space 3} -.090017
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+     sigma_u {c |} {res} .05309992
+{txt}     sigma_e {c |} {res} .35854336
+{txt}         rho {c |} {res} .02146257{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+F test that all u_i=0:     F({res}21{txt}, {res}153{txt}) = {res}    0.17             {txt}Prob > F = {res}1.0000
+
+{com}. xtreg guclms d81- d88 cez, fe
+
+{txt}Fixed-effects (within) regression               Number of obs      = {res}      176
+{txt}Group variable: {res}city                            {txt}Number of groups   = {res}       22
+
+{txt}R-sq:  within  = {res}0.6373                         {txt}Obs per group: min = {res}        8
+{txt}       between = {res}0.0094                                        {txt}avg = {res}      8.0
+{txt}       overall = {res}0.6230                                        {txt}max = {res}        8
+
+                                                {txt}F({res}8{txt},{res}146{txt})           = {res}    32.06
+{txt}corr(u_i, Xb)  = {res}-0.0060                        {txt}Prob > F           =    {res}0.0000
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}      guclms{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}         d81{col 14}{c |}{result}{space 2} .0170526{col 26}{space 2} .0675787{col 37}{space 1}    0.25{col 46}{space 3}0.801{col 55}{space 3}-.1165063{col 67}{space 3} .1506114
+{col 1}{text}         d82{col 14}{c |}{result}{space 2} .7958121{col 26}{space 2} .0675787{col 37}{space 1}   11.78{col 46}{space 3}0.000{col 55}{space 3} .6622532{col 67}{space 3}  .929371
+{col 1}{text}         d83{col 14}{c |}{result}{space 2}-.0160666{col 26}{space 2} .0675787{col 37}{space 1}   -0.24{col 46}{space 3}0.812{col 55}{space 3}-.1496255{col 67}{space 3} .1174922
+{col 1}{text}         d84{col 14}{c |}{result}{space 2} .0026587{col 26}{space 2} .0714434{col 37}{space 1}    0.04{col 46}{space 3}0.970{col 55}{space 3}-.1385382{col 67}{space 3} .1438556
+{col 1}{text}         d85{col 14}{c |}{result}{space 2} .3419631{col 26}{space 2}  .069323{col 37}{space 1}    4.93{col 46}{space 3}0.000{col 55}{space 3}  .204957{col 67}{space 3} .4789692
+{col 1}{text}         d86{col 14}{c |}{result}{space 2} .3092065{col 26}{space 2} .0675787{col 37}{space 1}    4.58{col 46}{space 3}0.000{col 55}{space 3} .1756476{col 67}{space 3} .4427654
+{col 1}{text}         d87{col 14}{c |}{result}{space 2} .0710007{col 26}{space 2} .0675787{col 37}{space 1}    1.05{col 46}{space 3}0.295{col 55}{space 3}-.0625582{col 67}{space 3} .2045595
+{col 1}{text}         d88{col 14}{c |}{result}  (dropped)
+{col 1}{text}         cez{col 14}{c |}{result}{space 2}-.1919402{col 26}{space 2} .0849908{col 37}{space 1}   -2.26{col 46}{space 3}0.025{col 55}{space 3}-.3599113{col 67}{space 3} -.023969
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2}-.3386845{col 26}{space 2} .0477854{col 37}{space 1}   -7.09{col 46}{space 3}0.000{col 55}{space 3}-.4331249{col 67}{space 3}-.2442441
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+     sigma_u {c |} {res} .05245175
+{txt}     sigma_e {c |} {res} .22413322
+{txt}         rho {c |} {res} .05192202{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+F test that all u_i=0:     F({res}21{txt}, {res}146{txt}) = {res}    0.44             {txt}Prob > F = {res}0.9849
+
+{com}. xtreg guclms d82- d88 cez, fe
+
+{txt}Fixed-effects (within) regression               Number of obs      = {res}      176
+{txt}Group variable: {res}city                            {txt}Number of groups   = {res}       22
+
+{txt}R-sq:  within  = {res}0.6373                         {txt}Obs per group: min = {res}        8
+{txt}       between = {res}0.0094                                        {txt}avg = {res}      8.0
+{txt}       overall = {res}0.6230                                        {txt}max = {res}        8
+
+                                                {txt}F({res}8{txt},{res}146{txt})           = {res}    32.06
+{txt}corr(u_i, Xb)  = {res}-0.0060                        {txt}Prob > F           =    {res}0.0000
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}      guclms{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}         d82{col 14}{c |}{result}{space 2} .7787595{col 26}{space 2} .0675787{col 37}{space 1}   11.52{col 46}{space 3}0.000{col 55}{space 3} .6452006{col 67}{space 3} .9123184
+{col 1}{text}         d83{col 14}{c |}{result}{space 2}-.0331192{col 26}{space 2} .0675787{col 37}{space 1}   -0.49{col 46}{space 3}0.625{col 55}{space 3}-.1666781{col 67}{space 3} .1004397
+{col 1}{text}         d84{col 14}{c |}{result}{space 2}-.0143939{col 26}{space 2} .0714434{col 37}{space 1}   -0.20{col 46}{space 3}0.841{col 55}{space 3}-.1555908{col 67}{space 3}  .126803
+{col 1}{text}         d85{col 14}{c |}{result}{space 2} .3249105{col 26}{space 2}  .069323{col 37}{space 1}    4.69{col 46}{space 3}0.000{col 55}{space 3} .1879044{col 67}{space 3} .4619167
+{col 1}{text}         d86{col 14}{c |}{result}{space 2}  .292154{col 26}{space 2} .0675787{col 37}{space 1}    4.32{col 46}{space 3}0.000{col 55}{space 3} .1585951{col 67}{space 3} .4257129
+{col 1}{text}         d87{col 14}{c |}{result}{space 2} .0539481{col 26}{space 2} .0675787{col 37}{space 1}    0.80{col 46}{space 3}0.426{col 55}{space 3}-.0796108{col 67}{space 3}  .187507
+{col 1}{text}         d88{col 14}{c |}{result}{space 2}-.0170526{col 26}{space 2} .0675787{col 37}{space 1}   -0.25{col 46}{space 3}0.801{col 55}{space 3}-.1506114{col 67}{space 3} .1165063
+{col 1}{text}         cez{col 14}{c |}{result}{space 2}-.1919402{col 26}{space 2} .0849908{col 37}{space 1}   -2.26{col 46}{space 3}0.025{col 55}{space 3}-.3599113{col 67}{space 3} -.023969
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2}-.3216319{col 26}{space 2} .0477854{col 37}{space 1}   -6.73{col 46}{space 3}0.000{col 55}{space 3}-.4160723{col 67}{space 3}-.2271915
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+     sigma_u {c |} {res} .05245175
+{txt}     sigma_e {c |} {res} .22413322
+{txt}         rho {c |} {res} .05192202{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+F test that all u_i=0:     F({res}21{txt}, {res}146{txt}) = {res}    0.44             {txt}Prob > F = {res}0.9849
+
+{com}. clear
+
+. exit
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+       log:  {res}G:\tools\Stata\statafiles\chen_wooldridge.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 9 Aug 2009, 20:37:28
+
+{com}. ivreg lwage educ exper tenure married south urban black (IQ =KWW)
+
+{txt}Instrumental variables (2SLS) regression
+
+      Source {c |}       SS       df       MS              Number of obs ={res}     935
+{txt}{hline 13}{char +}{hline 30}           F(  8,   926) ={res}   36.96
+    {txt}   Model {char |} {res} 31.4665121     8  3.93331401           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 134.189771   926   .14491336           {txt}R-squared     = {res} 0.1900
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1830
+    {txt}   Total {char |} {res} 165.656283   934  .177362188           {txt}Root MSE      = {res} .38067
+
+{txt}{hline 13}{c TT}{hline 64}
+       lwage {c |}      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+{hline 13}{char +}{hline 64}
+          IQ {c |}  {res} .0130473   .0049341     2.64   0.008     .0033641    .0227305
+{txt}        educ {c |}  {res} .0250321   .0166068     1.51   0.132    -.0075591    .0576234
+{txt}       exper {c |}  {res}   .01442   .0033208     4.34   0.000     .0079029    .0209371
+{txt}      tenure {c |}  {res} .0104562   .0026012     4.02   0.000     .0053512    .0155612
+{txt}     married {c |}  {res} .2006903   .0406775     4.93   0.000     .1208595    .2805211
+{txt}       south {c |}  {res}-.0515532   .0311279    -1.66   0.098    -.1126426    .0095361
+{txt}       urban {c |}  {res} .1767058   .0282117     6.26   0.000     .1213394    .2320722
+{txt}       black {c |}  {res}-.0225612   .0739597    -0.31   0.760    -.1677093    .1225869
+{txt}       _cons {c |}  {res} 4.592453   .3257807    14.10   0.000     3.953099    5.231807
+{txt}{hline 13}{c BT}{hline 64}
+{p 0 15 45}Instrumented:{space 2}IQ{p_end}
+{p 0 15 45}Instruments:{space 3}educ exper tenure married south urban black KWW{p_end}
+{hline 78}
+
+{com}. ivreg lwage educ  (IQ =KWW) exper tenure married south urban black
+
+{txt}Instrumental variables (2SLS) regression
+
+      Source {c |}       SS       df       MS              Number of obs ={res}     935
+{txt}{hline 13}{char +}{hline 30}           F(  8,   926) ={res}   36.96
+    {txt}   Model {char |} {res} 31.4665121     8  3.93331401           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 134.189771   926   .14491336           {txt}R-squared     = {res} 0.1900
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1830
+    {txt}   Total {char |} {res} 165.656283   934  .177362188           {txt}Root MSE      = {res} .38067
+
+{txt}{hline 13}{c TT}{hline 64}
+       lwage {c |}      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+{hline 13}{char +}{hline 64}
+          IQ {c |}  {res} .0130473   .0049341     2.64   0.008     .0033641    .0227305
+{txt}        educ {c |}  {res} .0250321   .0166068     1.51   0.132    -.0075591    .0576234
+{txt}       exper {c |}  {res}   .01442   .0033208     4.34   0.000     .0079029    .0209371
+{txt}      tenure {c |}  {res} .0104562   .0026012     4.02   0.000     .0053512    .0155612
+{txt}     married {c |}  {res} .2006903   .0406775     4.93   0.000     .1208595    .2805211
+{txt}       south {c |}  {res}-.0515532   .0311279    -1.66   0.098    -.1126426    .0095361
+{txt}       urban {c |}  {res} .1767058   .0282117     6.26   0.000     .1213394    .2320722
+{txt}       black {c |}  {res}-.0225612   .0739597    -0.31   0.760    -.1677093    .1225869
+{txt}       _cons {c |}  {res} 4.592453   .3257807    14.10   0.000     3.953099    5.231807
+{txt}{hline 13}{c BT}{hline 64}
+{p 0 15 45}Instrumented:{space 2}IQ{p_end}
+{p 0 15 45}Instruments:{space 3}educ exper tenure married south urban black KWW{p_end}
+{hline 78}
+
+{com}. use "G:\tools\Stata\statafiles\MROZ.DTA", clear
+
+. sum
+
+{txt}    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 56}
+        inlf {c |}{res}       753    .5683931    .4956295          0          1
+       {txt}hours {c |}{res}       753    740.5764    871.3142          0       4950
+     {txt}kidslt6 {c |}{res}       753    .2377158     .523959          0          3
+     {txt}kidsge6 {c |}{res}       753    1.353254    1.319874          0          8
+         {txt}age {c |}{res}       753    42.53785    8.072574         30         60
+{txt}{hline 13}{c +}{hline 56}
+        educ {c |}{res}       753    12.28685    2.280246          5         17
+        {txt}wage {c |}{res}       428    4.177682    3.310282      .1282         25
+     {txt}repwage {c |}{res}       753    1.849734    2.419887          0       9.98
+      {txt}hushrs {c |}{res}       753    2267.271    595.5666        175       5010
+      {txt}husage {c |}{res}       753    45.12085    8.058793         30         60
+{txt}{hline 13}{c +}{hline 56}
+     huseduc {c |}{res}       753    12.49137    3.020804          3         17
+     {txt}huswage {c |}{res}       753    7.482179    4.230559      .4121     40.509
+      {txt}faminc {c |}{res}       753    23080.59     12190.2       1500      96000
+         {txt}mtr {c |}{res}       753    .6788632    .0834955      .4415      .9415
+    {txt}motheduc {c |}{res}       753    9.250996    3.367468          0         17
+{txt}{hline 13}{c +}{hline 56}
+    fatheduc {c |}{res}       753    8.808765     3.57229          0         17
+        {txt}unem {c |}{res}       753    8.623506    3.114934          3         14
+        {txt}city {c |}{res}       753    .6427623    .4795042          0          1
+       {txt}exper {c |}{res}       753    10.63081     8.06913          0         45
+    {txt}nwifeinc {c |}{res}       753    20.12896     11.6348  -.0290575         96
+{txt}{hline 13}{c +}{hline 56}
+       lwage {c |}{res}       428    1.190173    .7231978  -2.054164   3.218876
+     {txt}expersq {c |}{res}       753    178.0385    249.6308          0       2025
+
+{com}. ivreg lwage educ exper tenure married south urban black (IQ =KWW) , first
+{err}variable IQ not found
+{txt}{search r(111):r(111);}
+
+{com}. log close
+       {txt}log:  {res}G:\tools\Stata\statafiles\chen_wooldridge.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 9 Aug 2009, 20:43:58
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

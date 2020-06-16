@@ -1,0 +1,49 @@
+help for gossip					L. Hamilton
+
+Moving first-order autocorrelations
+
+gossip yvar timevar, span(#) [ generate(newvar) graph ]
+
+Description
+
+calculates first-order autocorrelations of time series 
+yvar, within a moving window of span #.  For example, if we
+specify span(7) gen(new), then the first 
+through 3rd values of new are missing.  The 4th value of new 
+equals the lag-1 autocorrelation of yvar across observations 1 
+through 7.  The 5th value of new equals the lag-1 autocorrelation 
+of yvar across observations 2 through 8, and so forth.  The last 
+3 values of new are missing.  See Topliss (2001) for a rationale 
+and applications of this statistic to atmosphere-ocean data.  
+Statistics with Stata (2004) discusses the gossip program itself.
+
+gossip requires tsset data.  timevar is the time 
+variable to be used for graphing.
+
+Options
+
+span(#)	specifies the width of the window for
+		calculating autocorrelations.  This option is required; 
+		# should be an odd integer.
+
+gen(newvar)	creates a new variable holding the
+		autocorrelation coefficients.
+
+graph		requests a spike plot of lag-1 autocorrelations vs. 
+		timevar.
+
+Examples
+
+	. gossip water month, span(13) graph
+	. gossip water month, span(9) gen(autowater)
+	. gossip water month, span(17) gen(autowater) graph
+
+References
+
+Hamilton, Lawrence C.  2004.  Statistics with Stata.  Pacific Grove,
+ CA:  Duxbury.
+
+Topliss, Brenda J.  2001.  "Climate variability I:  A conceptual
+approach to ocean-atmosphere feedback."  In Abstracts for AGU Chapman
+Conference, The North Atlantic Oscillation, Nov. 28 - Dec 1, 2000,
+Ourense, Spain.
