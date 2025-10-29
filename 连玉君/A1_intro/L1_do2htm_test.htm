@@ -1,0 +1,103 @@
+
+<html>
+<head>
+</head>
+<body bgcolor=ffffff>
+<pre>
+-------------------------------------------------------------------------------
+      name:  <font color=000099>&lt;unnamed&gt;</font>
+<font color=000099>       </font>log:  <font color=000099>D:\stata11\ado\personal\Net_course_A\A1_intro\L1_do2htm_test.smcl</font>
+<font color=000099>  </font>log type:  <font color=000099>smcl</font>
+<font color=000099> </font>opened on:  <font color=000099>16 Mar 2010, 22:19:01</font>
+<p>
+<font color=CC6600>. </font>
+<font color=CC6600>. * 应用 -do2htm- 命令制作网页</font>
+<font color=CC6600>. </font>
+<font color=CC6600>.    cd `c(sysdir_personal)'Net_course_A\A1_intro</font>
+<font color=000099>D:\stata11\ado\personal\Net_course_A\A1_intro</font>
+<p>
+<font color=CC6600>. </font>
+<font color=CC6600>.    sysuse auto, clear      // -&gt; Note1: 调入数据</font>
+(1978 Automobile Data)
+<p>
+<font color=CC6600>. </font>
+<font color=CC6600>.    sum                     // 基本统计量</font>
+<p>
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+        make |<font color=000099>         0</font>
+       price |<font color=000099>        74    6165.257    2949.496       3291      15906</font>
+         mpg |<font color=000099>        74     21.2973    5.785503         12         41</font>
+       rep78 |<font color=000099>        69    3.405797    .9899323          1          5</font>
+    headroom |<font color=000099>        74    2.993243    .8459948        1.5          5</font>
+-------------+--------------------------------------------------------
+       trunk |<font color=000099>        74    13.75676    4.277404          5         23</font>
+      weight |<font color=000099>        74    3019.459    777.1936       1760       4840</font>
+      length |<font color=000099>        74    187.9324    22.26634        142        233</font>
+        turn |<font color=000099>        74    39.64865    4.399354         31         51</font>
+displacement |<font color=000099>        74    197.2973    91.83722         79        425</font>
+-------------+--------------------------------------------------------
+  gear_ratio |<font color=000099>        74    3.014865    .4562871       2.19       3.89</font>
+     foreign |<font color=000099>        74    .2972973    .4601885          0          1</font>
+<p>
+<font color=CC6600>. </font>
+<font color=CC6600>.    d,d                     // 样本概况描述</font>
+<p>
+Contains data from <font color=000099>D:\stata11\ado\base/a/auto.dta</font>
+  obs:<font color=000099>            74</font> (max=    1,008,244)      <font color=000099>1978 Automobile Data</font>
+ vars:<font color=000099>            12</font> (max=        5,000)      <font color=000099>13 Apr 2009 17:45</font>
+width:<font color=000099>            43</font> (max=       60,000)      
+ size:<font color=000099>         3,478</font> (max=   52,428,792)      <font color=000099>  (_dta has notes)</font>
+-------------------------------------------------------------------------------
+              storage  display     value
+variable name   type   format      label      variable label
+-------------------------------------------------------------------------------
+<font color=000099>make           </font> str18  %-18s                  <font color=000099>Make and Model</font>
+<font color=000099>price          </font> int    %8.0gc                 <font color=000099>Price</font>
+<font color=000099>mpg            </font> int    %8.0g                  <font color=000099>Mileage (mpg)</font>
+<font color=000099>rep78          </font> int    %8.0g                  <font color=000099>Repair Record 1978</font>
+<font color=000099>headroom       </font> float  %6.1f                  <font color=000099>Headroom (in.)</font>
+<font color=000099>trunk          </font> int    %8.0g                  <font color=000099>Trunk space (cu. ft.)</font>
+<font color=000099>weight         </font> int    %8.0gc                 <font color=000099>Weight (lbs.)</font>
+<font color=000099>length         </font> int    %8.0g                  <font color=000099>Length (in.)</font>
+<font color=000099>turn           </font> int    %8.0g                  <font color=000099>Turn Circle (ft.)</font>
+<font color=000099>displacement   </font> int    %8.0g                  <font color=000099>Displacement (cu. in.)</font>
+<font color=000099>gear_ratio     </font> float  %6.2f                  <font color=000099>Gear Ratio</font>
+<font color=000099>foreign        </font> byte   %8.0g       origin     <font color=000099>Car type</font>
+-------------------------------------------------------------------------------
+Sorted by:  <font color=000099>foreign</font>
+<p>
+<font color=CC6600>.   </font>
+<font color=CC6600>. *- 绘制一张图形</font>
+<font color=CC6600>.      #delimit ;            // -&gt; 注意此处的断行方法</font>
+delimiter now ;
+<font color=CC6600>.       grss twoway (scatter price wei)</font>
+<font color=CC6600>&gt;            (lfit price wei),</font>
+<font color=CC6600>&gt;            title("散点图和线性拟合图");</font>
+<br>
+<img border='0' src='L1_do2htm_test1.png'>
+<p>
+<font color=CC6600>.      #delimit cr</font>
+delimiter now cr
+<font color=CC6600>. </font>
+<font color=CC6600>. *- 再绘制一张图形</font>
+<font color=CC6600>.      sysuse nlsw88, clear</font>
+(NLSW, 1988 extract)
+<p>
+<font color=CC6600>.      gen lnwage = ln(wage)</font>
+<p>
+<font color=CC6600>.      grss histogram lnwage, normal</font>
+<br>
+<img border='0' src='L1_do2htm_test2.png'>
+<p>
+<font color=CC6600>.      </font>
+<font color=CC6600>. </font>
+end of do-file
+      name:  <font color=000099>&lt;unnamed&gt;</font>
+<font color=000099>       </font>log:  <font color=000099>D:\stata11\ado\personal\Net_course_A\A1_intro\L1_do2htm_test.smcl</font>
+<font color=000099>  </font>log type:  <font color=000099>smcl</font>
+<font color=000099> </font>closed on:  <font color=000099>16 Mar 2010, 22:19:14</font>
+-------------------------------------------------------------------------------
+</pre>
+</body>
+</html>

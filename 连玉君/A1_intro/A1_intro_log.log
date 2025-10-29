@@ -1,0 +1,71 @@
+-------------------------------------------------------------------------------------------------------
+       log:  H:\stata10\ado\personal\Net_course_A\A1_intro\A1_intro_log.log
+  log type:  text
+ opened on:  31 Jul 2009, 23:00:19
+
+. 
+.   sysuse auto, clear  // -> Note1: 调入数据
+(1978 Automobile Data)
+
+. 
+.   sum                 /*基本统计量*/
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+        make |         0
+       price |        74    6165.257    2949.496       3291      15906
+         mpg |        74     21.2973    5.785503         12         41
+       rep78 |        69    3.405797    .9899323          1          5
+    headroom |        74    2.993243    .8459948        1.5          5
+-------------+--------------------------------------------------------
+       trunk |        74    13.75676    4.277404          5         23
+      weight |        74    3019.459    777.1936       1760       4840
+      length |        74    187.9324    22.26634        142        233
+        turn |        74    39.64865    4.399354         31         51
+displacement |        74    197.2973    91.83722         79        425
+-------------+--------------------------------------------------------
+  gear_ratio |        74    3.014865    .4562871       2.19       3.89
+     foreign |        74    .2972973    .4601885          0          1
+
+. 
+.   d,d
+
+Contains data from H:\stata10\ado\base/a/auto.dta
+  obs:            74 (max=    1,008,244)      1978 Automobile Data
+ vars:            12 (max=        5,000)      13 Apr 2007 17:45
+width:            43 (max=       60,000)      
+ size:         3,478 (max=   52,428,792)        (_dta has notes)
+-------------------------------------------------------------------------------
+              storage  display     value
+variable name   type   format      label      variable label
+-------------------------------------------------------------------------------
+make            str18  %-18s                  Make and Model
+price           int    %8.0gc                 Price
+mpg             int    %8.0g                  Mileage (mpg)
+rep78           int    %8.0g                  Repair Record 1978
+headroom        float  %6.1f                  Headroom (in.)
+trunk           int    %8.0g                  Trunk space (cu. ft.)
+weight          int    %8.0gc                 Weight (lbs.)
+length          int    %8.0g                  Length (in.)
+turn            int    %8.0g                  Turn Circle (ft.) 
+displacement    int    %8.0g                  Displacement (cu. in.)
+gear_ratio      float  %6.2f                  Gear Ratio
+foreign         byte   %8.0g       origin     Car type
+-------------------------------------------------------------------------------
+Sorted by:  foreign
+
+.   
+.   #delimit ;          // -> 注意此处的断行方法
+delimiter now ;
+.      twoway (scatter price wei)
+>             (lfit price wei),
+>             title("散点图和线性拟合图");
+
+.   #delimit cr
+delimiter now cr
+. 
+.   log close           
+       log:  H:\stata10\ado\personal\Net_course_A\A1_intro\A1_intro_log.log
+  log type:  text
+ closed on:  31 Jul 2009, 23:00:26
+-------------------------------------------------------------------------------------------------------
