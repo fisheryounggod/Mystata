@@ -1,0 +1,912 @@
+From: <ÓÉ Microsoft Internet Explorer 5 ±£´æ>
+Subject: Multiple imputation FAQ page
+Date: Wed, 10 Feb 2010 16:08:28 +0800
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0000_01CAAA6B.487E9BC0"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3350
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0000_01CAAA6B.487E9BC0
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.stat.psu.edu/~jls/mifaq.html
+
+=EF=BB=BF<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Multiple imputation FAQ page</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dutf-8"><!-- Changed by: Joseph L Schafer,  30-Jun-1999 -->
+<META content=3D"MSHTML 6.00.2900.3660" name=3DGENERATOR></HEAD>
+<BODY text=3D#000000 vLink=3D#990000 aLink=3D#00cc00 link=3D#990000 =
+bgColor=3D#ffffff>
+<H1 align=3Dcenter><A name=3Dtop></A><FONT color=3D#23238e>The multiple =
+imputation FAQ=20
+page</FONT> </H1>This page provides basic information about multiple =
+imputation=20
+(MI) in the form of answers to Frequently Asked Questions (FAQs). For =
+more=20
+extensive, non-technical overviews of MI, see the articles by <A=20
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Schafer and Olsen =
+(1987)</A>=20
+and <A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Schafer =
+(1999)</A>.=20
+Answers to FAQs regarding MI in large public-use data sets (e.g. from =
+surveys=20
+and censuses) are given by <A=20
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Rubin (1996)</A>.=20
+<UL>
+  <LI><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#whatis">What is =
+multiple=20
+  imputation?</A>=20
+  <LI><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#only">Is MI the =
+only=20
+  principled way to handle missing data?</A>=20
+  <LI><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#few">Why are =
+only a few=20
+  imputations needed?</A>=20
+  <LI><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#create">How =
+does one=20
+  create multiple imputations?</A>=20
+  <LI><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#model">The =
+imputation=20
+  model</A>=20
+  <LI><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#wrong">What if =
+the=20
+  imputation model is wrong?</A>=20
+  <LI><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#congenial">What =
+is the=20
+  relationship between the model used for imputation and the model used =
+for=20
+  analysis?</A>=20
+  <LI><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#howto">How do I =
+combine=20
+  the results across the multiply imputed sets of data?</A>=20
+  <LI><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#minf">What is =
+the rate of=20
+  missing information?</A>=20
+  <LI><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#bayes">Is =
+multiple=20
+  imputation a Bayesian procedure?</A>=20
+  <LI><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#cc">Removing =
+incomplete=20
+  cases is so much easier than multiple imputation; why can't I just do=20
+  that?</A>=20
+  <LI><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#once">Why can't =
+I just=20
+  impute once?</A>=20
+  <LI><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#em">Is multiple =
+
+  imputation like EM?</A>=20
+  <LI><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#mcmc">Is =
+multiple=20
+  imputation related to MCMC?</A>=20
+  <LI><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#mar">What if =
+the missing=20
+  data are not 'missing at random'?</A>=20
+  <LI><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#fake">Isn't =
+multiple=20
+  imputation just making up data?</A>=20
+  <LI><A =
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">References</A>=20
+</LI></UL>
+<P><!--##################################################################=
+#####--><A=20
+name=3Dwhatis></A>
+<HR>
+
+<H2></A><FONT color=3D#23238e>What is multiple =
+imputation?</FONT></H2>Imputation,=20
+the practice of 'filling in' missing data with plausible values, is an=20
+attractive approach to analyzing incomplete data. It apparently solves =
+the=20
+missing-data problem at the beginning of the analysis. However, a naive =
+or=20
+unprincipled imputation method may create more problems than it solves,=20
+distorting estimates, standard errors and hypothesis tests, as =
+documented by <A=20
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Little and Rubin =
+(1987)</A>=20
+and others.=20
+<P>The question of how to obtain valid inferences from imputed data was=20
+addressed by <A =
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Rubin's=20
+(1987)</A> book on multiple imputation (MI). MI is a Monte Carlo =
+technique in=20
+which the missing values are replaced by <EM>m</EM>&gt;1 simulated =
+versions,=20
+where <EM>m</EM> is typically small (e.g. 3-10). In Rubin's method for =
+`repeated=20
+imputation' inference, each of the simulated complete datasets is =
+analyzed by=20
+standard methods, and the results are combined to produce estimates and=20
+confidence intervals that incorporate missing-data uncertainty. <A=20
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Rubin (1987)</A> =
+addresses=20
+potential uses of MI primarily for large public-use data files from =
+sample=20
+surveys and censuses. With the advent of new computational methods and =
+software=20
+for creating MI's, however, the technique has become increasingly =
+attractive for=20
+researchers in the biomedical, behavioral, and social sciences whose=20
+investigations are hindered by missing data. These methods are =
+documented in a=20
+recent book by <A =
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Schafer=20
+(1997)</A> on incomplete multivariate data.=20
+<P><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#top">Back to =
+top</A>=20
+<P><!--##################################################################=
+#####--><A=20
+name=3Donly></A>
+<HR>
+
+<H2></A><FONT color=3D#23238e>Is MI the only principled way to handle =
+missing=20
+data?</FONT></H2>MI is not the only principled method for handling =
+missing=20
+values, nor is it necessarily the best for any given problem. In some =
+cases,=20
+good estimates can be obtained through weighted estimation procedures. =
+In fully=20
+parametric models, maximum-likelihood estimates can often be calculated =
+directly=20
+from the incomplete data by specialized numerical methods, such as the =
+EM=20
+algorithm. Those procedures may be somewhat more efficient than MI =
+because they=20
+involve no simulation. Given sufficient time and resources, one could =
+perhaps=20
+derive a better statistical procedure than MI for any particular =
+problem. In=20
+real-life applications, however, where missing data are nuisance rather =
+than a=20
+the primary focus, an easy, approximate solution with good properties =
+can be=20
+preferable to one that is more efficient but problem-specific and =
+complicated to=20
+implement.=20
+<P><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#top">Back to =
+top</A>=20
+<P><!--##################################################################=
+#####--><A=20
+name=3Dfew></A>
+<HR>
+
+<H2></A><FONT color=3D#23238e>Why are only a few imputations=20
+needed?</FONT></H2>Many are surprised by the claim that only 3-10 =
+imputations=20
+may be needed. Rubin (1987, p. 114) shows that the efficiency of an =
+estimate=20
+based on <EM>m</EM> imputations is approximately=20
+<P><IMG src=3D"http://www.stat.psu.edu/~jls/formulas/effic.gif" =
+align=3Dcenter>=20
+<P>where <IMG src=3D"http://www.stat.psu.edu/~jls/formulas/gamma.gif"> =
+is the rate=20
+of missing information for the quantity being estimated. The =
+efficiencies=20
+achieved for various values of <EM>m</EM> and rates of missing =
+information are=20
+shown below.=20
+<P><IMG src=3D"http://www.stat.psu.edu/~jls/formulas/efftable.gif" =
+align=3Dcenter>=20
+<P>Unless the rate of missing information is very high, In most =
+situations there=20
+is simply little advantage to producing and analyzing more than a few =
+imputed=20
+datasets.=20
+<P>See how the <A =
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#minf">rate of=20
+missing information</A> is estimated.=20
+<P><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#top">Back to =
+top</A>=20
+<P><!--##################################################################=
+#####--><A=20
+name=3Dcreate></A>
+<HR>
+
+<H2></A><FONT color=3D#23238e>How does one create multiple=20
+imputations?</FONT></H2>Except in trivial settings, the probability=20
+distributions that one must draw from to produce proper MI's tend to be=20
+complicated and intractable. Recently, however, a variety of new =
+simulation=20
+methods have appeared in the statistical literature. These methods, =
+known as=20
+Markov chain Monte Carlo (MCMC), have spawned a small revolution in =
+Bayesian=20
+analysis and applied parametric modeling <A=20
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">(Gilks, Richardson =
+&amp;=20
+Spiegelhalter, 1996)</A>. <A=20
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Schafer (1997)</A> =
+has=20
+adapted and implemented MCMC methods for the purpose of multiple =
+imputation. In=20
+particular, he has written general-purpose MI software for incomplete=20
+multivariate data. They may be downloaded free of charge at our <A=20
+href=3D"http://www.stat.psu.edu/~jls/misoftwa.html#top">website</A>.=20
+<P><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#top">Back to =
+top</A>=20
+<P><!--##################################################################=
+#####--><A=20
+name=3Dmodel></A>
+<HR>
+
+<H2></A><FONT color=3D#23238e>The imputation model</FONT></H2>In order =
+to generate=20
+imputations for the missing values, one must impose a probability model =
+on the=20
+complete data (observed and missing values). Each of our software =
+packages=20
+applies a different class of multivariate complete-data models. NORM =
+uses the=20
+multivariate normal distribution. CAT is based on loglinear models, =
+which have=20
+been traditionally used by social scientists to describe associations =
+among=20
+variables in cross-classified data. The MIX program relies on the =
+<EM>general=20
+location model</EM>, which combines a loglinear model for the =
+categorical=20
+variables with a multivariate normal regression for the continuous ones. =
+Details=20
+of these models are given by <A=20
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Schafer (1997)</A>. =
+The newer=20
+package PAN uses a multivariate extension of a popular two-level linear=20
+regression model commonly applied to multilevel data (e.g. <A=20
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Bryk &amp; =
+Raudenbush,=20
+1992</A>). The PAN model is appropriate for describing multiple =
+variables=20
+collected on a sample of individuals over time, or multiple variables =
+collected=20
+on individuals who are grouped together into larger units (e.g. students =
+within=20
+classrooms).=20
+<P><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#top">Back to =
+top</A>=20
+<P><!--##################################################################=
+#####--><A=20
+name=3Dwrong></A>
+<HR>
+
+<H2></A><FONT color=3D#23238e>What if the imputation model is=20
+wrong?</FONT></H2>Experienced analysts know that real data rarely =
+conform to=20
+convenient models such as the multivariate normal. In most applications =
+of MI,=20
+the model used to generate the imputations will at best be only =
+approximately=20
+true. Fortunately, experience has repeatedly shown that MI tends to be =
+quite=20
+forgiving of departures from the imputation model. For example, when =
+working=20
+with binary or ordered categorical variables, it is often acceptable to =
+impute=20
+under a normality assumption and then round off the continuous imputed =
+values to=20
+the nearest category. Variables whose distributions are heavily skewed =
+may be=20
+transformed (e.g. by taking logarithms) to approximate normality and =
+then=20
+transformed back to their original scale after imputation.=20
+<P><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#top">Back to =
+top</A>=20
+<P><!--##################################################################=
+#####--><A=20
+name=3Dcongenial></A>
+<HR>
+
+<H2></A><FONT color=3D#23238e>What is the relationship between the model =
+used for=20
+imputation and the model used for analysis?</FONT></H2>An imputation =
+model=20
+should be chosen to be (at least approximately) compatible with the =
+analyses to=20
+be performed on the imputed datasets. The imputation model should be =
+rich enough=20
+to preserve the associations or relationships among variables that will =
+be the=20
+focus of later investigation. For example, suppose that a variable =
+<EM>Y</EM> is=20
+imputed under a normal model that includes the variable <EM>X1</EM>. =
+After=20
+imputation, the analyst then uses linear regression to predict =
+<EM>Y</EM> from=20
+<EM>X1</EM> and another variable <EM>X2</EM> which was not in the =
+imputation=20
+model. The estimated coefficient for <EM>X2</EM> from this regression =
+would tend=20
+to be biased toward zero, because <EM>Y</EM> has been imputed without =
+regard for=20
+its possible relationship with <EM>X2</EM>. In general, any association =
+that may=20
+prove important in subsequent analyses should be present in the =
+imputation=20
+model.=20
+<P>The converse of this rule, however, is not necessary. If <EM>Y</EM> =
+has been=20
+imputed under a model that includes <EM>X2</EM>, there is no need to =
+include=20
+<EM>X2</EM> in future analyses involving <EM>Y</EM> unless its =
+relationship to=20
+<EM>Y</EM> is of substantive interest. Results pertaining to <EM>Y</EM> =
+are not=20
+biased by the inclusion of extra variables in the imputation phase. =
+Therefore, a=20
+rich imputation model that preserves a large number of associations is =
+desirable=20
+because it may be used for a variety of post-imputation analyses.=20
+<P>Detailed discussion on the interrelationships between the model used =
+for=20
+imputation and the model used for analysis is given by <A=20
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Meng (1995)</A> and =
+<A=20
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Rubin (1996)</A>.=20
+<P>Above all, the processes of imputation and analysis should be guided =
+by=20
+common sense. For example, suppose that variables with skewed, =
+truncated, or=20
+heavy-tailed distributions are, for the sake of convenience, imputed =
+under an=20
+assumption of joint normality. Analyses that depend primarily on means,=20
+variances, and covariances, such as regression or principal-component =
+methods,=20
+should perform reasonably well even though the imputer's model is too=20
+simplistic. On the other hand, common sense would suggest that the same=20
+imputations ought not be used for estimation of 5th or 95th percentiles, =
+or=20
+other analyses sensitive to non-normal shape.=20
+<P><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#top">Back to =
+top</A>=20
+<P><!--##################################################################=
+#####--><A=20
+name=3Dhowto></A>
+<HR>
+
+<H2></A><FONT color=3D#23238e>How do I combine the results across the =
+multiply=20
+imputed sets of data?</FONT></H2><A=20
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Rubin (1987)</A> =
+presented=20
+this method for combining results from a data analysis performed =
+<EM>m</EM>=20
+times, once for each of <EM>m</EM> imputed data sets, to obtain a single =
+set of=20
+results.=20
+<P>From each analysis, one must first calculate and save the estimates =
+and=20
+standard errors. Suppose that <IMG=20
+src=3D"http://www.stat.psu.edu/~jls/formulas/qhat.gif"> is an estimate =
+of a scalar=20
+quantity of interest (e.g. a regression coefficient) obtained from data =
+set=20
+<EM>j</EM> (<EM>j</EM>=3D1,2,...,<EM>m</EM>) and <IMG=20
+src=3D"http://www.stat.psu.edu/~jls/formulas/u.gif"> is the standard =
+error=20
+associated with <IMG =
+src=3D"http://www.stat.psu.edu/~jls/formulas/qhat.gif">. The=20
+overall estimate is the average of the individual estimates,=20
+<P><IMG src=3D"http://www.stat.psu.edu/~jls/formulas/qbar.gif">=20
+<P>For the overall standard error, one must first calculate the=20
+within-imputation variance,=20
+<P><IMG src=3D"http://www.stat.psu.edu/~jls/formulas/ubar.gif">=20
+<P>and the between-imputation variance,=20
+<P><IMG src=3D"http://www.stat.psu.edu/~jls/formulas/b.gif">=20
+<P>The total variance is=20
+<P><IMG src=3D"http://www.stat.psu.edu/~jls/formulas/totvar.gif">=20
+<P>The overall standard error is the square root of <EM>T</EM>. =
+Confidence=20
+intervals are obtained by taking the overall estimate plus or minus a =
+number of=20
+standard errors, where that number is a quantile of Student's =
+t-distribution=20
+with degrees of freedom=20
+<P><IMG src=3D"http://www.stat.psu.edu/~jls/formulas/df.gif">=20
+<P>A significance test of the null hypothesis <EM>Q</EM>=3D0 is =
+performed by=20
+comparing the ratio <IMG =
+src=3D"http://www.stat.psu.edu/~jls/formulas/tratio.gif">=20
+to the same t-distribution. Additional methods for combining the results =
+from=20
+multiply imputed data are reviewed by <A=20
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Schafer (1997, Ch. =
+4)</A>.=20
+<P><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#top">Back to =
+top</A>=20
+<P><!--##################################################################=
+#####--><A=20
+name=3Dminf></A>
+<HR>
+
+<H2></A><FONT color=3D#23238e>What is the rate of missing=20
+information?</FONT></H2>When performing a multiply-imputed analysis, the =
+
+variation in results across the imputed data sets reflects statistical=20
+uncertainty due to missing data. <A=20
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#howto">Rubin's (1987) =
+rules for MI=20
+inference</A> provide some diagnostic measures that indicate how =
+strongly the=20
+quantity being estimated is influenced by missing data. The estimated =
+rate of=20
+missing information is=20
+<P><IMG src=3D"http://www.stat.psu.edu/~jls/formulas/gammadef.gif">=20
+<P>where=20
+<P><IMG src=3D"http://www.stat.psu.edu/~jls/formulas/relinc.gif">=20
+<P>is the relative increase in variance due to nonresponse.=20
+<P>The rate of missing information, together with the number of =
+imputations=20
+<EM>m</EM>, determines the relative efficiency of the MI inference; see =
+<A=20
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#few">Why are only a few=20
+imputations needed?</A>=20
+<P><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#top">Back to =
+top</A>=20
+<P><!--##################################################################=
+#####--><A=20
+name=3Dbayes></A>
+<HR>
+
+<H2></A><FONT color=3D#23238e>Is multiple imputation a Bayesian=20
+procedure?</FONT></H2>Partly yes and partly no. When imputations are =
+created=20
+under Bayesian arguments (and they usually are), MI has a natural =
+interpretation=20
+as an approximate Bayesian inference for the quantities of interest =
+based on the=20
+observed data. The validity of MI, however, does not require one to =
+fully=20
+subscribe to the Bayesian paradigm. <A=20
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#rf">Rubin (1987)</A> =
+provides=20
+technical conditions under which MI leads to frequency-valid answers. An =
+
+imputation method which satisfies these conditions is said to be =
+'proper.'=20
+<P>Rubin's definition of 'proper', like many frequentist criteria, are =
+useful=20
+for evaluating the properties of a given method but provide little =
+guidance for=20
+one seeking to create such a method in practice. For this reason, Rubin=20
+recommends that imputations be created through a Bayesian process: =
+specify a=20
+parametric model for the complete data (and, if necessary, a model for =
+the=20
+mechanism by which data become missing), apply a prior distribution to =
+the=20
+unknown model parameters, and simulate <EM>m</EM> independent draws from =
+the=20
+conditional distribution of the missing data given the observed data by =
+Bayes'=20
+Theorem. In simple problems, the computations necessary for creating =
+MI's can be=20
+performed explicitly through formulas. In non-trivial applications, =
+special=20
+computational techniques such as Markov chain Monte Carlo (MCMC) must be =
+
+applied.=20
+<P><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#top">Back to =
+top</A>=20
+<P><!--##################################################################=
+#####--><A=20
+name=3Dcc></A>
+<HR>
+
+<H2></A><FONT color=3D#23238e>Removing incomplete cases is so much =
+easier than=20
+multiple imputation; why can't I just do that?</FONT></H2>The =
+shortcomings of=20
+various case-deletion strategies have been well documented (e.g. <A=20
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Little &amp; Rubin, =
+
+1987</A>). If the discarded cases form a representative and relatively =
+small=20
+portion of the entire dataset, then case deletion may indeed be a =
+reasonable=20
+approach. However, case deletion leads to valid inferences in general =
+only when=20
+missing data are missing completely at random in the sense that the=20
+probabilities of response do not depend on any data values observed or =
+missing.=20
+In other words, case deletion implicitly assumes that the discarded =
+cases are=20
+like a random subsample. When the discarded cases differ systematically =
+from the=20
+rest, estimates may be seriously biased. Moreover, in multivariate =
+problems,=20
+case deletion often results in a large portion of the data being =
+discarded and=20
+an unacceptable loss of power.=20
+<P><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#top">Back to =
+top</A>=20
+<P><!--##################################################################=
+#####--><A=20
+name=3Donce></A>
+<HR>
+
+<H2></A><FONT color=3D#23238e>Why can't I just impute =
+once?</FONT></H2>If the=20
+proportion of missing values is small, then single imputation may be =
+quite=20
+reasonable. Without special corrective measures, single-imputation =
+inference=20
+tends to overstate precision because it omits the between-imputation =
+component=20
+of variability. When the fraction of missing information is small (say, =
+less=20
+than 5%) then single-imputation inferences for a scalar estimand may be =
+fairly=20
+accurate. For joint inferences about multiple parameters, however, even =
+small=20
+rates of missing information may seriously impair a single-imputation =
+procedure.=20
+In modern computing environments, the effort required to produce and =
+analyze a=20
+multiply-imputed dataset is often not substantially greater than what is =
+
+required for good single imputation.=20
+<P><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#top">Back to =
+top</A>=20
+<P><!--##################################################################=
+#####--><A=20
+name=3Dem></A>
+<HR>
+
+<H2></A><FONT color=3D#23238e>Is multiple imputation like =
+EM?</FONT></H2>MI bears=20
+a close resemblance to the EM algorithm and other computational methods =
+for=20
+calculating maximum-likelihood estimates based on the observed data =
+alone. These=20
+methods summarize a likelihood function which has been averaged over a=20
+predictive distribution for the missing values. MI performs this same =
+type of=20
+averaging by Monte Carlo rather than by numerical methods. In large =
+samples,=20
+when relevant aspects of the imputer's and analyst's models agree, =
+inferences=20
+obtained by MI with sufficiently many imputations will be nearly the =
+same as=20
+those obtained by direct maximization of the likelihood.=20
+<P><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#top">Back to =
+top</A>=20
+<P><!--##################################################################=
+#####--><A=20
+name=3Dmcmc></A>
+<HR>
+
+<H2></A><FONT color=3D#23238e>Is multiple imputation related to=20
+MCMC?</FONT></H2>Markov chain Monte Carlo (MCMC) is a collection of =
+methods for=20
+simulating random draws from nonstandard distributions via Markov =
+chains. MCMC=20
+is one of the primary methods for generating MI's in nontrivial =
+problems. In=20
+much of the existing literature on MCMC (e.g. <A=20
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Gilks, Richardson =
+&amp;=20
+Spiegelhalter, 1996</A>, and their references) MCMC is used for =
+parameter=20
+simulation, for creating a large number of (typically dependent) random =
+draws of=20
+parameters from Bayesian posterior distributions under complicated =
+parametric=20
+models. In MI-related applications, however, MCMC is used to create a =
+small=20
+number of independent draws of the missing data from a predictive =
+distribution,=20
+and these draws are then used for multiple-imputation inference. In many =
+cases=20
+it is possible to conduct an analysis either by parameter simulation or =
+by=20
+multiple imputation. Parameter simulation tends to work well when =
+interest is=20
+confined to small number of well-defined parameters, whereas multiple =
+imputation=20
+is more attractive for exploratory or multi-purpose analyses involving a =
+large=20
+number of estimands. Generating and storing 10 versions of the missing =
+data is=20
+often more efficient than generating and storing the hundreds or =
+thousands of=20
+dependent draws that would be required to achieve a comparable degree of =
+
+precision through parameter simulation.=20
+<P><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#top">Back to =
+top</A>=20
+<P><!--##################################################################=
+#####--><A=20
+name=3Dmar></A>
+<HR>
+
+<H2></A><FONT color=3D#23238e>What if the missing data are not 'missing =
+at=20
+random'?</FONT></H2>Most of the techniques presently available for =
+creating MI's=20
+assume that the missing values are 'missing at random' (MAR) in the =
+sense=20
+defined by <A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Rubin =
+
+(1976)</A> and <A =
+href=3D"http://www.stat.psu.edu/~jls/mifaq.html#ref">Little and=20
+Rubin (1987)</A>. That is, they assume that missing data values carry no =
+
+information about probabilities of missingness. This assumption is=20
+mathematically convenient because it allows one to eschew an explicit=20
+probability model for nonresponse. In some applications, however, =
+ignorability=20
+may seem artificial or implausible. With attrition in a longitudinal =
+study, for=20
+example, it is possible that subjects drop out for reasons related to =
+current=20
+data values. It is important to note that the MI paradigm does not =
+require or=20
+assume that nonresponse is ignorable. Imputations may in principle be =
+created=20
+under any kind of assumptions or model for the missing-data mechanism, =
+and the=20
+resulting inferences will be valid under that mechanism.=20
+<P><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#top">Back to =
+top</A>=20
+<P><!--##################################################################=
+#####--><A=20
+name=3Dfake></A>
+<HR>
+
+<H2></A><FONT color=3D#23238e>Isn't multiple imputation just making up=20
+data?</FONT></H2>When MI is presented to a new audience, some may view =
+it as a=20
+kind of statistical alchemy in which information is somehow invented or =
+created=20
+out of nothing. This objection is quite valid for single-imputation =
+methods,=20
+which treat imputed values no differently from observed ones. MI, =
+however, is=20
+nothing more than a device for representing missing-data uncertainty.=20
+Information is not being invented with MI any more than with EM or other =
+well=20
+accepted likelihood-based methods, which average over a predictive =
+distribution=20
+for the missing data by numerical techniques rather than by simulation.=20
+<P><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#top">Back to =
+top</A>=20
+<P><!--##################################################################=
+#####--><A=20
+name=3Dref></A>
+<HR>
+
+<H2></A><FONT color=3D#23238e>References</FONT></H2>
+<P>Bryk, A.S. and Raudenbush, S.W. (1992) <EM>Hierarchical Linear =
+Models</EM>.=20
+Sage, Newbury Park.=20
+<P>Gilks, W.R., Richardson, S. &amp; Spiegelhalter, D.J. (Eds.) (1996)=20
+<EM>Markov Chain Monte Carlo in Practice</EM>. Chapman &amp; Hall, =
+London.=20
+<P>Little, R.J.A. and Rubin, D.B. (1987) <EM>Statistical Analysis with =
+Missing=20
+Data</EM>. J. Wiley &amp; Sons, New York.=20
+<P>Meng, X.L.(1995) Multiple-imputation inferences with uncongenial =
+sources of=20
+input (with discussion). <EM>Statistical Science</EM>, 10, 538-573.=20
+<P>Rubin, D.B. (1976) Inference and missing data. <EM>Biometrika</EM>, =
+63,=20
+581-592.=20
+<P>Rubin, D.B. (1987) <EM>Multiple Imputation for Nonresponse in =
+Surveys</EM>.=20
+J. Wiley &amp; Sons, New York.=20
+<P>Rubin, D.B. (1996) Multiple imputation after 18+ years (with =
+discussion).=20
+<EM>Journal of the American Statistical Association</EM>, 91, 473-489.=20
+<P>Schafer, J.L. (1997) <EM>Analysis of Incomplete Multivariate =
+Data</EM>.=20
+Chapman &amp; Hall, London.=20
+<P>Schafer, J.L. (1999) Multiple imputation: a primer. <EM>Statistical =
+Methods=20
+in Medical Research</EM>, in press.=20
+<P>Schafer, J.L. and Olsen, M.K. (1998)=20
+<P><A href=3D"http://www.stat.psu.edu/~jls/mifaq.html#top">Back to =
+top</A>=20
+<P><!--##################################################################=
+#####-->
+<HR>
+
+<P>Go to <A =
+href=3D"http://www.stat.psu.edu/~jls/misoftwa.html#top">software for=20
+multiple imputation</A>=20
+<P>Go to <A href=3D"http://www.stat.psu.edu/~jls/jls.html#res">Joe =
+Schafer's home=20
+page</A> </P></BODY></HTML>
+
+------=_NextPart_000_0000_01CAAA6B.487E9BC0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.stat.psu.edu/~jls/formulas/effic.gif
+
+R0lGODlhWgApAIAAAP///wAAACwAAAAAWgApAAACv4SPqcvtD6OctNqLs45h+08FHUiWy2imJaoi
+bPo6MTybsYiP9doqu9sz/GCQocfIk4l6yJCO0WxFOYDObkrk/bBJ7YMLAhfHwcYVgxQfT0uojFp2
+y09miXpznvvscX0ir3EXWOeSk4PWR+cH5GNouJf4R6g4GMlICVlpKTSZmSH4CdWmAopIsoRaU3qx
+epBatZjYyglb62k5W/uEudm6q7opGUY7ehlsG5lrofx2bBzHvCzrfCtFzRYUfb3NDVIAACH/C01h
+dGhUeXBlMDAxVwQBAAMFCgECgSACgSACgSACgSACgSACgSACgSADAQAAAYKAmIgxAoYrAw4AAAkF
+gAEChGcAAZKAOINtAAAACgKWKAKWKQADDwAACxEBAoYtAogxAAAAAAA7
+
+------=_NextPart_000_0000_01CAAA6B.487E9BC0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.stat.psu.edu/~jls/formulas/gamma.gif
+
+R0lGODlhDAARAIAAAP///wAAACwAAAAADAARAAACG4SPqcsX+GCI0Zk3Gdagqtx0obeQiXmO4coC
+BQAh/wtNYXRoVHlwZTAwMREEAQADBQoBCQCggoykhGcAAAA7
+
+------=_NextPart_000_0000_01CAAA6B.487E9BC0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.stat.psu.edu/~jls/formulas/efftable.gif
+
+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
+
+------=_NextPart_000_0000_01CAAA6B.487E9BC0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.stat.psu.edu/~jls/formulas/qhat.gif
+
+R0lGODlhEgAZAIAAAP///wAAACwAAAAAEgAZAAACNISPqcvtGsI70ciJYbyPA7+AXyOOTFma0BmS
+LYWIqcVVlLy9sYPXl3zzzFgZS0YyTNiKiwIAIf8LTWF0aFR5cGUwMDEbBAEAAwUKATKDUQYJAAMP
+AQALARKDagARAAAAADs=
+
+------=_NextPart_000_0000_01CAAA6B.487E9BC0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.stat.psu.edu/~jls/formulas/u.gif
+
+R0lGODlhEQAVAIAAAP///wAAACwAAAAAEQAVAAACK4SPqcvhfl5TgYGaMN0zWx11COiVBkhenwll
+D5laqjzSpj3juVzFS6tbFAAAIf8LTWF0aFR5cGUwMDEgBAEAAwUKARKDVYNEgA8BAAuBRICSRICD
+agCRRIAAAAAAOw==
+
+------=_NextPart_000_0000_01CAAA6B.487E9BC0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.stat.psu.edu/~jls/formulas/qbar.gif
+
+R0lGODlhcAAyAIAAAP///wAAACwAAAAAcAAyAAAC/4SPqcvtD6OctNqLs968+w+G4ugFAWCiJ8m2
+SQq7crvW802tj43ivmPSNXjCn/EFIRaPxyXzmYNKLc6pdVEtZa/RUao3C4rFner4TObKsl9GW53W
+st9Id/An3IruWDdCD7IEGEIHpDDI4YQYOKgY1mdUeAhJ4/eCtrdjWTnZlETJWXeBdmao2Xmw2PVn
+V/rRiOrSJvkYMVt0y0hbKxEnujsqpYd76pWLM3ypM8uyDOy1k5dKp6qWRDpWUW09hJ29ym1n8PWs
+cbJtdd6jTlIezk4eLlzDI/+0nBpsn5g/Dhb7B92+X9P0DbwBTOBBDPTSKFxIxRREWdMcTlxT7GI7
+IA7uNDL0GOkfSGQPR04sAAAh/wtNYXRoVHlwZTAwMW4EAQADBQoBCQCgAoEgAoEgAoEgAoEgAoEg
+CjKDUQYRAAkAoAKGPQMOAAAKAQKIMQABEoNtAAAJAKADHQEACgEyg1EGCQADDwEACwESg2oAEQAK
+AoIuAAsBEoNqAoY9AogxAAESg20ADQKG5QAAAAA7
+
+------=_NextPart_000_0000_01CAAA6B.487E9BC0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.stat.psu.edu/~jls/formulas/ubar.gif
+
+R0lGODlhcQAyAIAAAP///wAAACwAAAAAcQAyAAAC/4SPqcvtD6OctNqLs968+w+G4jgGAWCiJ8m2
+Sgq7srvW812tj43i/p7aGXi/IkPX4AWNzAOyCc1Fp1KqFfK8ahHZbc4EDnctY7E57KUlx0O2Uexc
+asBr9hPedoOy+r2cu8CHI+jz50Aog1jY15PA6KG4iPUySBl4FtIXybJZKeToCZhxZnY4CSpaYnlZ
+ChnRSXLH9Cgb9/L4ivZGgZdqm3ahh9sI3CE8MVxseoibrMxKSof8PBfd+0p92bat6nx1At7jnZt9
+1Bg0Xj5aQ6R+owMf7C4/5ESMejtPZs9dpR/rJt0/bCp0CRz4yRxCEfDwHFwYKCFEV3UmfnhocRLG
+jAZAOHo8UAAAIf8LTWF0aFR5cGUwMDFtBAEAAwUKAQkAoAKBIAKBIAKBIAKBIAKBIAoyg1UGEQAJ
+AKAChj0DDgAACgECiDEAARKDbQAACQCgAx0BAAoBEoNVAw8BAAsBklyAg2oAEQAKAoIuAAsBEoNq
+AoY9AogxAAESg20ADQKG5QAAAAA7
+
+------=_NextPart_000_0000_01CAAA6B.487E9BC0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.stat.psu.edu/~jls/formulas/b.gif
+
+R0lGODlhrgAyAIAAAP///wAAACwAAAAArgAyAAAC/4SPqcvtD6OctNqLs968+w+G4kiW5omm6qoE
+AeDCL0vXdozb+n7OPg8MGmaZH0xIcRGRGKXGuGQ6iFFppZocDrFWBrcL+YJN4rHXTCujE+pQu8R9
+r7WruHxTvc/1z0XsiBJlNBdmoXSI6MQWmIhIJ6NI+MAnM5WHRPl02PN31dkC2hLpsbmYdpCZMoog
+6Mf6sXTJQrX22SD7yoH7qJqLZuvqK9wUjDprTAhsirxcVMzLqNyYClIWe9b3DNjLXFvYDS6a2BxO
+fTUsMa2+Pn77DQ3Nh7Xbgz4N1HZNTry/XR8O5k0sKoIodVLmz485SKvGyCmIMFMpbLcWSkLXrNUU
+fomTLo6I01FYpINFDmr0CEvapJMET57bMg+liDzsgD0kI9MNm5o2J1ikiPKPUHmwOv4EGvTIi6WG
+qlnCmVPplkf3QkW9KmpqwnRYu/qi1TSsV0zMmL7UhuroWF1l5SHcuDbuSrhy6wZrp9auQ7p69bZU
+lLevFGuC+4ppWNhr4MRmzDJ+/PaxZMEFAAAh/wtNYXRoVHlwZTAwMZUEAQADBQoBCQCgAoEgAoEg
+AoEgAoEgAoEgChKDQgkAoAKGPQMOAAAKAQKIMQABEoNtAoYtAogxAAAJAKADHQEACgEDAQAAATKD
+UQYJAAMPAQALARKDagARAAoChi0yg1EGEQAAApYoApYpAAMPAAALEQECiDIAAAABEoNqAoY9Aogx
+AAESg20ADQKG5QAJAKACgi4AAAA7
+
+------=_NextPart_000_0000_01CAAA6B.487E9BC0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.stat.psu.edu/~jls/formulas/totvar.gif
+
+R0lGODlhjgAqAIAAAP///wAAACwAAAAAjgAqAAAC/4SPqcvtD6OctNqLY8hy8w+GTOCJTWmm6oSu
+SevGMSwbdI1/N7cDfQ5krUiPX/B4cv2MyCaCaVk6p8UZBEoFYivGbbbmFVa/PJL5jA13ruS2WsNu
+os9cuo0oXrx9+OTLrlIieAHjRWOGc3iwN/Jkg1Ho9yKpwLiod2nFU+mg2Pipw5mpFDpJOSqKCRL5
+KHMz1+doCiqrarv5FztUWvsEO0jLB5vRgmLZyYt6q9w76/ur6+N8fPqMlsrsnN26DDmtibvdzI2t
+7Y1aTA0IuV4trRdNTrx4/de2S0V9P5+/n6VPyF8/E3g8xHsnUE4gaUReJXQC8E4rhw+RRERoMFjF
+HCsRM8r7uDERwUwUQwYBCCzeRZNjjqxkicwiTJknZ9LkaFPOy3E5e/r8SaUAACH/C01hdGhUeXBl
+MDAxWQQBAAMFCgECgSACgSACgSACgSACgSASg1QChj0yg1UGEQAChisDAQAAAQKIMQKGKwMOAAAJ
+AGABAogxAAGSgESDbQAAAAoCligClikAkqSAg0KCyICCLgAAADs=
+
+------=_NextPart_000_0000_01CAAA6B.487E9BC0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.stat.psu.edu/~jls/formulas/df.gif
+
+R0lGODlhxQA1AIAAAP///wAAACwAAAAAxQA1AAAC/4SPqcvtD6OctNqLs968+w+G4kiW5ommahq0
+6wvHY3DQ8o3nla33/s/7CRPBoaWoQBp7rmVGaYA6cdJpRFm1wrLaR9HG7Z7Cr5b53JQE0WJq+/kW
+kldnhPkYBzqRc3ueuZcE9+dWRuOSViOI0UcY0tiBeLjox+h4A7khGUVEeZE5BOq1IGoJAObJOXhZ
+OtpZpsqXunN5aiJLF2trt6ZpSATaysDz1SC8CIZV5wurGPyYVpyUWLubq2gq0otNapx3PLGd/Vip
+2j38zTJ5ejfe9A4pbj3L3QbukFw+jSbtbLtOQZ6Ugelu1WvVK581ftTMzSPIi6GYe+ccIuQVBRWe
+g97e0O1jCDKkyJHt9GmrIe/jMo7mMgnsWNGeQXa7hBHjBjCcPogxJ+IrdScah5st4wmtF9HjmyoN
+IzmdidQDRYe0VGgcOuYViKlR1dBpOm6GVqnkkPJT6ohr1KkUE2HpqrZZ2bFY51JNSbUairbAaDbl
+ebfrPL17t07z29Pkl5L0CJPgi/FdYrM70TqG+hTb1Yxs6L6cfPnkB2mbTSquDDq04dGVUL21TDSv
+YNWrM9fMaBnltrO5aYu2/biq7xKQgwsfbhy43SvIs7IWe7w5dLLLmUvH7DjudYzZt3vPUQAAIf8L
+TWF0aFR5cGUwMDG7BAEAAwUKAQKBIAKBIAKBIAKBIAKBIBKDZBKDZgKGPQMBAAABEoNtAoYtAogx
+AAKWKAKWKQCDsIABAACBsICCsICIMYKwgIYrg7CADgAACQBggbCAkrCAg22y1ICDVYbUgBEAAIGw
+gIOwgAEAAIGwgJKwgINtgrCAhiuCsICIMQCCsICWKIKwgJYpAJKwgINCAAAACoKwgJYogrCAlikA
+g7CADwAAC5GwgIGwgIKwgIgyAAAKgrCAgi4AAAA7
+
+------=_NextPart_000_0000_01CAAA6B.487E9BC0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.stat.psu.edu/~jls/formulas/tratio.gif
+
+R0lGODlhRAAWAIAAAP///wAAACwAAAAARAAWAAACfISPqcvtD6OctFoWXti85wsmXzOGkIeWhqqw
+5ou4MVx1jnx86UbPOXZa/YSiEMuFI5Z0LeMCqWlieBdoMXoFilLS7vDmzVqsYgCV6NNWn+zh6Ahu
+ccvmdheuTZLeMhwz/XQ2xhHHpmLTQxdml6hxJljXCMNHJmkJeJl5WQAAIf8LTWF0aFR5cGUwMDEq
+BAEAAwUKARKDdAKGPQMpAQABMoNRBhEAAAEDDQAAARKDVAALEQAAAAAAADs=
+
+------=_NextPart_000_0000_01CAAA6B.487E9BC0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.stat.psu.edu/~jls/formulas/gammadef.gif
+
+R0lGODlhkgAmAIAAAP///wAAACwAAAAAkgAmAAAC/4SPqcvtD6OctNqLs968+w+G4lgF5hMwaXIi
+LWWeK0lP86zgrrrrEJ7y1WhCIC/XMDqELANzGHoeikfk9Ie6QjUyptS5oLKCzlg22dxmZNX2zqp9
+Ab7zpJyuVhVjfJ+3ffMW1mcWppVXguUmmFZ36Hi29IgoQfe3eHijFIkGRmkTIeY5KbjCBslpSPrZ
+mVrGx6hq9oKHOlU4GhXLCuPKUVvSAsyr+jZcOWI6d0zc+CrCnBjdTA1te0tYrQ09ve39u0EoPk5e
+bn6Ono7bITX+/c4FLz/UPW/ve5+PUa9/3f9fSQ7AgbtWEQT4hN9BIkEuFVv47hSciRC3CXyVrWDF
+ZhiWWm3U1hHTR1Z4Eo4EGUqPwpMsW7pUUAAAIf8LTWF0aFR5cGUwMDFUBAEAAwUKAQkAoAKBIAKB
+IAKBIAKBIAKBIIKMUIRnAoY9Aw4AAAoBEoNyAoYrAogyAoIvAoEoEoNkEoNmAoYrAogzAoEpAAES
+g3IChisCiDEAAAAAADs=
+
+------=_NextPart_000_0000_01CAAA6B.487E9BC0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.stat.psu.edu/~jls/formulas/relinc.gif
+
+R0lGODlhbAAwAIAAAP///wAAACwAAAAAbAAwAAAC5oSPqcvtD6OctNqLs45h0+6FnziB5LmYKBKo
+6rq+MPDKc2jHSX5r/FnrAWGtokGGLLaEkiBRkTP9mEfWFGNkpbRUhxOqA1e73h0jSessS6ksufE1
+Q9XqkXz83nIPSjdtfLXHJ5hHGKUHEjh491cotvi4mFgRp8jkssYIeGTZyKnkeBbqOdrk2FlKSoZa
+yoqTavfm2po3S9tla7GUCdtrpdrn53uZO3yTG5ysvMzczOzBo2xMVTz9ZI2drV3YvO39DeQnDH4c
+SV6ueT6DpH5p3o7CDo9OOD+Ubi/CW50PB9oPMKBAewUAACH/C01hdGhUeXBlMDAxaQQBAAMFCgEC
+gSACgSACgSACgSACgSASg3IChj0DDgAACQBgAQkAQAMBAAABAogxAoYrEoNtAw8AAAkBQBEBAoYt
+AogxAAAACQBAApYoApYpAAkAYJKkgINCAAGygJiDVYaAmBEAAAAAAAA7
+
+------=_NextPart_000_0000_01CAAA6B.487E9BC0--

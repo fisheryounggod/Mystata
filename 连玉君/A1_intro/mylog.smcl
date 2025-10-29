@@ -1,0 +1,90 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}D:\stata11\ado\personal\Net_course_A\A1_intro\mylog.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}16 Mar 2010, 17:51:15
+{txt}
+{com}.         sysuse nlsw88, clear
+{txt}(NLSW, 1988 extract)
+
+{com}.         desc
+
+{txt}Contains data from {res}D:\stata11\ado\base/n/nlsw88.dta
+{txt}  obs:{res}         2,246                          NLSW, 1988 extract
+{txt} vars:{res}            17                          1 May 2009 22:52
+{txt} size:{res}        69,626{txt} (99.9% of memory free)   (_dta has notes)
+{hline}
+              storage  display     value
+variable name   type   format      label      variable label
+{hline}
+{p 0 48}{res}{bind:idcode         }{txt}{bind: int    }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}NLS id{p_end}
+{p 0 48}{bind:age            }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}age in current year{p_end}
+{p 0 48}{bind:race           }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:racelbl  }{bind:  }{res}{res}race{p_end}
+{p 0 48}{bind:married        }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:marlbl   }{bind:  }{res}{res}married{p_end}
+{p 0 48}{bind:never_married  }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}never married{p_end}
+{p 0 48}{bind:grade          }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}current grade completed{p_end}
+{p 0 48}{bind:collgrad       }{txt}{bind: byte   }{bind:{txt}%16.0g     }{space 1}{bind:gradlbl  }{bind:  }{res}{res}college graduate{p_end}
+{p 0 48}{bind:south          }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}lives in south{p_end}
+{p 0 48}{bind:smsa           }{txt}{bind: byte   }{bind:{txt}%9.0g      }{space 1}{bind:smsalbl  }{bind:  }{res}{res}lives in SMSA{p_end}
+{p 0 48}{bind:c_city         }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}lives in central city{p_end}
+{p 0 48}{bind:industry       }{txt}{bind: byte   }{bind:{txt}%23.0g     }{space 1}{bind:indlbl   }{bind:  }{res}{res}industry{p_end}
+{p 0 48}{bind:occupation     }{txt}{bind: byte   }{bind:{txt}%22.0g     }{space 1}{bind:occlbl   }{bind:  }{res}{res}occupation{p_end}
+{p 0 48}{bind:union          }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:unionlbl }{bind:  }{res}{res}union worker{p_end}
+{p 0 48}{bind:wage           }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}hourly wage{p_end}
+{p 0 48}{bind:hours          }{txt}{bind: byte   }{bind:{txt}%8.0g      }{space 1}{bind:         }{bind:  }{res}{res}usual hours worked{p_end}
+{p 0 48}{bind:ttl_exp        }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}total work experience{p_end}
+{p 0 48}{bind:tenure         }{txt}{bind: float  }{bind:{txt}%9.0g      }{space 1}{bind:         }{bind:  }{res}{res}job tenure (years){p_end}
+{txt}{hline}
+Sorted by:  {res}idcode
+{txt}
+{com}.         summ
+
+{txt}    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 56}
+{space 6}idcode {c |}{res}      2246    2612.654    1480.864          1       5159
+{txt}{space 9}age {c |}{res}      2246    39.15316    3.060002         34         46
+{txt}{space 8}race {c |}{res}      2246    1.282725    .4754413          1          3
+{txt}{space 5}married {c |}{res}      2246    .6420303    .4795099          0          1
+{txt}never_marr~d {c |}{res}      2246    .1041852    .3055687          0          1
+{txt}{hline 13}{c +}{hline 56}
+{space 7}grade {c |}{res}      2244    13.09893    2.521246          0         18
+{txt}{space 4}collgrad {c |}{res}      2246    .2368655    .4252538          0          1
+{txt}{space 7}south {c |}{res}      2246    .4194123    .4935728          0          1
+{txt}{space 8}smsa {c |}{res}      2246    .7039181    .4566292          0          1
+{txt}{space 6}c_city {c |}{res}      2246    .2916296    .4546139          0          1
+{txt}{hline 13}{c +}{hline 56}
+{space 4}industry {c |}{res}      2232    8.189516    3.010875          1         12
+{txt}{space 2}occupation {c |}{res}      2237    4.642825    3.408897          1         13
+{txt}{space 7}union {c |}{res}      1878    .2454739    .4304825          0          1
+{txt}{space 8}wage {c |}{res}      2246    7.766949    5.755523   1.004952   40.74659
+{txt}{space 7}hours {c |}{res}      2242    37.21811    10.50914          1         80
+{txt}{hline 13}{c +}{hline 56}
+{space 5}ttl_exp {c |}{res}      2246    12.53498    4.610208   .1153846   28.88461
+{txt}{space 6}tenure {c |}{res}      2231     5.97785    5.510331          0   25.91667
+{txt}
+{com}.         regress wage hours ttl_exp
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}    2242
+{txt}{hline 13}{char +}{hline 30}           F(  2,  2239) ={res}   97.98
+    {txt}   Model {char |} {res} 5978.66381     2  2989.33191           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 68309.1577  2239  30.5087797           {txt}R-squared     = {res} 0.0805
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0797
+    {txt}   Total {char |} {res} 74287.8215  2241  33.1494072           {txt}Root MSE      = {res} 5.5235
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}        wage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{space 7}hours {c |}{col 14}{result}{space 2} .0568453{col 26}{space 2} .0114072{col 37}{space 1}    4.98{col 46}{space 3}0.000{col 55}{space 3} .0344755{col 67}{space 3}  .079215
+{txt}{space 5}ttl_exp {c |}{col 14}{result}{space 2} .3013915{col 26}{space 2} .0260076{col 37}{space 1}   11.59{col 46}{space 3}0.000{col 55}{space 3} .2503899{col 67}{space 3} .3523931
+{txt}{space 7}_cons {c |}{col 14}{result}{space 2} 1.879377{col 26}{space 2} .4864704{col 37}{space 1}    3.86{col 46}{space 3}0.000{col 55}{space 3}  .925397{col 67}{space 3} 2.833357
+{col 1}{text}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{res}{txt}
+{com}.       log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}D:\stata11\ado\personal\Net_course_A\A1_intro\mylog.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}16 Mar 2010, 17:51:17
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

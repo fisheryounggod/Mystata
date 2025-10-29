@@ -1,0 +1,10 @@
+"AMC Concord" 4099 2930 186 Domestic
+"AMC Pacer" 4749 3350 173 Domestic
+"AMC Spirit" 3799 2640 168 Domestic
+"Buick Century" 4816 3250 196 Domestic
+"Buick Electra" 7827 4080 222 Domestic
+"Buick LeSabre" 5788 3670 218 Domestic
+"Buick Opel" 4453 2230 170 Domestic
+"Buick Regal" 5189 3280 200 Domestic
+"Buick Riviera" 10372 3880 207 Domestic
+"Buick Skylark" 4082 3400 200 Domestic

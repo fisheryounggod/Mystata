@@ -1,0 +1,36 @@
+-----------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\stata11\ado\personal\Net_course_A\A1_intro\mylog2.log
+  log type:  text
+ opened on:  16 Mar 2010, 17:48:04
+
+.          tab rep78 foreign
+
+    Repair |
+    Record |       Car type
+      1978 |  Domestic    Foreign |     Total
+-----------+----------------------+----------
+         1 |         2          0 |         2 
+         2 |         8          0 |         8 
+         3 |        27          3 |        30 
+         4 |         9          9 |        18 
+         5 |         2          9 |        11 
+-----------+----------------------+----------
+     Total |        48         21 |        69 
+
+
+.          des price rep78 foreign, d
+
+              storage  display     value
+variable name   type   format      label      variable label
+-----------------------------------------------------------------------------------------
+price           int    %8.0gc                 Price
+rep78           int    %8.0g                  Repair Record 1978
+foreign         byte   %8.0g       origin     Car type
+
+.       log close                          // _mylog2.log_-over-__   
+      name:  <unnamed>
+       log:  D:\stata11\ado\personal\Net_course_A\A1_intro\mylog2.log
+  log type:  text
+ closed on:  16 Mar 2010, 17:48:04
+-----------------------------------------------------------------------------------------

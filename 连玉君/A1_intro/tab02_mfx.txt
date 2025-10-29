@@ -1,0 +1,16 @@
+	(1)
+VARIABLES	wage
+	
+hours	0.0559***
+	(0.0115)
+ttl_exp	0.301***
+	(0.0260)
+married	-0.150
+	(0.246)
+Constant	2.016***
+	(0.536)
+	
+Observations	2242
+R-squared	0.081
+Standard errors in parentheses	
+*** p<0.01, ** p<0.05, * p<0.1	
